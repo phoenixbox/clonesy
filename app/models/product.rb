@@ -67,9 +67,9 @@ class Product < ActiveRecord::Base
   end
 
   def product_sales
-    Sale.where(group: 'product').
-         where(status: 'active').
-         where(foreign_key: self.id)
+    Sale.where(group: 'product')
+        .where(status: 'active')
+        .where(foreign_key: self.id)
   end
 
   def percent_of_product
