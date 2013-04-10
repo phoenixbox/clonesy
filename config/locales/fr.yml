@@ -1,26 +1,5 @@
 fr:
   submit: 'Soumettre'
-  ratings:
-    self: 'Evaluations'
-    rate: 'évaluer'
-    create: 'Créer une nouvelle évaluation'
-    title: 'Titre'
-    body: 'Détails'
-    stars: 'Etoiles'
-    displayname: 'Critiquée par'
-    average: 'Moyenne des notes'
-    none: "Pas encore d'évaluations!"
-    editpage: 'Modifier votre évaluation de'
-    newpage: 'Nouvelle évaluation pour'
-    please: 'Evaluer cet produit'
-    pleaserate: "Vous avez acheter ce produit. S'il vous plaît l'évaluer"
-    product: 'Produit'
-    your: 'Votre évaluation'
-    createdat: 'Créé'
-    rated:
-      thanks: 'Merci pour votre évaluation!'
-      notice: "Vous n'avez que 15 minutes à modifier cette évaluation"
-      edit: 'Modifier votre évaluation'
   remember: 'Garder ma session active'
   details: 'Détails'
   account:
@@ -81,10 +60,6 @@ fr:
     delete: 'Supprimer'
     update: 'Mise à jour'
   placeholder:
-    ratings:
-      title: "Putain, je l'aime!"
-      body: "Cette produit est trop bon"
-      stars: '5'
     category:
       title: 'La Matière Noire'
     product:
@@ -103,7 +78,6 @@ fr:
   product:
     self: 'Produit'
     collection: 'Produits'
-    rating: 'Votre évaluation'
     title: 'Titre'
     quantity: 'Quantité'
     description: 'Description'

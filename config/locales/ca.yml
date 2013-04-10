@@ -3,28 +3,6 @@
 
 ca:
   submit: 'Submit, eh!'
-  ratings:
-    self: 'Ratings, eh'
-    rate: 'rate, eh'
-    create: 'Create Rating, eh?'
-    title: 'Title, eh'
-    body: 'Body, eh'
-    stars: 'Stars, eh'
-    displayname: 'Reviewer, eh'
-    average: 'Average Rating, eh'
-    none: 'No Ratings Yet, eh!'
-    rateit: 'Rate it, eh!'
-    editpage: 'Edit your rating of'
-    newpage: 'New Rating for'
-    please: 'Rate this product, eh'
-    pleaserate: 'You bought this product, eh. Please rate it!'
-    product: 'Product, eh'
-    your: 'Your Rating, eh'
-    createdat: 'Created At, eh'
-    rated:
-      thanks: 'Thanks for rating this product, eh!'
-      notice: 'Ratings can only be edited for 15 minutes after creation, eh.'
-      edit: 'Edit your rating, eh'
   remember: 'Yes, remember me, eh'
   details: 'Details, eh'
   account:
@@ -85,10 +63,6 @@ ca:
     delete: 'Delete, eh'
     update: 'Update, eh'
   placeholder:
-    ratings:
-      title: "Love it, LOVE IT, eh!"
-      body: "I'm so thrilled I bought this product.  Get one for your doggy!"
-      stars: '5'
     category:
       title: 'Dark matter'
     product:
@@ -107,7 +81,6 @@ ca:
   product:
     self: 'Product, eh'
     collection: 'Products, eh'
-    rating: 'Your rating, eh'
     title: 'Title, eh'
     quantity: 'Quantity, eh'
     description: 'Description, eh'

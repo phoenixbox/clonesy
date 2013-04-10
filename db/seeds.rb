@@ -69,11 +69,6 @@ Category.create(title: "Bunnies", product_ids: [3, 17])
 Category.create(title: "Brutes", product_ids: [19, 20, 11])
 Category.create(title: "Miscellaneous", product_ids: [2, 9, 16, 4, 15, 18])
 
-Rating.create(user_id: 3, product_id: 3, title: 'Awesome!', body: "Gotta love this one. It's like Kirby but with better ears!", stars: 4)
-Rating.create(user_id: 2, product_id: 3, title: 'Meh...', body: 'Just a Kirby knock-off.', stars: 2)
-Rating.create(user_id: 2, product_id: 1, title: 'Cool', body: "I'm happy with my purchase", stars: 3)
-Rating.create(user_id: 3, product_id: 1, title: 'Bought two!', body: 'Fantastic', stars: 5)
-
 order1 = Order.create(status: 'pending', user_id: 1)
 order2 = Order.create(status: 'paid', user_id: 1)
 order3 = Order.create(status: 'shipped', user_id: 1)
