@@ -3,6 +3,8 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
+  has_one :billing_address, as: :addressable
+  has_one :shipping_address, as: :addressable
   validates :user_id, presence: true
   validates :status, presence: true,
                     inclusion: {in: %w(pending cancelled paid shipped returned),

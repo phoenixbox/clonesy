@@ -38,4 +38,12 @@ FactoryGirl.define do
     password 'password'
     admin true
   end
+
+  factory :address do
+    street  '43 Logan Street'
+    state   'CA'
+    zipcode '90100'
+    city    'The Angels'
+  end
+
 end
