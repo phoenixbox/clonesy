@@ -1,0 +1,16 @@
+<div class="btn-group span1" id="homepage-category-dropdown">
+  <a class="btn btn-custom-lighten dropdown-toggle" data-toggle="dropdown" href="#">
+    <%= t 'categories.select' %>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="/">Show All</a></li>
+    <% if categories.present? %>
+        <% categories.each do |category| %>
+            <li>
+              <%=link_to category.title, products_path(category_id: category.id) %>
+            </li>
+        <% end %>
+    <% end %>
+  </ul>
+</div>

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       true
     else
       redirect_to login_path,
-      :alert => "Only system administrators may access this page"
+        :alert => "Only system administrators may access this page"
     end
   end
 

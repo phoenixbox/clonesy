@@ -6,10 +6,13 @@ StoreEngine::Application.routes.draw do
   get "/login" => "sessions#new", :as => "login"
   get "/signup" => "users#new", :as => "signup"
 
+  get "/checkout" => "checkout#show"
+
   get "/account" => redirect("/account/profile")
   get "/account/profile" => "users#show"
   get "/account/orders" => "orders#index"
   get "/account/orders/:id" => "orders#show", :as => "account_order"
+
   post "/buy_now" => "orders#buy_now", :as => 'buy_now'
   put "/i18n" => "i18n#update"
 
@@ -29,12 +32,6 @@ StoreEngine::Application.routes.draw do
   namespace :admin do
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
-
-    resources :sales, as: 'sales' do
-      member do
-        post :toggle_status
-      end
-    end
 
     resources :products do
       member do

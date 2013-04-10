@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_filter :require_login
 
   def index
-    @orders = Order.where(user_id: user_id).all
+    @orders = current_user.orders
   end
 
   def show

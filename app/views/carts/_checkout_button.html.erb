@@ -1,14 +1,6 @@
 <% if current_user %>
-  <%= form_tag user_orders_path(current_user) do %>
-    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
-            data-key="pk_test_osSOH0LyEEACshdRsLjyvGSz"
-            data-image="/assets/marcy_stripe.png"
-            data-name="<%= t('store.name') %>"
-            data-description="<%= t('purchase') %>"
-            data-label="<%= t('checkout') %>"
-            data-amount="<%= price * 100 %>">
-    </script>
-  <% end %>
+  <%= link_to 'Checkout', checkout_path, class: 'btn' %>
 <% else %>
-  <%= button_to t('checkout'), login_path, class: 'btn btn-custom-lighten', method: :get %>
+  <a href="#checkout_modal" role="button" class="btn" data-toggle="modal">Checkout</a>
+  <%= render 'checkout_modal' %>
 <% end %>

@@ -17,8 +17,7 @@
 
       <div id="shopping_cart_summary">
         <h5>Total: <%= number_to_currency(current_cart.total) %></h5>
-        <%= render partial: 'checkout_button',
-                   locals: { price: current_cart.total } %>
+        <%= render partial: 'checkout_button' %>
         <%= button_to t('cart.empty'), cart_path, class: 'btn btn-warning', method: :delete %>
       </div>
   <% end %>
