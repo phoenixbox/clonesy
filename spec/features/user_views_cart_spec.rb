@@ -37,15 +37,12 @@ describe 'the user cart view' do
       end
     end
 
-    context 'the user wants to remove one item from the cart' do
-      it 'removes one item' do
-        product2 = FactoryGirl.create(:product, title: 'coolthings')
-        visit product_path(product2)
-        click_button "Add to Cart"
+    context 'the user wants to remove an item from the cart' do
+      it 'removes an item' do
         visit cart_path
-        fill_in  'carts_quantity', with: '0'
+        fill_in 'carts_quantity', with: '0'
         click_button 'Update'
-        expect(current_path).to eq cart_path
+        expect(find("input#carts_quantity").value).to eq '0'
       end
     end
   end

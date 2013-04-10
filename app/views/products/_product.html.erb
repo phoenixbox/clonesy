@@ -1,6 +1,6 @@
 <%= link_to product_path(product) do %>
   <div class="products span3">
-    <p><%= image_tag product.image.url(:thumbnail) %></p>
+    <p><%= image_tag gen_image_url(product.id) %></p>
     <h5><%= product.title.titleize %></h5>
     <p><%= t('product.price') %>: <%= number_to_currency(product.price) %></p>
   </div>

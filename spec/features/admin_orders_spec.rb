@@ -60,7 +60,7 @@ describe "admin dashboard" do
         expect(page).to have_content(@product.title)
         expect(page).to have_link(@product.title)
         expect(page).to have_xpath("//a[@href='#{product_path(@product)}']")
-        expect(page).to have_content(@order_item.quantity)
+        expect(find("input#admin_order_item_quantity").value.to_i).to eq @order_item.quantity
         expect(page).to have_content(@order_item.unit_price)
         expect(page).to have_content(@order_item.subtotal)
       end
