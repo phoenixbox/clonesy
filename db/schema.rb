@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402201518) do
+ActiveRecord::Schema.define(:version => 20130402003118) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -28,11 +28,9 @@ ActiveRecord::Schema.define(:version => 20130402201518) do
     t.integer  "order_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.decimal  "unit_price",    :precision => 8, :scale => 2
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.decimal  "selling_price", :precision => 8, :scale => 2
-    t.decimal  "percent_off",   :precision => 8, :scale => 2
+    t.decimal  "unit_price", :precision => 8, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
@@ -68,15 +66,6 @@ ActiveRecord::Schema.define(:version => 20130402201518) do
     t.integer  "stars",      :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
-  end
-
-  create_table "sales", :force => true do |t|
-    t.integer  "foreign_key"
-    t.integer  "percent_off", :default => 1
-    t.string   "group"
-    t.string   "status"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
   end
 
   create_table "users", :force => true do |t|
