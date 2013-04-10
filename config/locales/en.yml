@@ -71,7 +71,6 @@ en:
     login: 'Login'
     signup: 'Sign Up'
     languages: 'zomg!'
-    search: 'Search'
   home:
     welcome: 'Welcome'
   categories:

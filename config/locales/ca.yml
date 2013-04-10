@@ -71,7 +71,6 @@ ca:
     login: 'Login, eh'
     signup: 'Sign Up, eh'
     languages: 'zomg, eh!'
-    search: 'look for it, eh?'
   home:
     welcome: 'Welcome, eh'
   categories:

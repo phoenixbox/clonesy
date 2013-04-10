@@ -22,6 +22,14 @@ class Product < ActiveRecord::Base
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
 
+  def self.by_category(category_id)
+    if category_id.present?
+      Category.find(category_id).products
+    else
+      scoped
+    end
+  end
+
   def toggle_status
     if status == 'active'
       update_attributes(status: 'retired')

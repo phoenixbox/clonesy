@@ -67,7 +67,6 @@ fr:
     login: 'Connexion'
     signup: 'Inscription'
     languages: 'zomg!'
-    search: 'Rechercher'
   home:
     welcome: 'Bienvenue'
   categories:

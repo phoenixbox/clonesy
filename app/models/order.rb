@@ -8,8 +8,6 @@ class Order < ActiveRecord::Base
                     inclusion: {in: %w(pending cancelled paid shipped returned),
                                   message: "%{value} is not a valid status" }
 
-  scope :by_email, lambda {|email| where("email = ?", email) if email.present?}
-
   def self.by_status(status)
     if status.present? && status != 'all'
       order.where(status: status)

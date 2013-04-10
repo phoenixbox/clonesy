@@ -3,7 +3,7 @@ class Admin::OrdersController < ApplicationController
 
   def index
     @count = Order.count
-    @orders = Search.filter_admin_orders(params)
+    @orders = Order.by_status(params[:status]).all
     @statuses = Order.count(group: :status)
     @active_tab = params[:status] || 'all'
   end
