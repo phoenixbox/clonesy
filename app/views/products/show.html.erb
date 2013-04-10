@@ -12,14 +12,7 @@
       <% end %>
     </div>
     <br>
-    <% if @product.on_sale? %>
-      <p><b><%= t('product.onsale') %></b></p>
-      <p><%= t('product.originalprice') %>: <strike><%= number_to_currency(@product.price) %></strike></p>
-      <p><%= t('product.percentsavings') %>: <%= @product.percent_off %>%</p>
-      <p><%= t('product.saleprice') %>: <%= number_to_currency(@product.sale_price) %></p>
-    <% else %>
-      <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
-    <% end %>
+    <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
     <% if @product.status == 'active' %>
       <%= render partial: 'add_to_cart_button', locals: {product: @product} %>
       <%= render partial: 'buy_now_button', locals: {product: @product} %>

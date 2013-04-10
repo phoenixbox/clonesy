@@ -10,17 +10,10 @@ FactoryGirl.define do
     title 'Dark Matter'
   end
 
-  factory :sale do
-    percent_off 50
-    status 'active'
-  end
-
   factory :order_item do
     product { FactoryGirl.build(:product) }
     order { FactoryGirl.build(:order) }
     unit_price 20.00
-    selling_price 10.00
-    percent_off 50
     quantity 3
   end
 

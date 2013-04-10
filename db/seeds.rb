@@ -69,9 +69,6 @@ Category.create(title: "Bunnies", product_ids: [3, 17])
 Category.create(title: "Brutes", product_ids: [19, 20, 11])
 Category.create(title: "Miscellaneous", product_ids: [2, 9, 16, 4, 15, 18])
 
-Sale.create(status: 'active', group: 'product', foreign_key: 1, percent_off: 50)
-Sale.create(status: 'active', group: 'category', foreign_key: 3, percent_off: 25)
-
 Rating.create(user_id: 3, product_id: 3, title: 'Awesome!', body: "Gotta love this one. It's like Kirby but with better ears!", stars: 4)
 Rating.create(user_id: 2, product_id: 3, title: 'Meh...', body: 'Just a Kirby knock-off.', stars: 2)
 Rating.create(user_id: 2, product_id: 1, title: 'Cool', body: "I'm happy with my purchase", stars: 3)
@@ -90,79 +87,53 @@ order10 = Order.create(status: 'returned', user_id: 3)
 
 order1.order_items.create(product_id: product1.id,
                           unit_price: product1.price,
-                          selling_price: product1.current_price,
-                          percent_off: product1.percent_off,
                           quantity: 2)
 
 order1.order_items.create(product_id: product2.id,
                           unit_price: product2.price,
-                          selling_price: product2.current_price,
-                          percent_off: product2.percent_off,
                           quantity: 1)
 
 order2.order_items.create(product_id: product2.id,
                           unit_price: product2.price,
-                          selling_price: product2.current_price,
-                          percent_off: product2.percent_off,
                           quantity: 1)
 
 order3.order_items.create(product_id: product4.id,
                           unit_price: product4.price,
-                          selling_price: product4.current_price,
-                          percent_off: product4.percent_off,
                           quantity: 1)
 
 order3.order_items.create(product_id: product5.id,
                           unit_price: product5.price,
-                          selling_price: product5.current_price,
-                          percent_off: product5.percent_off,
                           quantity: 1)
 
 order4.order_items.create(product_id: product12.id,
                           unit_price: product12.price,
-                          selling_price: product12.current_price,
-                          percent_off: product12.percent_off,
                           quantity: 1)
 
 order4.order_items.create(product_id: product11.id,
                           unit_price: product11.price,
-                          selling_price: product11.current_price,
-                          percent_off: product11.percent_off,
                           quantity: 5)
 
 order5.order_items.create(product_id: product8.id,
                           unit_price: product8.price,
-                          selling_price: product8.current_price,
-                          percent_off: product8.percent_off,
                           quantity: 10)
 
 
 order6.order_items.create(product_id: product15.id,
                           unit_price: product15.price,
-                          selling_price: product15.current_price,
-                          percent_off: product15.percent_off,
                           quantity: 1)
 
 order7.order_items.create(product_id: product8.id,
                           unit_price: product8.price,
-                          selling_price: product8.current_price,
-                          percent_off: product8.percent_off,
                           quantity: 2)
 
 order8.order_items.create(product_id: product10.id,
                           unit_price: product10.price,
-                          selling_price: product10.current_price,
-                          percent_off: product10.percent_off,
                           quantity: 3)
 
 order9.order_items.create(product_id: product9.id,
                           unit_price: product9.price,
-                          selling_price: product9.current_price,
-                          percent_off: product9.percent_off,
                           quantity: 4)
 
 order10.order_items.create(product_id: product18.id,
                           unit_price: product18.price,
-                          selling_price: product18.current_price,
-                          percent_off: product18.percent_off,
                           quantity: 1)

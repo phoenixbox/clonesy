@@ -24,8 +24,6 @@ class Order < ActiveRecord::Base
     params[:cart].items.each do |cart_item|
       order.order_items.create(product_id: cart_item.product.id,
                                unit_price: cart_item.unit_price,
-                               selling_price: cart_item.selling_price,
-                               percent_off: cart_item.percent_off,
                                quantity: cart_item.quantity)
     end
 
@@ -47,18 +45,6 @@ class Order < ActiveRecord::Base
   def total
     if order_items.present?
       order_items.map {|order_item| order_item.subtotal }.inject(&:+)
-    else
-      0
-    end
-  end
-
-  def value
-    total + total_discount
-  end
-
-  def total_discount
-    if order_items.present?
-      order_items.map {|order_item| order_item.total_discount }.inject(&:+)
     else
       0
     end
