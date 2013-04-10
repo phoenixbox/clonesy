@@ -1,27 +1,5 @@
 cs:
   submit: 'BLARGH!'
-  ratings:
-    self: 'NOMNOMNOM'
-    rate: 'nomnom'
-    create: 'BLAARGHH'
-    title: 'MENAAAAME'
-    body: 'NOMNOMNOM'
-    stars: 'WAAAAHHHH'
-    displayname: 'bleep'
-    average: 'MEH BLEEP'
-    none: 'BLAGGGGGHHH!'
-    rateit: 'ROAR!'
-    editpage: 'nomnomnomnom'
-    newpage: 'nomnomnomnom'
-    please: 'bleepbleepbleep'
-    pleaserate: 'dinkadinkiwaaaahhhh'
-    product: 'merp'
-    your: 'NOMNOMNOM'
-    createdat: 'NOMNOMNOM'
-    rated:
-      thanks: 'HIHIHIHIHIHIHIHIHI!'
-      notice: 'BLERRRRRRGHHEHROAAAARRRR'
-      edit: 'blipbleepblop'
   remember: 'blerpen'
   details: 'merp'
   account:
@@ -83,10 +61,6 @@ cs:
     delete: 'bleeop'
     update: 'bleeop'
   placeholder:
-    ratings:
-      title: "derrrperrrr"
-      body: "BLEEEERRRGHGHGHDH ROOOOOARRRRR!"
-      stars: '5'
     category:
       title: 'MOOOARRRRR'
     product:
@@ -112,7 +86,6 @@ cs:
   product:
     self: 'NOMNOMNOM'
     collection: 'NOMNOMNOM'
-    rating: 'NOMNOMNOM'
     title: 'NOMNOMNOM'
     quantity: 'NOMNOMNOM'
     description: 'NOMNOMNOM'

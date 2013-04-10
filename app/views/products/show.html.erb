@@ -26,20 +26,5 @@
     <% else %>
       <p> Product is retired! </p>
     <% end %>
-    <%= render 'user_rating_status_or_action' %>
-    <% if @ratings.present? %>
-        <div class="average-rating">
-          <h4><%= t('ratings.average') %>: </h4>
-          <div id="star-avg">
-            <script>
-                $('#star-avg').raty({ readOnly: true, score: <%= average_rating(@ratings) %> });
-            </script>
-          </div>
-          <p></p>
-        </div>
-        <%= render partial: 'rating', collection: @ratings %>
-    <% else %>
-        <%= t('ratings.none') %>
-    <% end %>
   </div>
 </div>
