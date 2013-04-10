@@ -1,0 +1,18 @@
+<div id="checkout_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Checkout</h3>
+  </div>
+  <div class="modal-body">
+    <p>Please login or skip to checkout</p>
+    <%= simple_form_for :sessions, :url => sessions_path, method: 'POST' do |f| %>
+      <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
+      <%= f.input :password %>
+      <%= f.hidden_field :next_page, value: checkout_path %>
+      <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
+    <% end %>
+
+    <%= link_to t('account.create'), signup_path %>
+    <button class="btn btn-primary pull-right">Skip to checkout</button>
+  </div>
+</div>

@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    raise params.inspect
     @order = Order.create_and_charge(cart: current_cart,
                                      user: current_user,
                                      token: params[:stripeToken])

@@ -1,13 +1,13 @@
 module Search
   def self.filter_products(params = {})
     if params[:category_id].present?
-      Category.find(params[:category_id]).products.where(status: 'active')
+      Category.find(params[:category_id]).products.active
     elsif params[:search].present?
       Product.where("title ILIKE ? OR description ILIKE ?",
                     "%#{params[:search]}%",
-                    "%#{params[:search]}%").where(status: 'active')
+                    "%#{params[:search]}%").active
     else
-      Product.find_all_by_status('active')
+      Product.active
     end
   end
 

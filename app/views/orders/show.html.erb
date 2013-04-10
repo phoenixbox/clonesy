@@ -1,8 +1,7 @@
 <div class="order-show">
-  <%= render partial: '/users/user_navigation', :locals => { active: false } %>
+  <%= render partial: '/users/user_navigation', locals: { active: false } %>
 
   <div class="span8">
-
     <h1><%= t('order.self') %> #<%= @order.id %></h1>
     <p><%= t('model.createdat') %> <%= @order.created_at.to_s(:short) %></p>
     <span class="label default"><%= @order.status %></span> <%= t('time.asof') %> <%=@order.updated_at.to_s(:short) %>
