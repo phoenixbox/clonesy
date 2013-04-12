@@ -1,4 +1,5 @@
 StoreEngine::Application.routes.draw do
+
   root to: 'products#index'
 
   get "/code" => redirect("http://github.com/raphweiner/store_engine")
@@ -39,8 +40,15 @@ StoreEngine::Application.routes.draw do
       end
     end
 
+    resources :stores
     resources :orders, only: [ :show, :update ]
     resources :order_items, only: [ :update, :destroy]
     resources :categories, except: [ :show ]
   end
+
+  resources :stores
+
+
+
+  
 end

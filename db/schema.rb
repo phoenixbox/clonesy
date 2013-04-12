@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410220602) do
+ActiveRecord::Schema.define(:version => 20130411163716) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -68,6 +68,26 @@ ActiveRecord::Schema.define(:version => 20130410220602) do
     t.datetime "updated_at",                                :null => false
   end
 
+  create_table "stores", :force => true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.string   "description"
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "user_store_roles", :force => true do |t|
+    t.integer  "store_id_id"
+    t.integer  "user_id_id"
+    t.string   "role"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_store_roles", ["store_id_id"], :name => "index_user_store_roles_on_store_id_id"
+  add_index "user_store_roles", ["user_id_id"], :name => "index_user_store_roles_on_user_id_id"
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "full_name"
@@ -79,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20130410220602) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "admin"
+    t.boolean  "platform_admin"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

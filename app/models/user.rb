@@ -19,4 +19,13 @@ class User < ActiveRecord::Base
   def default_values
     self.admin = false
   end
+
+  # def admin?
+  #   UserStoreRole.where(store_id: current_store.id).where(user_id: id).role == "admin"
+  # end
+
+  def platform_admin?
+    self.platform_admin == true
+  end
+
 end

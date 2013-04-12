@@ -13,5 +13,6 @@
         <%= f.hidden_field :admin, value: false %>
         <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
     <% end %>
+    <%= button_to 'Create New Store', new_store_path, method: :get%>
   </div>
 </div>

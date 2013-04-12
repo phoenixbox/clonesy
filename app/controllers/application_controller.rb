@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   before_filter :get_locale
 
   def require_admin
-    if current_user == false
+    if !current_user
       not_authenticated
-    elsif current_user.admin == true
+    elsif current_user.admin?
       true
     else
       redirect_to login_path,
@@ -38,4 +38,5 @@ class ApplicationController < ActionController::Base
     else 'us'
     end
   end
+
 end

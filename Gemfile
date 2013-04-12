@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'sorcery'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'pg'
+gem 'validation-scopes'
 
 group :production do
   gem 'pg'
