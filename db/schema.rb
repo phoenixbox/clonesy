@@ -78,15 +78,15 @@ ActiveRecord::Schema.define(:version => 20130411163716) do
   end
 
   create_table "user_store_roles", :force => true do |t|
-    t.integer  "store_id_id"
-    t.integer  "user_id_id"
+    t.integer  "store_id"
+    t.integer  "user_id"
     t.string   "role"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "user_store_roles", ["store_id_id"], :name => "index_user_store_roles_on_store_id_id"
-  add_index "user_store_roles", ["user_id_id"], :name => "index_user_store_roles_on_user_id_id"
+  add_index "user_store_roles", ["store_id"], :name => "index_user_store_roles_on_store_id"
+  add_index "user_store_roles", ["user_id"], :name => "index_user_store_roles_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -94,12 +94,11 @@ ActiveRecord::Schema.define(:version => 20130411163716) do
     t.string   "display_name"
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
-    t.boolean  "admin"
-    t.boolean  "platform_admin"
+    t.boolean  "uber",                         :default => false
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

@@ -1,0 +1,23 @@
+<div>
+  <%= render partial: 'shared/uber_navigation', :locals => { active: :dashboard }  %>
+
+  <div class="span8">
+    <h1>Dashboard</h1>
+    <hr>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Store Name</th>
+        <th>Created At</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <%= render @stores %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

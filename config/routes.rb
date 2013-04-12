@@ -19,7 +19,6 @@ StoreEngine::Application.routes.draw do
 
   resources :sessions, only: [ :new, :create, :destroy ]
   resources :products, only: [ :index, :show ]
-
   resource :cart, only: [ :update, :show, :destroy ] do
     member do
       put :remove_item
@@ -29,6 +28,8 @@ StoreEngine::Application.routes.draw do
   resources :users, only: [ :new, :create, :update ] do
     resources :orders, except: [ :show ]
   end
+
+  resources :stores
 
   namespace :admin do
     root to: redirect("/admin/dashboard")
@@ -41,14 +42,22 @@ StoreEngine::Application.routes.draw do
     end
 
     resources :stores
+
     resources :orders, only: [ :show, :update ]
     resources :order_items, only: [ :update, :destroy]
     resources :categories, except: [ :show ]
   end
 
-  resources :stores
+  namespace :uber do
+    root to: redirect("/uber/dashboard")
+    get :dashboard, to: "stores#index", as: 'dashboard'
 
-
-
-  
+    resources :stores do
+      member do
+        put :approve
+        put :disapprove
+        put :toggle_status
+      end
+    end
+  end
 end
