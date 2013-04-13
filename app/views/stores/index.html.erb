@@ -12,7 +12,7 @@
 
 <% @stores.each do |store| %>
   <tr>
-    <td><%= link_to store.name, store_home_path(store) %></td>
+    <td><%= link_to store.name, store.path %></td>
     <td><%= store.path %></td>
     <td><%= store.description %></td>
   </tr>

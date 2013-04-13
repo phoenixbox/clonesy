@@ -1,3 +1,6 @@
+<% if current_store.pending? %>
+<p id="notice"><%= "Not Found: This store is pending approval." %></p>
+<% else %>
 <div class="product-index">
   <section class="row">
     <%= render partial: 'category_dropdown',
@@ -10,4 +13,4 @@
     <%= render @products %>
   </div>
 </div>
-
+<% end %>

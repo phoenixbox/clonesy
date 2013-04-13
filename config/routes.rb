@@ -31,10 +31,10 @@ StoreEngine::Application.routes.draw do
     end
   end
 
-  scope "/:store_path", as: :store do
-    get "/" => "products#index", as: :home
-    get "/checkout" => "checkout#show", as: :checkout
-    post "/buy_now" => "orders#buy_now", as: :buy_now
+  scope "/:store_path", as: "store" do
+    get "/" => "products#index", as: "home"
+    get "/checkout" => "checkout#show", as: "checkout"
+    post "/buy_now" => "orders#buy_now", as: "buy_now"
 
     resources :products, only: [ :show ]
 
