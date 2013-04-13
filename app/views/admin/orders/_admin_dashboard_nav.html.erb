@@ -4,7 +4,7 @@
 <% else %>
 <li>
 <% end %>
-<%= link_to "#{count} #{t 'total'}", admin_dashboard_path %>
+<%= link_to "#{count} #{t 'total'}", store_admin_dashboard_path(current_store) %>
 </li>
 <% %w(pending cancelled paid shipped returned).each do |status| %>
   <% if active_tab == status %>
@@ -12,7 +12,7 @@
   <% else %>
   <li>
   <% end %>
-  <%= link_to status_count(status), admin_dashboard_path(status: status) %>
+  <%= link_to status_count(status), store_admin_dashboard_path(current_store, status: status) %>
   </li>
 <% end %>
 </ul>

@@ -1,27 +1,32 @@
 <div class="logo">
   <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
 </div>
+<% if current_store %>
 <div class="logo-text">
-  <%= link_to t('store.name'), root_path, :class => 'brand' %>
+  <%= link_to current_store.name, store_home_path(current_store), :class => 'brand' %>
 </div>
+<% end %>
 <div class="nav-buttons">
   <ul class="nav pull-right">
     <% if logged_in? && current_user.uber? %>
-      <li><%= link_to 'Uber', uber_dashboard_path %></li>
-    <% elsif logged_in? && current_user.admin? %>
-      <li><%= link_to t('admin.self'), admin_dashboard_path %></li>
+      <li><%= link_to 'Uber', uber_stores_path %></li>
+    <% end %>
+    <% if logged_in? && current_store && current_store.is_admin?(current_user) %>
+      <li><%= link_to t('admin.self'), store_admin_dashboard_path(current_store) %></li>
     <% end %>
 
     <% if logged_in? %>
         <li><%= render 'layouts/logout_button' %></li>
-        <li><%= link_to t('navigation.account'), account_path %></li>
+        <li><%= link_to t('navigation.account'), account_profile_path %></li>
     <% else %>
         <li><%= link_to t('navigation.login'), login_path  %></li>
         <li><%= link_to t('navigation.signup'), signup_path %></li>
     <% end %>
+    <% unless current_store.nil? %>
     <li>
-      <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", cart_path, class: 'btn btn-custom-lighten', method: :get %>
+      <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path(current_store), class: 'btn btn-custom-lighten', method: :get %>
     </li>
+    <% end %>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= image_tag("/images/flags/#{get_flag}.png") %> <b class="caret"></b></a>
     <ul class="dropdown-menu">

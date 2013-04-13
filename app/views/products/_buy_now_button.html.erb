@@ -1,5 +1,5 @@
 <% if logged_in? %>
-  <%= form_tag buy_now_path, id: "buyNowForm" do %>
+  <%= form_tag store_buy_now_path(current_store), id: "buyNowForm" do %>
     <%= hidden_field_tag 'order', product.id.to_s %>
     <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
             data-key="pk_test_osSOH0LyEEACshdRsLjyvGSz"

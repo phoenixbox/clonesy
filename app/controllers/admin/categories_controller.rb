@@ -2,7 +2,7 @@ class Admin::CategoriesController < ApplicationController
   before_filter :require_admin
 
   def index
-    @categories = Category.all
+    @categories = current_store.categories.all
   end
 
   def new
@@ -10,9 +10,9 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(params[:category])
+    @category = current_store.categories.build(params[:category])
     if @category.save
-      redirect_to admin_categories_path,
+      redirect_to store_admin_categories_path,
       :notice => "Successfully created category."
     else
       render :action => 'new'
@@ -20,23 +20,16 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
+    @category = current_store.categories.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = current_store.categories.find(params[:id])
     if @category.update_attributes(params[:category])
-      redirect_to admin_categories_path,
+      redirect_to store_admin_categories_path,
       :notice  => "Successfully updated category."
     else
       render :action => 'edit'
     end
   end
-
-  # def destroy
-  #   @product = Product.find(params[:id])
-  #   @product.destroy
-  #   redirect_to admin_products_url,
-  #   :notice => "Successfully destroyed product."
-  # end
 end

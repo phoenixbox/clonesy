@@ -1,27 +1,27 @@
 <tr>
-  <td><%= link_to store.name, store_path(store) %></td>
+  <td><%= link_to store.name, store_home_path(store) %></td>
   <td><%= store.created_at %></td>
   <td><%= store.status %></td>
   <% if store.status == 'pending' %>
   <td>
     <%= button_to 'Approve',
-                approve_uber_store_path(store),
+                approve_uber_store_path(store.id),
                 method: :put, class: 'btn' %>
 
-    <%= button_to 'Disapprove',
-                disapprove_uber_store_path(store),
+    <%= button_to 'Decline',
+                decline_uber_store_path(store.id),
                 method: :put, class: 'btn' %>
   </td>
   <% elsif store.status == 'online' %>
   <td>
-    <%= button_to 'Take Online',
-                toggle_status_uber_store_path(store),
+    <%= button_to 'Take Offline',
+                toggle_online_status_uber_store_path(store.id),
                 method: :put, class: 'btn' %>
   </td>
   <% elsif store.status == 'offline' %>
   <td>
-    <%= button_to 'Take Offline',
-                toggle_status_uber_store_path(store),
+    <%= button_to 'Take Online',
+                toggle_online_status_uber_store_path(store.id),
                 method: :put, class: 'btn' %>
   </td>
   <% end %>

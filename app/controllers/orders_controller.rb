@@ -6,12 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    order = Order.find(params[:id])
-    if current_user.id == order.user_id
-      @order = Order.find(params[:id])
-    else
-      redirect_to account_orders_path
-    end
+    @order = current_user.orders.find_by_id(params[:id])
+    @order_items = @order.order_items
   end
 
   def create
@@ -24,7 +20,7 @@ class OrdersController < ApplicationController
       redirect_to account_order_path(@order),
         :notice => "Order submitted!"
     else
-      redirect_to cart_path, :notice => "Checkout failed."
+      redirect_to store_cart_path(current_store), :notice => "Checkout failed."
     end
   end
 

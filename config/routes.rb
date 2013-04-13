@@ -1,63 +1,61 @@
 StoreEngine::Application.routes.draw do
+  root to: 'stores#index'
 
-  root to: 'products#index'
-
-  get "/code" => redirect("http://github.com/raphweiner/store_engine")
-  get "/logout" => "sessions#destroy", :as => "logout"
-  get "/login" => "sessions#new", :as => "login"
-  get "/signup" => "users#new", :as => "signup"
-
-  get "/checkout" => "checkout#show"
-
-  get "/account" => redirect("/account/profile")
-  get "/account/profile" => "users#show"
-  get "/account/orders" => "orders#index"
-  get "/account/orders/:id" => "orders#show", :as => "account_order"
-
-  post "/buy_now" => "orders#buy_now", :as => 'buy_now'
+  get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
   put "/i18n" => "i18n#update"
 
-  resources :sessions, only: [ :new, :create, :destroy ]
-  resources :products, only: [ :index, :show ]
-  resource :cart, only: [ :update, :show, :destroy ] do
-    member do
-      put :remove_item
-    end
-  end
+  delete "/logout" => "sessions#destroy", as: :logout
+  get "/login" => "sessions#new", as: :login
+  resources :sessions, only: [ :create ]
 
-  resources :users, only: [ :new, :create, :update ] do
+  get "/signup" => "users#new", as: :signup
+  resources :users, only: [ :create, :update ] do
     resources :orders, except: [ :show ]
   end
 
-  resources :stores
+  scope path: "account", as: "account" do
+    get "/profile" => "users#show", as: :profile
+    get "/orders" => "orders#index", as: :orders
+    get "/orders/:id" => "orders#show", as: :order
+  end
 
-  namespace :admin do
-    root to: redirect("/admin/dashboard")
-    get :dashboard, to: "orders#index", as: 'dashboard'
+  resources :stores, only: [ :new, :create ]
 
-    resources :products do
+  namespace :uber do
+    resources :stores, only: [ :index ] do
       member do
-        post :toggle_status
+        put :approve
+        put :decline
+        put :toggle_online_status
+      end
+    end
+  end
+
+  scope "/:store_path", as: :store do
+    get "/" => "products#index", as: :home
+    get "/checkout" => "checkout#show", as: :checkout
+    post "/buy_now" => "orders#buy_now", as: :buy_now
+
+    resources :products, only: [ :show ]
+
+    resource :cart, only: [ :update, :show, :destroy ] do
+      member do
+        put :remove_item
       end
     end
 
-    resources :stores
+    namespace :admin do
+      get :dashboard, to: "orders#index", as: :dashboard
 
-    resources :orders, only: [ :show, :update ]
-    resources :order_items, only: [ :update, :destroy]
-    resources :categories, except: [ :show ]
-  end
-
-  namespace :uber do
-    root to: redirect("/uber/dashboard")
-    get :dashboard, to: "stores#index", as: 'dashboard'
-
-    resources :stores do
-      member do
-        put :approve
-        put :disapprove
-        put :toggle_status
+      resources :products do
+        member do
+          post :toggle_status
+        end
       end
+
+      resources :orders, only: [ :show, :update ]
+      resources :order_items, only: [ :update, :destroy]
+      resources :categories, except: [ :show ]
     end
   end
 end

@@ -25,16 +25,4 @@ class User < ActiveRecord::Base
   def uber?
     self.uber
   end
-
-  def admin?
-    user_role = UserStoreRole.where(store_id: current_store.id)
-                             .where(user_id: id)
-    user_role ? user_role.admin? : false
-  end
-
-  def stocker?
-    user_role = UserStoreRole.where(store_id: current_store.id)
-                             .where(user_id: id)
-    user_role ? user_role.stocker? : false
-  end
 end

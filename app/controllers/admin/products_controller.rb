@@ -1,8 +1,9 @@
 class Admin::ProductsController < ApplicationController
   before_filter :require_admin
+  before_filter :find_product, only: [ :create, :edit, :update, :destroy, :toggle_status ]
 
   def index
-    @products = Product.order('created_at DESC').all
+    @products = current_store.products.order('created_at DESC').all
   end
 
   def new
@@ -10,9 +11,8 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params[:product])
     if @product.save
-      redirect_to admin_products_path,
+      redirect_to store_admin_products_path(current_store),
         :notice => "Successfully created product."
     else
       render :action => 'new', :notice  => "Product creation failed."
@@ -20,13 +20,11 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
-      redirect_to admin_products_path,
+      redirect_to store_admin_products_path(current_store),
         :notice  => "Successfully updated product."
     else
       render :action => 'edit', :notice  => "Update failed."
@@ -34,19 +32,22 @@ class Admin::ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
-    redirect_to admin_products_url,
+    redirect_to store_admin_products_path(current_store),
       :notice => "Successfully destroyed product."
   end
 
   def toggle_status
-    @product = Product.find(params[:id])
     if @product.toggle_status
-      redirect_to admin_products_path,
+      redirect_to store_admin_products_path(current_store),
         :notice  => "Product status successfully set to '#{@product.status}'."
     else
       head 400
     end
+  end
+
+  private
+  def find_product
+    @product = current_store.products.find(params[:id])
   end
 end

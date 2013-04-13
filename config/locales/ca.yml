@@ -29,7 +29,7 @@ ca:
     confirmlogout: 'Are you sure? This will clear your cart, eh'
     add: 'Add to Cart, eh'
   store:
-    name: "Frank's Monsterporium, eh?"
+    name: "Mr. White, eh?"
   confirm: 'Are you sure, eh?'
   checkout: 'Checkout, eh'
   purchase: 'Purchase, eh'

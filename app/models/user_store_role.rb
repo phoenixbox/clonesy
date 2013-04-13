@@ -1,6 +1,8 @@
 class UserStoreRole < ActiveRecord::Base
-  belongs_to :store_id
-  belongs_to :user_id
+  attr_accessible :store_id, :user_id, :role, as: :uber
+
+  belongs_to :store
+  belongs_to :user
 
   validates :role, presence: true,
                    inclusion: {in: %w(admin stocker) }

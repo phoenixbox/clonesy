@@ -8,7 +8,7 @@
     <% if categories.present? %>
         <% categories.each do |category| %>
             <li>
-              <%=link_to category.title, products_path(category_id: category.id) %>
+              <%=link_to category.title, store_home_path(current_store, category_id: category.id) %>
             </li>
         <% end %>
     <% end %>

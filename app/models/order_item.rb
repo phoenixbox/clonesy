@@ -2,7 +2,7 @@ class OrderItem < ActiveRecord::Base
   attr_accessible :product_id, :quantity, :unit_price
   belongs_to :order
   belongs_to :product
-  delegate :title, to: :product
+  delegate :title, :store, to: :product
 
   validates :unit_price, presence: :true,
                          format: { with: /^\d+??(?:\.\d{0,2})?$/ },

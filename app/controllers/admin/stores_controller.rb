@@ -6,7 +6,7 @@ class Admin::StoresController < ApplicationController
   end
 
   def show
-    @store = Store.find(params[:id])
+    @store = Store.find_by_path!(params[:store_path])
   end
 
   def new
@@ -14,7 +14,7 @@ class Admin::StoresController < ApplicationController
   end
 
   def edit
-    @store = Store.find(params[:id])
+    @store = Store.find_by_path!(params[:store_path])
   end
 
   def create
@@ -30,11 +30,6 @@ class Admin::StoresController < ApplicationController
 
   def update
     @store = Store.find(params[:id])
-  end
-
-  def destroy
-    @store = Store.find(params[:id])
-    @store.destroy
   end
 end
 

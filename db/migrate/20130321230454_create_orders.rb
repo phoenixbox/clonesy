@@ -2,6 +2,7 @@ class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
       t.references :user
+      t.references :store
       t.string :status
 
       t.timestamps

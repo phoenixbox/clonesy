@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   attr_accessible :title, :description, :price, :status, :category_ids, :store_id
   has_and_belongs_to_many :categories
+  belongs_to :store
 
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }
@@ -10,7 +11,7 @@ class Product < ActiveRecord::Base
   validates :price, presence: :true,
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
-  # validates :uniqueness, :scope => :store_id
+  validates :store_id, presence: true
 
   def self.by_category(category_id)
     if category_id.present?

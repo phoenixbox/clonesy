@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, @category] do |f| %>
+<%= simple_form_for [current_store, :admin, @category] do |f| %>
   <%= f.input :title, input_html: { placeholder: t('placeholder.category.title') } %>
   <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
 <% end %>

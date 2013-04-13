@@ -1,5 +1,5 @@
 <% if next_status(order.status) %>
 <%= button_to next_status(order.status),
-              admin_order_path(order, update_status: true),
+              store_admin_order_path(current_store, order, update_status: true),
               method: :put, class: 'btn btn-mini' %>
 <% end %>
