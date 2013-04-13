@@ -6,7 +6,7 @@
     <br>
     <%= cart_item.product.description %>
     <br>
-    <%= link_to t('action.remove'), remove_item_cart_path(remove_item: { product_id: cart_item.product.id }), confirm: t('confirm'), method: :put %>
+    <%= link_to t('action.remove'), remove_item_store_cart_path(remove_item: { product_id: cart_item.product.id }), confirm: t('confirm'), method: :put %>
   </td>
   <td><%= number_to_currency(cart_item.unit_price) %></td>
   <td>

@@ -8,7 +8,7 @@
     <%= simple_form_for :sessions, :url => sessions_path, method: 'POST' do |f| %>
       <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
       <%= f.input :password %>
-      <%= f.hidden_field :next_page, value: checkout_path %>
+      <%= f.hidden_field :next_page, value: store_checkout_path %>
       <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
     <% end %>
 
