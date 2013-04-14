@@ -1,12 +1,10 @@
 class Cart
-  attr_reader :session
-
-  def initialize(session)
-    @session = session
+  def initialize(cart_data)
+    @cart_data = cart_data
   end
 
   def items
-    session.map do |id, quantity|
+    @cart_data.map do |id, quantity|
       CartItem.new(Product.find(id), quantity)
     end
   end
@@ -15,27 +13,27 @@ class Cart
     items.map { |item| item.total }.inject(&:+)
   end
 
-  def remove_item(remove_item_param)
-    if id = remove_item_param[:product_id]
-      session.delete(id)
+  def remove_item(product_id)
+    if product_id.present?
+      @cart_data.delete(product_id)
     end
-    session
+    @cart_data
   end
 
   def update(carts_param)
     if id = carts_param[:product_id]
       quantity = carts_param[:quantity]
-      session[id] = quantity || (session[id].to_i + 1).to_s
+      @cart_data[id] = quantity || (@cart_data[id].to_i + 1).to_s
     end
-    session
+    @cart_data
   end
 
   def destroy
-    session = {}
+    @cart_data = {}
   end
 
   def count
-    session.present? ? "(#{calculate_count})" : nil
+    @cart_data.present? ? "(#{calculate_count})" : nil
   end
 
   def empty?
@@ -44,6 +42,6 @@ class Cart
 
 private
   def calculate_count
-    session.values.map(&:to_i).reduce(&:+)
+    @cart_data.values.map(&:to_i).reduce(&:+)
   end
 end

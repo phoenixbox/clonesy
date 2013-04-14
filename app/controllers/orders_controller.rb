@@ -11,13 +11,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.create_and_charge(cart: current_cart,
-                                     user: current_user,
-                                     token: params[:stripeToken])
-    if @order.valid?
-      session[:cart] = current_cart.destroy
-      Mailer.order_confirmation(current_user, @order).deliver
-      redirect_to account_order_path(@order),
+    order = create_order_and_pay(current_cart)
+    if order.valid?
+      current_cart.destroy
+
+      redirect_to account_order_path(order),
         :notice => "Order submitted!"
     else
       redirect_to store_cart_path(current_store), :notice => "Checkout failed."
@@ -25,16 +23,30 @@ class OrdersController < ApplicationController
   end
 
   def buy_now
-    @order = Order.create_and_charge(cart: Cart.new({params[:order] => '1'}),
-                                     user: current_user,
-                                     token: params[:stripeToken])
-    if @order.valid?
-      session[:cart] = current_cart.destroy
-      Mailer.order_confirmation(current_user, @order).deliver
-      redirect_to account_order_path(@order),
+    cart = Cart.new(params[:order] => '1')
+
+    order = create_order_and_pay(cart.items)
+    if order.valid?
+      redirect_to account_order_path(order),
         :notice => "Order submitted!"
     else
       redirect_to :back, :notice => "Checkout failed."
     end
   end
+
+protected
+
+  def create_order_and_pay(cart_items)
+    Order.create_pending_order(current_user, cart_items).tap do |order|
+      Payment.create_with_charge token: params[:stripeToken],
+                                 price: order.total,
+                                 email: order.user.email,
+                                 order: order
+
+      if order.valid?
+        Mailer.order_confirmation(current_user, order).deliver
+      end
+    end
+  end
+
 end

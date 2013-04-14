@@ -2,7 +2,7 @@
         <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
         <%= f.input :billing_address %>
         <%= f.input :address_address %>
-        <%= f.hidden_field :next_page, value: checkout_path %>
+        <%= f.hidden_field :next_page, value: store_checkout_path(current_store) %>
         <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
       <% end %> -->
 

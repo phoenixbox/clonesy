@@ -19,20 +19,16 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def self.create_and_charge(params)
-    order = create(status: 'pending', user_id: params[:user].id)
-
-    params[:cart].items.each do |cart_item|
-      order.order_items.create(product_id: cart_item.product.id,
-                               unit_price: cart_item.unit_price,
-                               quantity: cart_item.quantity)
+  def self.create_pending_order(user, cart_items)
+    transaction do
+      create(status: 'pending', user_id: user.id).tap do |order|
+        cart_items.each do |cart_item|
+          order.order_items.create(product_id: cart_item.product.id,
+                                   unit_price: cart_item.unit_price,
+                                   quantity: cart_item.quantity)
+        end
+      end
     end
-
-    payment = Payment.new_with_charge(token: params[:token],
-                                      price: order.total,
-                                      email: params[:user].email,
-                                      order: order)
-    order
   end
 
   def update_status
