@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
   add_index "addresses", ["addressable_type", "addressable_id"], :name => "index_addresses_on_addressable_type_and_addressable_id"
 
   create_table "categories", :force => true do |t|
-    t.integer  "store_id"
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -53,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "store_id"
     t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -62,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "products", :force => true do |t|
-    t.integer  "store_id"
     t.string   "title"
     t.text     "description"
     t.decimal  "price",       :precision => 8, :scale => 2
