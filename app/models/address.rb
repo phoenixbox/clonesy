@@ -1,11 +1,10 @@
 class Address < ActiveRecord::Base
-  attr_accessible :street, :state, :zipcode, :city, :type
-
-  belongs_to :addressable, polymorphic: true
+  attr_accessible :street, :state, :zipcode, :city
+  belongs_to :user
 
   validates :street, presence: true
-  validates :state, presence: true, length: 2
-  validates :zipcode, presence: true, length: 5
+  validates :state, presence: true
+  validates :zipcode, presence: true
   validates :city, presence: true
-  validates :type, presence: true, inclusion: { in: %w(shipping billing) }
+  validates :type, presence: true
 end

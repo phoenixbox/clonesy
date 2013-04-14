@@ -7,10 +7,10 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :city
       t.string :type
 
-      t.belongs_to :addressable, polymorphic: true
+      t.references :user
 
       t.timestamps
     end
-    add_index :addresses, [:addressable_type, :addressable_id]
+    add_index :addresses, [:user_id, :type], unique: true
   end
 end
