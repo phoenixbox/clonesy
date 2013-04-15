@@ -19,13 +19,12 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.string   "zipcode"
     t.string   "city"
     t.string   "type"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "addresses", ["addressable_type", "addressable_id"], :name => "index_addresses_on_addressable_type_and_addressable_id"
+  add_index "addresses", ["user_id", "type"], :name => "index_addresses_on_user_id_and_type", :unique => true
 
   create_table "categories", :force => true do |t|
     t.integer  "store_id"
@@ -55,10 +54,12 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.integer  "user_id"
     t.integer  "store_id"
     t.string   "status"
+    t.string   "guid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  add_index "orders", ["guid"], :name => "index_orders_on_guid", :unique => true
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "products", :force => true do |t|
@@ -88,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "user_store_roles", ["store_id"], :name => "index_user_store_roles_on_store_id"
+  add_index "user_store_roles", ["store_id", "user_id", "role"], :name => "index_user_store_roles_on_store_id_and_user_id_and_role", :unique => true
   add_index "user_store_roles", ["user_id"], :name => "index_user_store_roles_on_user_id"
 
   create_table "users", :force => true do |t|

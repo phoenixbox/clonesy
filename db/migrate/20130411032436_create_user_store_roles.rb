@@ -7,7 +7,7 @@ class CreateUserStoreRoles < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :user_store_roles, :store_id
+    add_index :user_store_roles, [ :store_id, :user_id, :role ], unique: true
     add_index :user_store_roles, :user_id
   end
 end

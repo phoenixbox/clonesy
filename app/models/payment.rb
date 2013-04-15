@@ -1,7 +1,7 @@
 class Payment
   attr_reader :token, :price, :email, :order
 
-  def self.new_with_charge(params)
+  def self.create_with_charge(params)
     payment = new(params)
     payment.charge
   end

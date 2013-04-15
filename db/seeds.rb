@@ -1,6 +1,12 @@
-User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
-User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
-User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX").uber_up
+user1 = User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
+user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
+user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
+user3.uber_up
+
+user1.create_billing_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
+user1.create_shipping_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
+user2.create_shipping_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
+user3.create_billing_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
 
 store1 = Store.create(name: "Brad's Bean Bags", path: "bean-bags-galore", description: "the bestest bean bags")
 store2 = Store.create(name: "Jorge's Tortiallas", path: "tortilla-palace", description: "get yo tortilla on!")
