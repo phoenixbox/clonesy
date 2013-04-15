@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     if @user.save
       Mailer.welcome_email(@user).deliver
       auto_login(@user)
-      redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
+      redirect_to root_url,
+                  notice: "Welcome, #{@user.full_name}"
     else
       render :action => 'new'
     end
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update_attributes(params[:user])
       redirect_to account_profile_path,
-      :notice => "Successfully updated account"
+                  :notice => "Successfully updated account"
     else
       render :action => 'show'
     end

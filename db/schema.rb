@@ -54,10 +54,12 @@ ActiveRecord::Schema.define(:version => 20130411163716) do
     t.integer  "user_id"
     t.integer  "store_id"
     t.string   "status"
+    t.string   "guid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  add_index "orders", ["guid"], :name => "index_orders_on_guid", :unique => true
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "products", :force => true do |t|

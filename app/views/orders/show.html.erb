@@ -1,5 +1,7 @@
 <div class="order-show">
-  <%= render partial: '/users/user_navigation', locals: { active: false } %>
+  <% if logged_in? %>
+    <%= render partial: '/users/user_navigation', locals: { active: false } %>
+  <% end %>
 
   <div class="span8">
     <h1><%= t('order.self') %> #<%= @order.id %></h1>

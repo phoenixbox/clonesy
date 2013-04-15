@@ -4,8 +4,11 @@ class Cart
   end
 
   def items
+    products = Product.find(@cart_data.keys).index_by(&:id)
+
     @cart_data.map do |id, quantity|
-      CartItem.new(Product.find(id), quantity)
+      product = products[id.to_i]
+      CartItem.new(product, quantity)
     end
   end
 
