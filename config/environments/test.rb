@@ -36,5 +36,4 @@ StoreEngine::Application.configure do
   config.active_support.deprecation = :stderr
 end
 
-ENV["REDISTOGO_URL"] = 'redis://localhost:6789' 
-
+ENV["REDISTOGO_URL"] = 'redis://localhost:6789'
