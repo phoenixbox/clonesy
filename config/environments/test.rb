@@ -35,3 +35,6 @@ StoreEngine::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 end
+
+ENV["REDISTOGO_URL"] = 'redis://localhost:6789' 
+

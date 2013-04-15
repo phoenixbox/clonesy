@@ -1,4 +1,8 @@
+require 'resque/server'
+
 StoreEngine::Application.routes.draw do
+  mount Resque::Server.new, at: "/resque"
+
   root to: 'stores#index'
 
   get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
