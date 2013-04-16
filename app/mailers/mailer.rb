@@ -1,4 +1,5 @@
 class Mailer < ActionMailer::Base
+  add_template_helper(MailerHelper)
   default from: "frank@franks-monsterporium.com"
 
   def welcome_email(email, full_name)
@@ -19,9 +20,10 @@ class Mailer < ActionMailer::Base
     mail(to: user.email, subject: "You're now a #{role}!")
   end
 
-  def role_invitation(email, inviter, store)
-    @store = store
+  def role_invitation(email, inviter, store, role)
     @inviter = inviter
+    @store = store
+    @role = role
     mail(to: email, subject: "You've been invited!")
   end
 

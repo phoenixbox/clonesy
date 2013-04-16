@@ -4,7 +4,7 @@ Dear <%= @user.full_name.titleize %>,
 You've been promoted to a <%= @role %> for <%= @store.name %>
 <br>
 <br>
-You can start stocking the store at TODO: ADD LINK TO STOCKING FUNCTIONALITY.
+Check out the store <%= link_to @store.name, role_link(@role, @store) %>
 <br>
 Have fun!
 <br>
