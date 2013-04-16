@@ -1,4 +1,8 @@
+require 'resque/server'
+
 StoreEngine::Application.routes.draw do
+  mount Resque::Server.new, at: "/resque"
+
   root to: 'stores#index'
 
   get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
@@ -8,16 +12,16 @@ StoreEngine::Application.routes.draw do
   get "/login" => "sessions#new", as: :login
   resources :sessions, only: [ :create ]
 
-  get "/signup" => "users#new", as: :signup
-  resources :users, only: [ :create, :update ] do
-    resources :orders, except: [ :show ]
+  get "/users/new" => "users#new", as: :signup
+  resources :users, only: [ :create, :update ]
+
+  get "/profile" => "users#show", as: :profile
+  
+  scope path: "account", as: "account" do
+    get "/orders" => "orders#index", as: :orders
   end
 
-  scope path: "account", as: "account" do
-    get "/profile" => "users#show", as: :profile
-    get "/orders" => "orders#index", as: :orders
-    get "/orders/:id" => "orders#show", as: :order
-  end
+  get "/orders/:guid" => "orders#show", as: :order
 
   resources :stores, only: [ :new, :create ]
 
@@ -31,10 +35,12 @@ StoreEngine::Application.routes.draw do
     end
   end
 
-  scope "/:store_path", as: "store" do
-    get "/" => "products#index", as: "home"
-    get "/checkout" => "checkout#show", as: "checkout"
-    post "/buy_now" => "orders#buy_now", as: "buy_now"
+  scope "/:store_path", as: :store do
+    get "/" => "products#index", as: :home
+
+    get "/checkout" => "checkouts#show", as: :checkout
+    post "/checkout" => "checkouts#create", as: :checkout
+    post "/buy_now" => "checkouts#buy_now", as: :buy_now
 
     resources :products, only: [ :show ]
 

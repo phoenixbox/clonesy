@@ -7,9 +7,13 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      Mailer.welcome_email(@user).deliver
+      # Mailer.welcome_email(@user.email, @user.full_name).deliver
+      # WelcomeEmailJob.perform(@user.email, @user.full_name)
+      Resque.enqueue(WelcomeEmailJob, @user.email, @user.full_name)
+
       auto_login(@user)
-      redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
+      redirect_to root_url,
+                  notice: "Welcome, #{@user.full_name}"
     else
       render :action => 'new'
     end
@@ -18,8 +22,8 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to account_profile_path,
-      :notice => "Successfully updated account"
+      redirect_to profile_path,
+                  :notice => "Successfully updated account"
     else
       render :action => 'show'
     end

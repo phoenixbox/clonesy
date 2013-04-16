@@ -1,21 +1,19 @@
 class CartsController < ApplicationController
-  before_filter :find_or_create_cart
-
   def show
   end
 
   def update
-    session[:cart] = current_cart.update(params[:carts])
+    current_cart.update params[:carts]
     redirect_to(:back)
   end
 
   def remove_item
-    session[:cart] = current_cart.remove_item(params[:remove_item])
+    current_cart.remove_item params[:product_id]
     redirect_to(:back)
   end
 
   def destroy
-    session[:cart] = current_cart.destroy
-    redirect_to root_path, :notice  => "Cart cleared."
+    current_cart.destroy
+    redirect_to store_home_path(current_store), :notice  => "Cart cleared."
   end
 end

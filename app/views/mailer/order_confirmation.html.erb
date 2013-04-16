@@ -8,7 +8,7 @@ Thanks so much for your purchase of:
 <br>
 <% end %>
 <br>
-We've processed your payment for <%= number_to_currency(@order.total) %>.
+We've processed your payment for <%= number_to_currency(@order.total) %>. You can find your order <a href="<%= order_url(@order, host: HOST_DOMAIN) %>">here</a>.
 <br>
 <br>
 We hope you stop by again!

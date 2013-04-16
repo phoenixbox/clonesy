@@ -17,12 +17,12 @@
 
     <% if logged_in? %>
         <li><%= render 'layouts/logout_button' %></li>
-        <li><%= link_to t('navigation.account'), account_profile_path %></li>
+        <li><%= link_to t('navigation.account'), profile_path %></li>
     <% else %>
         <li><%= link_to t('navigation.login'), login_path  %></li>
         <li><%= link_to t('navigation.signup'), signup_path %></li>
     <% end %>
-    <% unless current_store.nil? %>
+    <% if current_store != nil && current_store.id != nil %>
     <li>
       <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path, class: 'btn btn-custom-lighten', method: :get %>
     </li>

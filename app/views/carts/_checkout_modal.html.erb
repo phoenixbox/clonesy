@@ -4,15 +4,22 @@
     <h3 id="myModalLabel">Checkout</h3>
   </div>
   <div class="modal-body">
-    <p>Please login or skip to checkout</p>
-    <%= simple_form_for :sessions, :url => sessions_path, method: 'POST' do |f| %>
+    <div style="padding-right: 10px; margin-right: 10px; border-right: 1px solid #ccc; width: 225px; float:left">
+    <h4>Login</h4>
+    <%= simple_form_for :sessions, url: sessions_path, method: 'POST' do |f| %>
       <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
       <%= f.input :password %>
-      <%= f.hidden_field :next_page, value: store_checkout_path %>
+      <%= f.hidden_field :next_page, value: store_checkout_path(current_store) %>
       <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
     <% end %>
-
     <%= link_to t('account.create'), signup_path %>
-    <button class="btn btn-primary pull-right">Skip to checkout</button>
+    </div>
+    <div style="width: 225px; float:left">
+    <h4>Checkout as guest</h4>
+      <%= link_to 'Continue',
+                   store_checkout_path(current_store),
+                   class: 'btn pull-right' %>
+    </div>
+    <div style="clear:both"></div>
   </div>
 </div>
