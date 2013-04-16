@@ -8,5 +8,8 @@ class CreateStores < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :stores, :path
+    add_index :stores, :status
   end
 end
