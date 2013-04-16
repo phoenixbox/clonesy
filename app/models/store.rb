@@ -25,6 +25,10 @@ class Store < ActiveRecord::Base
     UserStoreRole.exists?(store_id: self, user_id: user, role: :stocker)
   end
 
+  def is_admin_or_stocker?(user)
+    is_admin?(user) || is_stocker?(user)
+  end
+
   def to_param
     path
   end

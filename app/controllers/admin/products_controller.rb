@@ -1,6 +1,6 @@
 class Admin::ProductsController < ApplicationController
-  before_filter :require_admin
-  before_filter :find_product, only: [ :create, :edit, :update, :destroy, :toggle_status ]
+  before_filter :require_admin_or_stocker
+  before_filter :find_product, only: [ :edit, :update, :destroy, :toggle_status ]
 
   def index
     @products = current_store.products.order('created_at DESC').all
@@ -11,6 +11,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
+    @product = current_store.products.new(params[:product])
     if @product.save
       redirect_to store_admin_products_path(current_store),
         :notice => "Successfully created product."
