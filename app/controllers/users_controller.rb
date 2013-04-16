@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to account_profile_path,
+      redirect_to profile_path,
                   :notice => "Successfully updated account"
     else
       render :action => 'show'
