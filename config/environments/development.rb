@@ -36,4 +36,4 @@ StoreEngine::Application.configure do
   config.assets.debug = true
 end
 
-ENV["REDISTOGO_URL"] = 'redis://localhost:6789'
+ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
