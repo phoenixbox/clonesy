@@ -9,17 +9,16 @@ class StoresController < ApplicationController
 
   def new
     @store = Store.new
+    @products = current_store.products
   end
 
   def create
     @store = Store.new(params[:store])
 
     if @store.save
-      redirect_to store_path(@store.id
-        ), notice: "Store is now pending approval"
+      redirect_to store_home_path(@store), notice: "Your store is created."
     else
-      raise @store.errors.inspect
-      render :action => 'new'
+      render action: 'new'
     end
   end
 end

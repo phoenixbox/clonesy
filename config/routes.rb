@@ -1,4 +1,8 @@
+require 'resque/server'
+
 StoreEngine::Application.routes.draw do
+  mount Resque::Server.new, at: "/resque"
+
   root to: 'stores#index'
 
   get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
@@ -11,8 +15,9 @@ StoreEngine::Application.routes.draw do
   get "/users/new" => "users#new", as: :signup
   resources :users, only: [ :create, :update ]
 
+  get "/profile" => "users#show", as: :profile
+  
   scope path: "account", as: "account" do
-    get "/profile" => "users#show", as: :profile
     get "/orders" => "orders#index", as: :orders
   end
 

@@ -71,10 +71,10 @@ describe 'new user creates and edits account' do
     fill_in "Email", with: 'poetry@poetry.com'
     fill_in "Password", with: "poet"
     click_button "Login"
-    visit account_profile_path
+    visit profile_path
     fill_in "Display Name", with: 'Maya'
     click_button "Update Account"
-    expect(current_path).to eq account_profile_path
+    expect(current_path).to eq profile_path
     expect(page).to have_content "updated account"
   end
 end
