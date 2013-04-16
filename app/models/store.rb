@@ -8,8 +8,10 @@ class Store < ActiveRecord::Base
   has_many :products
   has_many :user_store_roles
 
-  validates :name, uniqueness: true
-  validates :path, uniqueness: true
+  validates :name, presence: true,
+                   uniqueness: true
+  validates :path, presence: true,
+                   uniqueness: true
   validates :status, presence: true,
                      inclusion: { in: %w(online offline pending declined) }
 

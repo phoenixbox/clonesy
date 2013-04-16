@@ -16,7 +16,7 @@ StoreEngine::Application.routes.draw do
   resources :users, only: [ :create, :update ]
 
   get "/profile" => "users#show", as: :profile
-  
+
   scope path: "account", as: "account" do
     get "/orders" => "orders#index", as: :orders
   end
@@ -52,7 +52,15 @@ StoreEngine::Application.routes.draw do
 
     namespace :admin do
       get '/' => "dashboards#manage", as: :manage
-      post '/create_stocker' => "dashboards#create_stocker"
+
+      get '/edit' => "dashboards#edit", as: :edit_store
+      put '/update' => "dashboards#update", as: :update_store
+
+      post '/stocker' => "dashboards#create_stocker", as: :create_stocker
+      delete '/stocker' => "dashboards#delete_stocker", as: :delete_stocker
+
+      post '/admin' => "dashboards#create_admin", as: :delete_admin
+      delete '/admin' => "dashboards#delete_admin", as: :delete_admin
 
       get :dashboard, to: "orders#index", as: :dashboard
 
