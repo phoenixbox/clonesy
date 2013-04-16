@@ -9,14 +9,30 @@
     <p>Description: <%= current_store.description %></p>
     <%= link_to 'Edit', store_admin_edit_store_path(current_store) %>
     <hr>
-    <h3>Users</h3>
-    <%= simple_form_for @stocker, url: store_admin_create_stocker_path(current_store) do |s| %>
+    <h3>Admins</h3>
+    <%= simple_form_for @admin, url: store_admin_create_role_path(current_store) do |s| %>
+      <%= s.hidden_field :role, value: :admin %>
+      <%= s.input :email %>
+      <%= s.submit "Add Admin", class: "btn btn-primary" %>
+    <% end %>
+    <table class="table table-striped">
+      <thead>
+      <th>Email</th>
+      <th></th>
+      </thead>
+      <tbody>
+        <%= render partial: 'admin', collection: @admins %>
+      </tbody>
+    </table>
+    <hr>
+    <h3>Stockers</h3>
+    <%= simple_form_for @stocker, url: store_admin_create_role_path(current_store) do |s| %>
+      <%= s.hidden_field :role, value: :stocker %>
       <%= s.input :email %>
       <%= s.submit "Add Stocker", class: "btn btn-primary" %>
     <% end %>
     <table class="table table-striped">
       <thead>
-      <th>Role</th>
       <th>Email</th>
       <th></th>
       </thead>
@@ -24,5 +40,6 @@
         <%= render partial: 'stocker', collection: @stockers %>
       </tbody>
     </table>
+
   </div>
 </div>

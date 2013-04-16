@@ -59,11 +59,8 @@ StoreEngine::Application.routes.draw do
       get '/edit' => "dashboards#edit", as: :edit_store
       put '/update' => "dashboards#update", as: :update_store
 
-      post '/stocker' => "dashboards#create_stocker", as: :create_stocker
-      delete '/stocker' => "dashboards#delete_stocker", as: :delete_stocker
-
-      post '/admin' => "dashboards#create_admin", as: :delete_admin
-      delete '/admin' => "dashboards#delete_admin", as: :delete_admin
+      post '/role' => "dashboards#create_role", as: :create_role
+      delete '/role' => "dashboards#destroy_role", as: :revoke_role
 
       get :dashboard, to: "orders#index", as: :dashboard
 

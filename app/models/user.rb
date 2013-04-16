@@ -35,9 +35,17 @@ class User < ActiveRecord::Base
     new(params)
   end
 
+  # TODO: Not DRY! Pass along role? What to do if user/store already exists. Destroy other relationship? (ie. admin <-> stocker)
   def stocker_up(store)
     begin
       UserStoreRole.create({user_id: self.id, store_id: store.id, role: 'stocker'}, as: :uber)
+    rescue ActiveRecord::RecordNotUnique
+    end
+  end
+
+  def admin_up(store)
+    begin
+      UserStoreRole.create({user_id: self.id, store_id: store.id, role: 'admin'}, as: :uber)
     rescue ActiveRecord::RecordNotUnique
     end
   end
