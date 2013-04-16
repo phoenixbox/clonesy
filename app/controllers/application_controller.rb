@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_locale
 
   def require_admin
-    if current_store.nil? || !current_store.is_admin?(current_user)
+    if current_store.nil? || !(current_store.is_admin?(current_user) || current_user.uber?)
       not_authenticated
     end
   end

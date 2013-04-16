@@ -1,6 +1,11 @@
 <tr>
-  <td><%= link_to store.name, store_home_path(store) %></td>
-  <td><%= store.created_at %></td>
+  <td>
+    <%= link_to store.name, store_home_path(store) %>
+    <br>
+    <%= link_to 'Administer', store_admin_manage_path(store) %>
+  </td>
+  <td><%= store.path %></td>
+  <td><%= store.description.slice(0, 32) %></td>
   <td><%= store.status %></td>
   <% if store.status == 'pending' %>
   <td>

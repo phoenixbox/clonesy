@@ -4,6 +4,7 @@
   <div class="span8">
     <h1><%= t 'admin.dashboard' %></h1>
     <hr>
+    <%# TODO: Fix order links to correctly use new guid schema %>
 
     <% if @count > 0 %>
       <%= render partial: 'admin_dashboard_nav',

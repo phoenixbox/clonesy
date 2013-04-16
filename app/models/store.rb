@@ -16,6 +16,7 @@ class Store < ActiveRecord::Base
                      inclusion: { in: %w(online offline pending declined) }
 
   scope :approved, lambda { where("status <> 'declined'") }
+  scope :online, lambda { where(status: 'online') }
 
   def is_admin?(user)
     UserStoreRole.exists?(store_id: self, user_id: user, role: :admin)
@@ -26,7 +27,7 @@ class Store < ActiveRecord::Base
   end
 
   def is_admin_or_stocker?(user)
-    is_admin?(user) || is_stocker?(user)
+    is_admin?(user) || is_stocker?(user) || user.uber?
   end
 
   def to_param
