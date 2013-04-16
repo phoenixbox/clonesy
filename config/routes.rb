@@ -46,6 +46,9 @@ StoreEngine::Application.routes.draw do
     end
 
     namespace :admin do
+      get '/' => "dashboards#manage", as: :manage
+      post '/create_stocker' => "dashboards#create_stocker"
+
       get :dashboard, to: "orders#index", as: :dashboard
 
       resources :products do

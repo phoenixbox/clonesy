@@ -35,6 +35,13 @@ class User < ActiveRecord::Base
     new(params)
   end
 
+  def stocker_up(store)
+    begin
+      UserStoreRole.create({user_id: self.id, store_id: store.id, role: 'stocker'}, as: :uber)
+    rescue ActiveRecord::RecordNotUnique
+    end
+  end
+
   def uber_up
     self.uber = true
     self.save

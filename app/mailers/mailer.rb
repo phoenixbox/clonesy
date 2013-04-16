@@ -11,4 +11,16 @@ class Mailer < ActionMailer::Base
     @order = order
     mail(to: user.email, subject: "Thanks for your purchase!")
   end
+
+  def stocker_confirmation(user, store)
+    @user = user
+    @store = store
+    mail(to: user.email, subject: "You're now a stocker!")
+  end
+
+  def stocker_invitation(email, inviter, store)
+    @store = store
+    @inviter = inviter
+    mail(to: email, subject: "You've been invited!")
+  end
 end

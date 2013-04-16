@@ -1,0 +1,8 @@
+<div class="admin-dashboard-manage">
+  <%= render partial: 'shared/admin_navigation', :locals => { active: :manage }  %>
+
+  <%= simple_form_for @stocker, url: store_admin_create_stocker_path(current_store) do |s| %>
+    <%= s.input :email %>
+    <%= s.submit "Add Stocker", class: "btn btn-primary" %>
+  <% end %>
+</div>
