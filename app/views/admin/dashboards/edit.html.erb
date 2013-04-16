@@ -1,0 +1,15 @@
+<div class="admin-dashboard-manage">
+  <%= render partial: 'shared/admin_navigation', :locals => { active: nil }  %>
+
+  <div class="span8">
+    <h1>Edit Store</h1>
+    <hr>
+    <%# TODO: require confirmation for change of path %>
+    <%= simple_form_for @store, url: store_admin_update_store_path(current_store) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :path %>
+      <%= f.input :description %>
+      <%= f.submit class: 'btn' %>
+    <% end %>
+  </div>
+</div>

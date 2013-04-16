@@ -1,6 +1,9 @@
 <div class="span3">
   <ul class="nav nav-list">
     <li class="nav-header"><%= t('admin.self') %></li>
+    <li class="<%= active == :manage ? 'active' : '' %>">
+      <%= link_to 'Manage', store_admin_manage_path(current_store) %>
+    </li>
     <li class="<%= active == :dashboard ? 'active' : '' %>">
       <%= link_to t('admin.dashboard'), store_admin_dashboard_path(current_store) %>
     </li>

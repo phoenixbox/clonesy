@@ -16,7 +16,7 @@ StoreEngine::Application.routes.draw do
   resources :users, only: [ :create, :update ]
 
   get "/profile" => "users#show", as: :profile
-  
+
   scope path: "account", as: "account" do
     get "/orders" => "orders#index", as: :orders
   end
@@ -50,7 +50,18 @@ StoreEngine::Application.routes.draw do
       end
     end
 
+    # TODO: Controller redirects to /admin namespace -> replicate stocker functionality (controller/views) for sake of explicit auth restrictions?
+    get '/stock/products' => "admin/products#index", as: :stock_products
+
     namespace :admin do
+      get '/' => "dashboards#manage", as: :manage
+
+      get '/edit' => "dashboards#edit", as: :edit_store
+      put '/update' => "dashboards#update", as: :update_store
+
+      post '/role' => "roles#create", as: :create_role
+      delete '/role' => "roles#destroy", as: :revoke_role
+
       get :dashboard, to: "orders#index", as: :dashboard
 
       resources :products do

@@ -8,12 +8,15 @@ class Store < ActiveRecord::Base
   has_many :products
   has_many :user_store_roles
 
-  validates :name, uniqueness: true
-  validates :path, uniqueness: true
+  validates :name, presence: true,
+                   uniqueness: true
+  validates :path, presence: true,
+                   uniqueness: true
   validates :status, presence: true,
                      inclusion: { in: %w(online offline pending declined) }
 
   scope :approved, lambda { where("status <> 'declined'") }
+  scope :online, lambda { where(status: 'online') }
 
   def is_admin?(user)
     UserStoreRole.exists?(store_id: self, user_id: user, role: :admin)
@@ -21,6 +24,10 @@ class Store < ActiveRecord::Base
 
   def is_stocker?(user)
     UserStoreRole.exists?(store_id: self, user_id: user, role: :stocker)
+  end
+
+  def is_admin_or_stocker?(user)
+    is_admin?(user) || is_stocker?(user) || user.uber?
   end
 
   def to_param

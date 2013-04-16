@@ -1,0 +1,9 @@
+<tr>
+  <td><%= admin.email %></td>
+  <td>
+      <%= link_to 'Remove',
+                  store_admin_revoke_role_path(current_store, user_id: admin),
+                  method: :delete,
+                  confirm: "are you sure?" %>
+  </td>
+</tr>

@@ -4,7 +4,13 @@ class ApplicationController < ActionController::Base
   before_filter :get_locale
 
   def require_admin
-    if current_store.nil? || !current_store.is_admin?(current_user)
+    if current_store.nil? || !(current_store.is_admin?(current_user) || current_user.uber?)
+      not_authenticated
+    end
+  end
+
+  def require_admin_or_stocker
+    if current_store.nil? || !current_store.is_admin_or_stocker?(current_user)
       not_authenticated
     end
   end
@@ -14,7 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to login_path, :alert => "First login to access this page."
+    redirect_to login_path,
+                alert: "You are not authorized to visit that page :("
   end
 
   def current_cart

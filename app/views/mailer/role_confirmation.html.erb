@@ -1,0 +1,11 @@
+Dear <%= @user.full_name.titleize %>,
+<br>
+<br>
+You've been promoted to a <%= @role %> for <%= @store.name %>
+<br>
+<br>
+Check out the store <%= link_to @store.name, role_link(@role, @store) %>
+<br>
+Have fun!
+<br>
+Frank's Monsterporium

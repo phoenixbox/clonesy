@@ -1,0 +1,45 @@
+<div class="admin-dashboard-manage">
+  <%= render partial: 'shared/admin_navigation', :locals => { active: :manage }  %>
+
+  <div class="span8">
+    <h1>Manage</h1>
+    <hr>
+    <p>Name: <%= current_store.name %></p>
+    <p>Path: <%= current_store.path %></p>
+    <p>Description: <%= current_store.description %></p>
+    <%= link_to 'Edit', store_admin_edit_store_path(current_store) %>
+    <hr>
+    <h3>Admins</h3>
+    <%= simple_form_for @admin, url: store_admin_create_role_path(current_store) do |s| %>
+      <%= s.hidden_field :role, value: :admin %>
+      <%= s.input :email %>
+      <%= s.submit "Add Admin", class: "btn btn-primary" %>
+    <% end %>
+    <table class="table table-striped">
+      <thead>
+      <th>Email</th>
+      <th></th>
+      </thead>
+      <tbody>
+        <%= render partial: 'admin', collection: @admins %>
+      </tbody>
+    </table>
+    <hr>
+    <h3>Stockers</h3>
+    <%= simple_form_for @stocker, url: store_admin_create_role_path(current_store) do |s| %>
+      <%= s.hidden_field :role, value: :stocker %>
+      <%= s.input :email %>
+      <%= s.submit "Add Stocker", class: "btn btn-primary" %>
+    <% end %>
+    <table class="table table-striped">
+      <thead>
+      <th>Email</th>
+      <th></th>
+      </thead>
+      <tbody>
+        <%= render partial: 'stocker', collection: @stockers %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
