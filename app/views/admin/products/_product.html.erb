@@ -17,7 +17,7 @@
       <ul class="dropdown-menu">
         <li>
           <%= link_to t('crud.edit'),
-                      edit_store_admin_product_path(current_store, product) %>
+                      edit_store_product_path(@role, current_store, product) %>
         </li>
         <li class="divider">
         </li>

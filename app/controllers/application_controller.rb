@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_cart, :current_store, :get_flag
-  before_filter :get_locale
+  helper_method :current_cart, :current_store, :flag,
+                :store_products_path, :edit_store_product_path
+
+  before_filter :locale
 
   def require_admin
     if current_store.nil? || !(current_store.is_admin?(current_user) || current_user.uber?)
@@ -10,7 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin_or_stocker
-    if current_store.nil? || !current_store.is_admin_or_stocker?(current_user)
+    @role = current_store.admin_or_stocker?(current_user)
+    if current_store.nil? || !@role
       not_authenticated
     end
   end
@@ -39,11 +42,27 @@ class ApplicationController < ActionController::Base
     @store ||= Store.online.where(path: params[:store_path]).first
   end
 
-  def get_locale
+  def locale
     I18n.locale = session[:i18n] || I18n.default_locale || :en
   end
 
-  def get_flag
+  def store_products_path(role, store)
+    if role == :admin
+      store_admin_products_path(store)
+    elsif role == :stocker
+      store_stock_products_path(store)
+    end
+  end
+
+  def edit_store_product_path(role, store, product)
+    if role == :admin
+      edit_store_admin_product_path(store, product)
+    elsif role == :stocker
+      store_stock_edit_product_path(store, product)
+    end
+  end
+
+  def flag
     case session[:i18n]
     when 'fr' then 'fr'
     when 'cs' then 'cs'

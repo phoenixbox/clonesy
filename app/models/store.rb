@@ -19,15 +19,23 @@ class Store < ActiveRecord::Base
   scope :online, lambda { where(status: 'online') }
 
   def is_admin?(user)
-    UserStoreRole.exists?(store_id: self, user_id: user, role: :admin)
+    UserStoreRole.exists?(store_id: self,
+                          user_id: user,
+                          role: :admin)
   end
 
   def is_stocker?(user)
-    UserStoreRole.exists?(store_id: self, user_id: user, role: :stocker)
+    UserStoreRole.exists?(store_id: self,
+                          user_id: user,
+                          role: :stocker)
   end
 
-  def is_admin_or_stocker?(user)
-    is_admin?(user) || is_stocker?(user) || user.uber?
+  def admin_or_stocker?(user)
+    if is_admin?(user) || user.uber?
+      :admin
+    elsif is_stocker?(user)
+      :stocker
+    end
   end
 
   def to_param
