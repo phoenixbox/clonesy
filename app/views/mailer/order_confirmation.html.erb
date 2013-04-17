@@ -1,14 +1,9 @@
-Dear <%= @user.full_name.titleize %>,
+Dear <%= @user["full_name"].titleize %>,
 <br>
 <br>
-Thanks so much for your purchase of:
+Thanks so much for your purchase!
 <br>
-<% @order.order_items.each do |order_item| %>
-<%= order_item.quantity %>x <%= order_item.title %>
-<br>
-<% end %>
-<br>
-We've processed your payment for <%= number_to_currency(@order.total) %>. You can find your order <a href="<%= order_url(@order, host: HOST_DOMAIN) %>">here</a>.
+We've processed your payment for <%= number_to_currency(@order_total) %>. You can find your order <a href="<%= order_url(@order_id, host: HOST_DOMAIN) %>">here</a>.
 <br>
 <br>
 We hope you stop by again!

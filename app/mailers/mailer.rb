@@ -7,10 +7,11 @@ class Mailer < ActionMailer::Base
     mail(to: email, subject: "Welcome to Frank's Monsterporium!")
   end
 
-  def order_confirmation(user, order)
+  def order_confirmation(user, order_id, order_total)
     @user = user
-    @order = order
-    mail(to: user.email, subject: "Thanks for your purchase!")
+    @order_id = order_id
+    @order_total = order_total
+    mail(to: user["email"], subject: "Thanks for your purchase!")
   end
 
   def role_confirmation(user, store, role)
