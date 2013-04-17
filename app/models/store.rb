@@ -19,9 +19,9 @@ class Store < ActiveRecord::Base
   scope :online, lambda { where(status: 'online') }
 
   def is_admin?(user)
-    UserStoreRole.exists?(store_id: self,
-                          user_id: user,
-                          role: :admin)
+    user.uber? || UserStoreRole.exists?(store_id: self,
+                                        user_id: user,
+                                        role: :admin)
   end
 
   def is_stocker?(user)
@@ -31,7 +31,7 @@ class Store < ActiveRecord::Base
   end
 
   def admin_or_stocker?(user)
-    if is_admin?(user) || user.uber?
+    if is_admin?(user)
       :admin
     elsif is_stocker?(user)
       :stocker

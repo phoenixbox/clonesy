@@ -50,7 +50,6 @@ StoreEngine::Application.routes.draw do
       end
     end
 
-    # TODO: Controller redirects to /admin namespace -> replicate stocker functionality (controller/views) for sake of explicit auth restrictions?
     get '/stock/products' => "admin/products#index", as: :stock_products
     get '/stock/products/:id/edit' => "admin/products#edit", as: :stock_edit_product
 
