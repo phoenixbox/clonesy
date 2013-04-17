@@ -4,9 +4,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.where(email: params[:user][:email]).first
 
-    if @user.save
+    if @user && @user.orphan?
+      @user.update_attributes(params[:user].merge({orphan: false}))
+    else
+      @user = User.create(params[:user])
+    end
+
+    if @user.valid?
       # Mailer.welcome_email(@user.email, @user.full_name).deliver
       # WelcomeEmailJob.perform(@user.email, @user.full_name)
       Resque.enqueue(WelcomeEmailJob, @user.email, @user.full_name)
