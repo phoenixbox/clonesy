@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
   before_filter :find_product, only: [ :edit, :update, :destroy, :toggle_status ]
 
   def index
-    @products = current_store.products.order('created_at DESC').all
+    @products = current_store.products.order('created_at DESC').page(params[:page]).per(20)
   end
 
   def new
