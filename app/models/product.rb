@@ -13,6 +13,8 @@ class Product < ActiveRecord::Base
                     numericality: { greater_than: 0 }
   validates :store_id, presence: true
 
+  scope :active, lambda { where(status: 'active') }
+
   def self.by_category(category_id)
     if category_id.present?
       Category.find(category_id).products

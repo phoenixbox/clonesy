@@ -12,10 +12,7 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'pg'
 gem 'validation-scopes'
 gem "resque", "~>1.24.0"
-
-group :production do
-  gem 'pg'
-end
+gem 'faker'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
