@@ -14,7 +14,8 @@ class Admin::RolesController < ApplicationController
       redirect_to store_admin_manage_path(current_store),
                   notice: 'Successfully promoted user.'
     else
-      Mailer.role_invitation(email, current_user, current_store, role).deliver
+      # Mailer.role_invitation(email, current_user, current_store, role).deliver
+      Resque.enqueue(RoleInviteEmailJob, email, current_user, current_store, role)
       redirect_to store_admin_manage_path(current_store),
                   notice: 'Successfully invited user.'
     end
