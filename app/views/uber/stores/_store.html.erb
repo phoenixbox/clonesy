@@ -19,13 +19,13 @@
   </td>
   <% elsif store.status == 'online' %>
   <td>
-    <%= button_to 'Take Offline',
+    <%= button_to 'Disable',
                 toggle_online_status_uber_store_path(store.id),
                 method: :put, class: 'btn' %>
   </td>
   <% elsif store.status == 'offline' %>
   <td>
-    <%= button_to 'Take Online',
+    <%= button_to 'Enable',
                 toggle_online_status_uber_store_path(store.id),
                 method: :put, class: 'btn' %>
   </td>
