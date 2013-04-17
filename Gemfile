@@ -31,6 +31,7 @@ group :development, :test do
   gem 'debugger'
   gem 'capybara'
   gem 'simplecov'
+  gem 'newrelic_rpm'
 end
 
 group :test do
