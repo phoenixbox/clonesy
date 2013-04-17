@@ -24,13 +24,19 @@ class ApplicationController < ActionController::Base
                 alert: "You are not authorized to visit that page :("
   end
 
+  def require_current_store
+    if !current_store
+      raise ActionController::RoutingError.new('Store is not online')
+    end
+  end
+
   def current_cart
     session[:cart] ||= {}
     @cart ||= SessionCart.new(session[:cart], current_store)
   end
 
   def current_store
-    @store ||= Store.where(path: params[:store_path]).first
+    @store ||= Store.online.where(path: params[:store_path]).first
   end
 
   def get_locale

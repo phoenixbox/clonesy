@@ -3,22 +3,17 @@ class StoresController < ApplicationController
     @stores = Store.online
   end
 
-  def show
-    @store = Store.find(params[:id])
-  end
-
   def new
-    @store = Store.new
-    @products = current_store.products
+    @new_store = Store.new
   end
 
   def create
-    @store = Store.new(params[:store])
+    @new_store = Store.new(params[:store])
 
-    if @store.save
-      redirect_to store_home_path(@store), notice: "Your store is created."
+    if @new_store.save
+      render :confirmation
     else
-      render action: 'new'
+      render :new
     end
   end
 end
