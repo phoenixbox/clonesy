@@ -8,6 +8,7 @@
     <p>Name: <%= current_store.name %></p>
     <p>Path: <%= current_store.path %></p>
     <p>Description: <%= current_store.description %></p>
+    <p>Theme: <%= current_store.theme %></p>
     <%= link_to 'Edit', store_admin_edit_store_path(current_store) %>
     <hr>
     <%= render partial: 'add_admin', locals: { admin: @admin } %>
