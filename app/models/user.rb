@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
                   :email,
                   :full_name,
                   :password,
-                  :password_confirmation
+                  :password_confirmation,
+                  :orphan
 
   has_one :billing_address, validate: true, autosave: true
   has_one :shipping_address, validate: true, autosave: true
@@ -31,23 +32,9 @@ class User < ActiveRecord::Base
     params[:full_name] = "Guest"
     params[:password] = generate_password
     params[:password_confirmation] = params[:password]
+    params[:orphan] = true
 
     new(params)
-  end
-
-  # TODO: Not DRY! Pass along role? What to do if user/store already exists. Destroy other relationship? (ie. admin <-> stocker)
-  def stocker_up(store)
-    begin
-      UserStoreRole.create({user_id: self.id, store_id: store.id, role: 'stocker'}, as: :uber)
-    rescue ActiveRecord::RecordNotUnique
-    end
-  end
-
-  def admin_up(store)
-    begin
-      UserStoreRole.create({user_id: self.id, store_id: store.id, role: 'admin'}, as: :uber)
-    rescue ActiveRecord::RecordNotUnique
-    end
   end
 
   def uber_up
@@ -57,6 +44,10 @@ class User < ActiveRecord::Base
 
   def uber?
     self.uber
+  end
+
+  def orphan?
+    self.orphan
   end
 
   private

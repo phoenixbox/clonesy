@@ -1,8 +1,8 @@
 # StoreEngine
 
-## Welcome to Frank's Monsterporium, a faux online store
+## Welcome to Mr. White's Stores, a faux online store
 
-Frank's Monsterporium has the best selection, nay, the ONLY selection of Frank's awesome creations on the web.
+Mr. White's Stores has the best selection, nay, the ONLY selection of Frank's awesome creations on the web.
 
 This project was created for the gSchool StoreEngine Project. The background for this project can be found at: http://tutorials.jumpstartlab.com/projects/store_engine.html
 

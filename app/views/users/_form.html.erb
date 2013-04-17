@@ -4,5 +4,6 @@
     <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
+    <%= f.hidden_field :next_page, value: @next_page %>
     <%= f.button :submit, t('submit') %>
 <% end %>

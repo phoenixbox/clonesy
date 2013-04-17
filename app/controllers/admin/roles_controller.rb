@@ -9,12 +9,13 @@ class Admin::RolesController < ApplicationController
       redirect_to store_admin_manage_path(current_store),
                   notice: 'Please enter an email.'
     elsif user = User.where(email: email).first
-      user.send("#{role}_up", current_store)
-      Mailer.role_confirmation(user, current_store, role).deliver
+      Role.promote(user, current_store, role)
+
+      Resque.enqueue(RoleConfirmEmailJob, user, current_store, role)
       redirect_to store_admin_manage_path(current_store),
                   notice: 'Successfully promoted user.'
     else
-      Mailer.role_invitation(email, current_user, current_store, role).deliver
+      Resque.enqueue(RoleInviteEmailJob, email, current_user, current_store, role)
       redirect_to store_admin_manage_path(current_store),
                   notice: 'Successfully invited user.'
     end
@@ -22,9 +23,9 @@ class Admin::RolesController < ApplicationController
 
   def destroy
     user_id = params[:user_id]
-    relationship = UserStoreRole.where(user_id: user_id, store_id: current_store).first
-    relationship.destroy
-    Mailer.revoke_role(User.find(user_id), current_store).deliver
+    Role.revoke(user_id, current_store)
+
+    Resque.enqueue(RoleRevokeEmailJob, User.find(user_id), current_store)
     redirect_to store_admin_manage_path(current_store),
                 notice: "Successfully revoked role."
   end

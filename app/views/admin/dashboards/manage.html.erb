@@ -1,5 +1,6 @@
 <div class="admin-dashboard-manage">
-  <%= render partial: 'shared/admin_navigation', :locals => { active: :manage }  %>
+  <%= render partial: 'shared/admin_navigation',
+             locals: { active: :manage }  %>
 
   <div class="span8">
     <h1>Manage</h1>
@@ -9,12 +10,7 @@
     <p>Description: <%= current_store.description %></p>
     <%= link_to 'Edit', store_admin_edit_store_path(current_store) %>
     <hr>
-    <h3>Admins</h3>
-    <%= simple_form_for @admin, url: store_admin_create_role_path(current_store) do |s| %>
-      <%= s.hidden_field :role, value: :admin %>
-      <%= s.input :email %>
-      <%= s.submit "Add Admin", class: "btn btn-primary" %>
-    <% end %>
+    <%= render partial: 'add_admin', locals: { admin: @admin } %>
     <table class="table table-striped">
       <thead>
       <th>Email</th>
@@ -25,12 +21,7 @@
       </tbody>
     </table>
     <hr>
-    <h3>Stockers</h3>
-    <%= simple_form_for @stocker, url: store_admin_create_role_path(current_store) do |s| %>
-      <%= s.hidden_field :role, value: :stocker %>
-      <%= s.input :email %>
-      <%= s.submit "Add Stocker", class: "btn btn-primary" %>
-    <% end %>
+    <%= render partial: 'add_stocker', locals: { stocker: @stocker } %>
     <table class="table table-striped">
       <thead>
       <th>Email</th>

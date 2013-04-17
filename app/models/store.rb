@@ -2,11 +2,11 @@ class Store < ActiveRecord::Base
   attr_accessible :description, :name, :path
   attr_accessible :status, as: :uber
 
-  before_validation :set_default_status, on: :create
-
   has_many :categories
   has_many :products
   has_many :user_store_roles
+
+  before_validation :parameterize_path
 
   validates :name, presence: true,
                    uniqueness: true
@@ -19,15 +19,23 @@ class Store < ActiveRecord::Base
   scope :online, lambda { where(status: 'online') }
 
   def is_admin?(user)
-    UserStoreRole.exists?(store_id: self, user_id: user, role: :admin)
+    UserStoreRole.exists?(store_id: self,
+                          user_id: user,
+                          role: :admin)
   end
 
   def is_stocker?(user)
-    UserStoreRole.exists?(store_id: self, user_id: user, role: :stocker)
+    UserStoreRole.exists?(store_id: self,
+                          user_id: user,
+                          role: :stocker)
   end
 
-  def is_admin_or_stocker?(user)
-    is_admin?(user) || is_stocker?(user) || user.uber?
+  def admin_or_stocker?(user)
+    if is_admin?(user) || user.uber?
+      :admin
+    elsif is_stocker?(user)
+      :stocker
+    end
   end
 
   def to_param
@@ -52,7 +60,7 @@ class Store < ActiveRecord::Base
 
   private
 
-  def set_default_status
-    self.status ||= 'pending'
+  def parameterize_path
+    self.path = path.parameterize
   end
 end

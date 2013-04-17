@@ -1,28 +1,29 @@
 class Mailer < ActionMailer::Base
   add_template_helper(MailerHelper)
-  default from: "frank@franks-monsterporium.com"
+  default from: "white@mrwhite-sose.herokuapp.com"
 
   def welcome_email(email, full_name)
     @full_name = full_name
-    mail(to: email, subject: "Welcome to Frank's Monsterporium!")
+    mail(to: email, subject: "Welcome to White's Monsterporium!")
   end
 
-  def order_confirmation(user, order)
+  def order_confirmation(user, order_id, order_total)
     @user = user
-    @order = order
-    mail(to: user.email, subject: "Thanks for your purchase!")
+    @order_id = order_id
+    @order_total = order_total
+    mail(to: user["email"], subject: "Thanks for your purchase!")
   end
 
-  def role_confirmation(user, store, role)
+  def role_confirmation(user, current_store, role)
     @user = user
     @role = role
-    @store = store
-    mail(to: user.email, subject: "You're now a #{role}!")
+    @store = current_store
+    mail(to: user["email"], subject: "You're now a #{role}!")
   end
 
-  def role_invitation(email, inviter, store, role)
-    @inviter = inviter
-    @store = store
+  def role_invitation(email, current_user, current_store, role)
+    @inviter = current_user
+    @store = current_store
     @role = role
     mail(to: email, subject: "You've been invited!")
   end
@@ -30,6 +31,6 @@ class Mailer < ActionMailer::Base
   def revoke_role(user, store)
     @user = user
     @store = store
-    mail(to: user.email, subject: "Role revoked")
+    mail(to: user["email"], subject: "Role revoked")
   end
 end

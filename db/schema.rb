@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413001447) do
+ActiveRecord::Schema.define(:version => 20130411163716) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.string   "name"
     t.string   "path"
     t.string   "description"
-    t.string   "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "status",      :default => "pending"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   add_index "stores", ["path"], :name => "index_stores_on_path"
@@ -101,14 +101,15 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.string   "display_name"
     t.string   "crypted_password"
     t.string   "salt"
+    t.boolean  "orphan",                       :default => false
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "uber",                         :default => false
-    t.boolean  "registered",                   :default => true
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
 
 end
