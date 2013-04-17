@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :locale
 
   def require_admin
-    if current_store.nil? || !(current_store.is_admin?(current_user) || current_user.uber?)
+    if current_store.nil? || !current_store.is_admin?(current_user)
       not_authenticated
     end
   end
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_store
-    if current_user.uber?
+    if current_user && current_user.uber?
       @store ||= Store.where(path: params[:store_path]).first
     else
       @store ||= Store.online.where(path: params[:store_path]).first
