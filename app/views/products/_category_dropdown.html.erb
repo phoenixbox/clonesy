@@ -4,7 +4,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <li><a href="/">Show All</a></li>
+    <li><%= link_to 'Show All', store_home_path(current_store) %></li>
     <% if categories.present? %>
         <% categories.each do |category| %>
             <li>
