@@ -1,22 +1,23 @@
-<h1>Listing stores</h1>
+<div class="span11 center">
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Path</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <h1>Stores</h1>
 
-<% @stores.each do |store| %>
-  <tr>
-    <td><%= link_to store.name, store.path %></td>
-    <td><%= store.path %></td>
-    <td><%= store.description %></td>
-  </tr>
-<% end %>
-</table>
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Path</th>
+      <th>Description</th>
+    </tr>
 
-<br />
+    <% @stores.each do |store| %>
+    <tr>
+      <td><%= link_to store.name, store.path %></td>
+      <td><%= store.path %></td>
+      <td><%= store.description %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+</div>
