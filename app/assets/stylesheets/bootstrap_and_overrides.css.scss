@@ -1,4 +1,5 @@
 @import "bootstrap";
+
 body {
   padding-top: 60px;
   background-color: rgba(68, 117, 123, 0.32);
@@ -9,7 +10,14 @@ body {
 
 @import "bootstrap-responsive";
 
-// Nav Bar
+// FORM
+
+input.span2 {
+  width: 110px;
+}
+
+// NAVIGATION
+
 .logo-pic {
   float: left;
 }
@@ -55,8 +63,64 @@ hr {
     box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
 }
 
+//PRODUCTS
 
-//Cart, Category, and Search Buttons, can recreate at http://http://twitterbootstrapbuttons.w3masters.nl/
+.products {
+  text-align: center;
+  color: #395974;
+  padding: 5px;
+  margin: 5px;
+  height: 300px;
+}
+
+.content {
+  background: url('texture.jpg') repeat fixed center;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.dropdown-menu {
+  text-align: left;
+}
+
+#homepage-category-dropdown {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.prod_detail_img product-categories {
+  display: inline;
+  white-space: nowrap;
+}
+
+.product-index {
+  margin: 30px;
+}
+
+// USERS
+
+.signup-form {
+  margin: 30px;
+}
+
+.user-index {
+  margin: 30px;
+}
+
+// LOGIN
+
+.login-form {
+  margin: 30px;
+}
+
+//CART / CATEGORY / SEARCH Buttons
+
+.cart-overview {
+  margin: 30px;
+}
 
 .btn-custom-lighten.active {
   color: rgba(255, 255, 255, 0.75);
@@ -104,9 +168,25 @@ hr {
   background-color:#b61435;
 }
 
+// ORDERS
 
+.order-show {
+  margin: 30px;
+}
 
-// FOOTER INFO ############################################################
+.order-index {
+  margin: 30px;
+}
+
+// TABLES
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// FOOTER
+
 #footer{
   height: 75px;
   width: 100%;
