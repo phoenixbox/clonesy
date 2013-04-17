@@ -7,7 +7,7 @@ class CheckoutsController < ApplicationController
 
   def create
     if @user.save
-      order = create_order_and_pay(@user, current_cart)
+      order = create_order(@user, current_cart)
       if order.valid?
         current_cart.destroy
         redirect_to order_path(order), notice: "Order submitted!"
@@ -22,7 +22,7 @@ class CheckoutsController < ApplicationController
   def buy_now
     cart = Cart.new(params[:product_id] => '1')
 
-    order = create_order_and_pay(current_user, cart.items)
+    order = create_order(current_user, cart.items)
     if order.valid?
       redirect_to order_path(order), notice: "Order submitted!"
     else
@@ -44,15 +44,9 @@ private
     @user.build_billing_address if @user.billing_address.nil?
   end
 
-  def create_order_and_pay(user, cart_items)
+  def create_order(user, cart_items)
     Order.create_pending_order(user, cart_items).tap do |order|
-      if order.valid?
-        Payment.create_with_charge token: params[:stripeToken],
-                                   price: order.total,
-                                   email: order.user.email,
-                                   order: order
-        Resque.enqueue(OrderConfirmEmailJob, user, order.id, order.total)
-      end
+      Resque.enqueue(OrderConfirmEmailJob, user, order.id, order.total)
     end
   end
 end

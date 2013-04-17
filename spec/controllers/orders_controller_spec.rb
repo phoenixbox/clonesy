@@ -1,27 +1,6 @@
 require 'spec_helper'
 
 describe OrdersController do
-  describe 'create' do
-    it 'fails to creates an order without a stripeToken' do
-      user = FactoryGirl.create(:user)
-      product = FactoryGirl.create(:product)
-      login_user user
-      session[:cart] = {product.id.to_s => '1'}
-      post :create
-      expect(response).to_not be_success
-    end
-  end
-
-  describe 'buy_now' do
-    it 'fails to create an order without a stripeToken' do
-      user = FactoryGirl.create(:user)
-      product = FactoryGirl.create(:product)
-      login_user user
-      post :buy_now, order: product.id
-      expect(response).to_not be_success
-    end
-  end
-
   describe 'index' do
     context 'when the user is logged in' do
 
