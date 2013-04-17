@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   before_filter :require_current_store
 
   def index
-    @products = Product.by_category(params[:category_id]).where(store_id: current_store.id).where(status: 'active').all
-    @categories = Category.all
+    @products = current_store.products.by_category(params[:category_id]).active.all
+    @categories = current_store.categories
     session[:return_to] = request.fullpath
   end
 

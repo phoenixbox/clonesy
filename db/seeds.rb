@@ -1,109 +1,115 @@
-user1 = User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
-user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
-user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
-user3.uber_up
+def seed_products(store, count)
+  count.times do |i|
+    begin
+      puts "Seeding product #{i} for store #{store.id}"
+      title = Faker::Lorem.words(2).join(" ") + rand(10000).to_s
+      desc = Faker::Lorem.sentence(word_count = 5)
+      store.products.create!(title: title,
+                             description: desc,
+                             status: 'active',
+                             category_ids: [store.categories.sample.id],
+                             price: rand(2000) + 1)
+    rescue
+      puts "Product name taken! Retrying."
+      retry
+    end
+  end
+end
 
-user1.create_billing_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
-user1.create_shipping_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
-user2.create_shipping_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
-user3.create_billing_address(street: "1 Locust St", state: "NH", city: "Dover", zipcode: "03824")
+def seed_categories(store, count)
+  count.times do |i|
+    begin
+      title = Faker::Lorem.words(2).join(" ")
+      store.categories.create!(title: title,
+                               store_id: store.id)
+      puts "Category #{title} created for Store #{store.id}"
+    rescue
+      puts "Category name taken! Retrying."
+      retry
+    end
+  end
+end
 
-store1 = Store.create(name: "Brad's Bean Bags", path: "bean-bags-galore", description: "the bestest bean bags")
-store2 = Store.create(name: "Jorge's Tortiallas", path: "tortilla-palace", description: "get yo tortilla on!")
-store3 = Store.create(name: "Paul's PB&Js", path: "pbj", description: "peanut-butter-jelly-time")
-store4 = Store.create(name: "Raphael's Rickshaws", path: "rick-roll-rickshaws", description: "rick roll up in this!")
 
+def seed_users(count)
+  count.times do |i|
+    puts "seeding user #{i}"
+    User.create!(full_name: "full_name#{i}",
+                 password: "password",
+                 password_confirmation: "password",
+                 email: "user#{i}@example.com",
+                 display_name: "display_name#{i}")
+  end
+end
+
+# THE USUAL SUSPECS / UBERS
+user1 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
+user1.uber_up
+user2 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
+user2.uber_up
+
+# CREATE STORES
+store1 = Store.create!(name: "Brad's Bean Bags", path: "bean-bags-galore", description: "the bestest bean bags")
+store2 = Store.create!(name: "Jorge's Tortiallas", path: "tortilla-palace", description: "get yo tortilla on!")
+store3 = Store.create!(name: "Paul's PB&Js", path: "pbj", description: "peanut-butter-jelly-time")
+store4 = Store.create!(name: "Raphael's Rickshaws", path: "rick-roll-rickshaws", description: "rick roll up in this!")
+store5 = Store.create!(name: "George's Cool Market", path: "cool-market", description: "it's market time")
+store6 = Store.create!(name: "Burger Master", path: "burger-master", description: "the king of burgers")
+store7 = Store.create!(name: "Ice Cream Galore", path: "ice-cream-galore", description: "we loves us some ice cream")
+store8 = Store.create!(name: "Wendy's Magical Den", path: "wendys", description: "The queen of magical Dens")
+store9 = Store.create!(name: "McGonal's Goo", path: "gooey-goo", description: "sticky icky icky")
+store10 = Store.create!(name: "Mike's Soft Lemonade", path: "soft-lemonade", description: "there can be only one")
+
+stores = [store1, store2, store3, store4, store5, store6, store7, store8, store9, store10]
+
+# SET STORE STATUS
 store1.update_attributes({status: 'online'}, as: :uber)
-store2.update_attributes({status: 'offline'}, as: :uber)
-store3.update_attributes({status: 'declined'}, as: :uber)
+store2.update_attributes({status: 'online'}, as: :uber)
+store3.update_attributes({status: 'online'}, as: :uber)
+store4.update_attributes({status: 'declined'}, as: :uber)
+store5.update_attributes({status: 'declined'}, as: :uber)
+# store 6-8 are pending by default
+store9.update_attributes({status: 'offline'}, as: :uber)
+store10.update_attributes({status: 'offline'}, as: :uber)
 
-UserStoreRole.create({user_id: 1, store_id: 1, role: 'admin'}, as: :uber)
-UserStoreRole.create({user_id: 1, store_id: 2, role: 'stocker'}, as: :uber)
-UserStoreRole.create({user_id: 2, store_id: 2, role: 'admin'}, as: :uber)
-UserStoreRole.create({user_id: 3, store_id: 3, role: 'admin'}, as: :uber)
-UserStoreRole.create({user_id: 1, store_id: 4, role: 'admin'}, as: :uber)
+# CREATE CATEGORIES
+stores.each { |store| seed_categories(store, 10) }
 
-product1 = Product.create(title: "Bobby", description: "Marcy's triplet brother. He's kind of smelly.", price: 14.19, status: 'active', store_id: 1)
-product2 = Product.create(title: "Ruby (green)", description: "We <3 it.", price: 120.19, status: 'active', store_id: 1)
-product3 = Product.create(title: "Dust Bunny", description: "We swear Frank didn't get his inspiration from Kirby.", price: 2.50, status: 'active', store_id: 1)
-product4 = Product.create(title: "The Great Fairy", description: "She'll heal you when you're low on hearts. Keep her in a bottle.", price: 23.90, status: 'active', store_id: 1)
-product5 = Product.create(title: "The Great Slump", description: "The Great Slump has a single claw arm.", price: 272.30, status: 'active', store_id: 1)
-product6 = Product.create(title: "Madam Mushroom", description: "For best results, ingest 30 minutes before you want your vision quest to begin.", price: 104.19, status: 'active', store_id: 2)
-product7 = Product.create(title: "Macy", description: "Macy, Marcy's triplet sister, is a tom-boy at heart.", price: 104.19, status: 'active', store_id: 2)
-product8 = Product.create(title: "Marcy", description: "The one and only (except for her siblings).", price: 104.19, status: 'active', store_id: 2)
-product9 = Product.create(title: "Ruby (blue)", description: "We <3 it.", price: 104.19, status: 'active', store_id: 2)
-product10 = Product.create(title: "Madam Mushroom (yellow)", description: "For best results, ingest 30 minutes before you want your vision quest to begin.", price: 104.19, status: 'active', store_id: 3)
-product11 = Product.create(title: "Senior Marshmellow", description: "Unfortunately he never learned how to spell his name correctly.", price: 74.44, status: 'active', store_id: 3)
-product12 = Product.create(title: "Slump, Sr.", description: "The grandfather of all hairballs. He was in a war once, you know.", price: 34.07, status: 'active', store_id: 3)
-product13 = Product.create(title: "Slumpy", description: "The daddy of the bunch.", price: 104.19, status: 'active', store_id: 3)
-product14 = Product.create(title: "Over-Saturated Slumpy", description: "Slumpy really hates being put in the microwave.", price: 1001.87, status: 'active', store_id: 4)
-product15 = Product.create(title: "Madam Mushroom (purple)", description: "For best results, ingest 30 minutes before you want your vision quest to begin.", price: 1235.99, status: 'active', store_id: 4)
-product16 = Product.create(title: "Ruby", description: "We <3 it.", price: 1.19, status: 'active', store_id: 4)
-product17 = Product.create(title: "Dust Bunny (purple)", description: "We swear Frank didn't get his inspiration from Kirby.", price: 17.95, status: 'active', store_id: 4)
-product18 = Product.create(title: "Squint", description: "Expert piano player", price: 24.00, status: 'active', store_id: 4)
-product19 = Product.create(title: "The Viking", description: "He's really a big softy at heart.", price: 4.70, status: 'active', store_id: 4)
-product20 = Product.create(title: "The Wizard", description: "Cranky, hates kids, and doesn't smell very good. I heard he's related to Dumbledore's second cousin.", price: 99.50, status: 'active', store_id: 4)
+# CREATE PRODUCTS
+stores.each { |store| seed_products(store, 10_000) }
 
-order1 = Order.create(status: 'pending', user_id: 1, store_id: 1)
-order2 = Order.create(status: 'paid', user_id: 1, store_id: 1)
-order3 = Order.create(status: 'shipped', user_id: 1, store_id: 1)
-order4 = Order.create(status: 'cancelled', user_id: 2, store_id: 2)
-order5 = Order.create(status: 'returned', user_id: 2, store_id: 2)
-order6 = Order.create(status: 'pending', user_id: 3, store_id: 3)
-order7 = Order.create(status: 'paid', user_id: 3, store_id: 3)
-order8 = Order.create(status: 'shipped', user_id: 3, store_id: 4)
-order9 = Order.create(status: 'pending', user_id: 3, store_id: 4)
-order10 = Order.create(status: 'returned', user_id: 3, store_id: 4)
+# CREATE USERS
+seed_users(10_000)
 
-order1.order_items.create(product_id: product1.id,
-                          unit_price: product1.price,
-                          quantity: 2)
+# CREATE ROLES
+stores.each do |store|
+  ['admin', 'admin', 'stocker', 'stocker'].each do |role|
+    begin
+      UserStoreRole.create({user_id: rand(10_000),
+                            store_id: store.id,
+                            role: role}, as: :uber)
+    rescue
+      puts "Oy Vey! UserStoreRole exists. Retrying."
+      retry
+    end
+  end
+end
 
-order1.order_items.create(product_id: product2.id,
-                          unit_price: product2.price,
-                          quantity: 1)
-
-order2.order_items.create(product_id: product2.id,
-                          unit_price: product2.price,
-                          quantity: 1)
-
-order3.order_items.create(product_id: product4.id,
-                          unit_price: product4.price,
-                          quantity: 1)
-
-order3.order_items.create(product_id: product5.id,
-                          unit_price: product5.price,
-                          quantity: 1)
-
-order4.order_items.create(product_id: product12.id,
-                          unit_price: product12.price,
-                          quantity: 1)
-
-order4.order_items.create(product_id: product11.id,
-                          unit_price: product11.price,
-                          quantity: 5)
-
-order5.order_items.create(product_id: product8.id,
-                          unit_price: product8.price,
-                          quantity: 10)
-
-
-order6.order_items.create(product_id: product15.id,
-                          unit_price: product15.price,
-                          quantity: 1)
-
-order7.order_items.create(product_id: product8.id,
-                          unit_price: product8.price,
-                          quantity: 2)
-
-order8.order_items.create(product_id: product10.id,
-                          unit_price: product10.price,
-                          quantity: 3)
-
-order9.order_items.create(product_id: product9.id,
-                          unit_price: product9.price,
-                          quantity: 4)
-
-order10.order_items.create(product_id: product18.id,
-                          unit_price: product18.price,
-                          quantity: 1)
+# CREATE ORDERS
+STATUSES = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
+stores.each do |store|
+  50.times do |i|
+    begin
+      puts "Seeding order #{i} for store #{store.id}"
+      order = Order.create(status: STATUSES.sample,
+                           user_id: rand(10_000),
+                           store_id: store.id)
+      product = store.products.sample
+      order.order_items.create(product_id: product.id,
+                               unit_price: product.price,
+                               quantity: rand(5))
+    rescue
+      retry
+    end
+  end
+end
