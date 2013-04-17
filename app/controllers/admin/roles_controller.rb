@@ -10,7 +10,6 @@ class Admin::RolesController < ApplicationController
                   notice: 'Please enter an email.'
     elsif user = User.where(email: email).first
       user.send("#{role}_up", current_store)
-      # Mailer.role_confirmation(user, current_store, role).deliver
       Resque.enqueue(RoleConfirmEmailJob, user, current_store, role)
       redirect_to store_admin_manage_path(current_store),
                   notice: 'Successfully promoted user.'

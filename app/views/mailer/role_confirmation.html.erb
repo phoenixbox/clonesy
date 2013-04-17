@@ -1,10 +1,10 @@
-Dear <%= @user.full_name.titleize %>,
+Dear <%= @user["full_name"].titleize %>,
 <br>
 <br>
-You've been promoted to a <%= @role %> for <%= @store.name %>
+You've been promoted to a <%= @role %> for <%= @store["name"] %>
 <br>
 <br>
-Check out the store <%= link_to @store.name, role_link(@role, @store) %>
+Check out the store <%= link_to @store["name"] , role_link(@role, @store["id"]) %>
 <br>
 Have fun!
 <br>

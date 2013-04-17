@@ -7,8 +7,6 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      # Mailer.welcome_email(@user.email, @user.full_name).deliver
-      # WelcomeEmailJob.perform(@user.email, @user.full_name)
       Resque.enqueue(WelcomeEmailJob, @user.email, @user.full_name)
 
       auto_login(@user)

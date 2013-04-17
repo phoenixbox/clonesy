@@ -14,11 +14,11 @@ class Mailer < ActionMailer::Base
     mail(to: user["email"], subject: "Thanks for your purchase!")
   end
 
-  def role_confirmation(user, store, role)
+  def role_confirmation(user, current_store, role)
     @user = user
     @role = role
-    @store = store
-    mail(to: user.email, subject: "You're now a #{role}!")
+    @store = current_store
+    mail(to: user["email"], subject: "You're now a #{role}!")
   end
 
   def role_invitation(email, inviter, store, role)
