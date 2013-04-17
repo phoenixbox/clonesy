@@ -39,7 +39,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_store
-    @store ||= Store.online.where(path: params[:store_path]).first
+    if current_user.uber?
+      @store ||= Store.where(path: params[:store_path]).first
+    else
+      @store ||= Store.online.where(path: params[:store_path]).first
+    end
   end
 
   def locale
