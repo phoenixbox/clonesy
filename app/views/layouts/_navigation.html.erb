@@ -1,9 +1,13 @@
 <div class="logo">
-  <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
+  <a href="<%= root_path %>" class="brand"><img src="<%= gen_image_url(7)%>" width=50px/></a>
 </div>
 <% if current_store %>
 <div class="logo-text">
   <%= link_to current_store.name, store_home_path(current_store), :class => 'brand' %>
+</div>
+<% else %>
+<div class="logo-text">
+  <%= link_to "Mr. White's Stores", root_path, :class => 'brand' %>
 </div>
 <% end %>
 <div class="nav-buttons">
