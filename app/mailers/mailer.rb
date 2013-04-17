@@ -31,6 +31,6 @@ class Mailer < ActionMailer::Base
   def revoke_role(user, store)
     @user = user
     @store = store
-    mail(to: user.email, subject: "Role revoked")
+    mail(to: user["email"], subject: "Role revoked")
   end
 end

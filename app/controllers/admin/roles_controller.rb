@@ -25,7 +25,8 @@ class Admin::RolesController < ApplicationController
     user_id = params[:user_id]
     relationship = UserStoreRole.where(user_id: user_id, store_id: current_store).first
     relationship.destroy
-    Mailer.revoke_role(User.find(user_id), current_store).deliver
+    # Mailer.revoke_role(User.find(user_id), current_store).deliver
+    Resque.enqueue(RoleRevokeEmailJob, User.find(user_id), current_store)
     redirect_to store_admin_manage_path(current_store),
                 notice: "Successfully revoked role."
   end

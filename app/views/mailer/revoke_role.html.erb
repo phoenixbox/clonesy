@@ -1,7 +1,7 @@
-Dear <%= @user.full_name.titleize %>,
+Dear <%= @user["full_name"].titleize %>,
 <br>
 <br>
-We're writing to let you know that your role with <%= @store.name %> has been revoked.
+We're writing to let you know that your role with <%= @store["name"] %> has been revoked.
 <br>
 <br>
 If you believe this is a mistake, please contact the store's administrator.
