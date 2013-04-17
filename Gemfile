@@ -8,7 +8,6 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'jquery-rails'
 gem 'sorcery'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'pg'
 gem 'validation-scopes'
 gem "resque", "~>1.24.0"
