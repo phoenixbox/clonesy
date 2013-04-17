@@ -4,7 +4,13 @@
   <div class="span8">
     <h1><%= t('account.edit')%></h1>
     <hr>
+
+    <div class="pull-right">
+    <%= link_to 'Create New Store',
+                new_store_path,
+                class: 'btn btn-large btn-custom-lighten' %>
+    </div>
+
     <%= render 'form' %>
-    <%= button_to 'Create New Store', new_store_path, method: :get %>
   </div>
 </div>

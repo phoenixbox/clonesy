@@ -2,11 +2,11 @@ class Store < ActiveRecord::Base
   attr_accessible :description, :name, :path
   attr_accessible :status, as: :uber
 
-  before_validation :set_default_status, on: :create
-
   has_many :categories
   has_many :products
   has_many :user_store_roles
+
+  before_validation :parameterize_path
 
   validates :name, presence: true,
                    uniqueness: true
@@ -52,7 +52,7 @@ class Store < ActiveRecord::Base
 
   private
 
-  def set_default_status
-    self.status ||= 'pending'
+  def parameterize_path
+    self.path = path.parameterize
   end
 end

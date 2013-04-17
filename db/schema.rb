@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.string   "name"
     t.string   "path"
     t.string   "description"
-    t.string   "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "status",      :default => "pending"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "user_store_roles", :force => true do |t|

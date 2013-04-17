@@ -4,7 +4,7 @@ class CreateStores < ActiveRecord::Migration
       t.string :name
       t.string :path
       t.string :description
-      t.string :status
+      t.string :status,       default: 'pending'
 
       t.timestamps
     end
