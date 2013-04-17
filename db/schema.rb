@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413001447) do
+ActiveRecord::Schema.define(:version => 20130411163716) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
   add_index "addresses", ["user_id", "type"], :name => "index_addresses_on_user_id_and_type", :unique => true
 
   create_table "categories", :force => true do |t|
+    t.integer  "store_id"
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "store_id"
     t.string   "status"
     t.string   "guid"
     t.datetime "created_at", :null => false
@@ -61,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "products", :force => true do |t|
+    t.integer  "store_id"
     t.string   "title"
     t.text     "description"
     t.decimal  "price",       :precision => 8, :scale => 2
@@ -101,9 +104,9 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "uber",                         :default => false
-    t.boolean  "registered",                   :default => true
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
 
 end
