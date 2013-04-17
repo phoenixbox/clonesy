@@ -1,11 +1,11 @@
 Dear <%= @user["full_name"].titleize %>,
-<br>
-<br>
+
+
 You've been promoted to a <%= @role %> for <%= @store["name"] %>
-<br>
-<br>
-Check out the store <%= link_to @store["name"] , role_link(@role, @store["id"]) %>
-<br>
+
+Check out the store here: <%= role_link(@role, @store["id"]) %>
+
+
 Have fun!
-<br>
+
 Mr. White's Stores

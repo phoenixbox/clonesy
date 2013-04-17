@@ -1,0 +1,13 @@
+Dear <%= @user["full_name"].titleize %>,
+
+
+Thanks so much for your purchase!
+
+We will process your payment for <%= number_to_currency(@order_total) %>. You can find your order here: <%= order_url(@order_id, host: HOST_DOMAIN) %>.
+
+We will email you once we charge your card.
+
+
+We hope you stop by again!
+
+Mr. White's Stores
