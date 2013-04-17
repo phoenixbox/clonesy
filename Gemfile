@@ -12,6 +12,7 @@ gem 'pg'
 gem 'validation-scopes'
 gem "resque", "~>1.24.0"
 gem 'faker'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
