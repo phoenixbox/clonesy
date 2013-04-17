@@ -25,7 +25,7 @@ common: &default_settings
   # completely turn the agent off regardless of the other settings.
   # Valid values are true, false and auto.
   #
-  # agent_enabled: auto
+  agent_enabled: auto
 
   # Application Name Set this to be the name of your application as
   # you'd like it show up in New Relic. The service will then auto-map
@@ -42,7 +42,7 @@ common: &default_settings
   #       - Ajax Service
   #       - All Services
   #
-  app_name: My Application
+  app_name: Mr.White SoSE
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at
