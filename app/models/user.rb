@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
                   :email,
                   :full_name,
                   :password,
-                  :password_confirmation
+                  :password_confirmation,
+                  :orphan
 
   has_one :billing_address, validate: true, autosave: true
   has_one :shipping_address, validate: true, autosave: true
@@ -31,6 +32,7 @@ class User < ActiveRecord::Base
     params[:full_name] = "Guest"
     params[:password] = generate_password
     params[:password_confirmation] = params[:password]
+    params[:orphan] = true
 
     new(params)
   end
@@ -57,6 +59,10 @@ class User < ActiveRecord::Base
 
   def uber?
     self.uber
+  end
+
+  def orphan?
+    self.orphan
   end
 
   private

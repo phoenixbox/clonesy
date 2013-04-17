@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20130413001447) do
     t.string   "display_name"
     t.string   "crypted_password"
     t.string   "salt"
+    t.boolean  "orphan",                       :default => false
     t.datetime "created_at",                                      :null => false
     t.datetime "updated_at",                                      :null => false
     t.string   "remember_me_token"
