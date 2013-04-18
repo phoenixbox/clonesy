@@ -61,7 +61,9 @@ end
 # store10 = Store.create!(name: "Mike's Soft Lemonade", path: "soft-lemonade", description: "there can be only one")
 
 # stores = [store1, store2, store3, store4, store5, store6, store7, store8, store9, store10]
-stores = Store.all
+store8 = Store.find(8)
+store9 = Store.find(9)
+store10 = Store.find(10)
 
 # SET STORE STATUS
 # store1.update_attributes({status: 'online'}, as: :uber)
@@ -79,10 +81,10 @@ stores = Store.all
 # CREATE PRODUCTS
 # stores.each { |store| seed_products(store, 10_000) }
 
-seed_products(stores[7], 6_000)
-seed_products(stores[8], 10_000)
-seed_products(stores[9], 10_000)
-seed_products(stores[9], 10_000)
+seed_products(stores8, 6_000)
+seed_products(stores9, 10_000)
+seed_products(stores10, 10_000)
+
 # CREATE USERS
 seed_users(10_000)
 
