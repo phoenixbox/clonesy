@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to product.title, store_product_path(product.store, product) %></td>
+  <td><%= link_to product.title, store_product_path(current_store, product) %></td>
   <td><%= number_to_currency(product.price) %></td>
   <td>
     <% product.categories.each do |category| %>

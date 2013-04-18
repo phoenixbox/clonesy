@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe 'the admin categories view', type: :feature do
   before(:each) do
-    FactoryGirl.create(:admin)
+    FactoryGirl.create(:uber)
     visit login_path
     fill_in 'sessions_email', with: 'logan@gmail.com'
     fill_in 'sessions_password', with: 'password'
     click_button 'Login'
-    visit admin_categories_path
+    visit store_admin_categories_path(current_store)
   end
 
   it 'should have a title' do

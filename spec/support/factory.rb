@@ -28,15 +28,15 @@ FactoryGirl.define do
     email 'raphael@example.com'
     display_name 'raphweiner'
     password 'password'
-    admin false
+    uber false
   end
 
-  factory :admin, parent: :user do
+  factory :uber, parent: :user do
     full_name 'Logan Sears'
     email 'logan@gmail.com'
     display_name 'lsears'
     password 'password'
-    admin true
+    uber true
   end
 
   factory :address do
