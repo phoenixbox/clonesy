@@ -1,52 +1,60 @@
-<%= simple_form_for @user, url: store_checkout_path(current_store), method: :post do |f| %>
+<div class="login-form">
+  <%= simple_form_for @user, url: store_checkout_path(current_store), method: :post do |f| %>
   <% if @user.new_record? %>
   <h4>Email</h4>
   <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
   <% end %>
 
-  <h4>Shipping Address</h4>
-  <%= f.simple_fields_for :shipping_address do |s| %>
+  <div class="span5">
+    <h3>Shipping Address</h3>
+    <hr>
+    <%= f.simple_fields_for :shipping_address do |s| %>
     <%= s.input :street %>
     <%= s.input :city,  class:"input-prepend" %>
     <%= s.input :state, class:"input-append" %>
     <%= s.input :zipcode %>
-  <% end %>
+    <% end %>
+  </div>
 
-  <h4>Billing Address</h4>
-  <%= f.simple_fields_for :billing_address do |b| %>
+  <div class="span5">
+    <h3>Billing Address</h3>
+    <hr>
+    <%= f.simple_fields_for :billing_address do |b| %>
     <%= b.input :street %>
     <%= b.input :city  %>
     <%= b.input :state %>
     <%= b.input :zipcode %>
-  <% end %>
-
+    <% end %>
+  </div>
   <%# TODO: Get this working! %>
 
-  <h4>Payment Information</h4>
+  <div class="span10">
+    <h3>Payment Information</h3>
+    <hr>
     <span class="payment-errors"></span>
-  <div class="form-row">
-      <label>
-        <span>Card Number</span></br>
-        <input type="text" size="20" data-stripe="number"/>
-      </label>
-    </div>
-
     <div class="form-row">
       <label>
-        <span>CVC</span></br>
-        <input type="text" size="4" data-stripe="cvc"/>
+        <span>Card Number / CVC</span></br>
+        <input type="text" size="20" data-stripe="number" class="span3"/>
+        <input type="text" size="4" data-stripe="cvc" class="span1"/>
       </label>
     </div>
 
     <div class="form-row">
       <label>
         <span>Expiration (MM/YYYY)</span></br>
-        <input type="text" size="2" data-stripe="exp-month"/>
+        <input type="text" size="2" data-stripe="exp-month" class="span1"/>
+        <input type="text" size="4" data-stripe="exp-year" class="span2"/>
       </label>
-      <span> / </span>
-      <input type="text" size="4" data-stripe="exp-year"/>
     </div>
-  </div>
 
-  <%= f.button :submit, 'Checkout', class:"btn btn-custom-lighten" %>
+    <div class="form-row">
+      <br>
+      <%= f.button :submit, 'Checkout', class:"btn btn-large btn-custom-lighten span2" %>
+      <p> <br> </p>
+    </div>
+
+  </div>
+</div>
 <% end %>
+</div>

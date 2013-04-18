@@ -1,7 +1,7 @@
 <% if logged_in? %>
   <%= form_tag store_buy_now_path(current_store), id: "buyNowForm" do %>
     <%= hidden_field_tag :product_id, product.id %>
-    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button btn-custom-lighten btn-block"
             data-key="pk_test_osSOH0LyEEACshdRsLjyvGSz"
             data-image="<%= gen_image_url(7) %>"
             data-name="<%= t('store.name') %>"
@@ -11,5 +11,5 @@
 
   <% end %>
 <% else %>
-  <%= button_to t('product.buynow'), login_path, class: 'btn btn-primary', method: :get %>
+  <%= button_to t('product.buynow'), login_path, class: 'btn btn-primary span3', method: :get %>
 <% end %>
