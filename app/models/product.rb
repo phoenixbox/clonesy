@@ -1,5 +1,10 @@
 class Product < ActiveRecord::Base
-  attr_accessible :title, :description, :price, :status, :category_ids, :store_id
+  attr_accessible :title,
+                  :description,
+                  :price, :status,
+                  :category_ids,
+                  :store_id
+
   has_and_belongs_to_many :categories
   belongs_to :store
 
