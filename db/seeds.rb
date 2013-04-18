@@ -60,10 +60,10 @@ end
 # store9 = Store.create!(name: "McGonal's Goo", path: "gooey-goo", description: "sticky icky icky")
 # store10 = Store.create!(name: "Mike's Soft Lemonade", path: "soft-lemonade", description: "there can be only one")
 
-# stores = [store1, store2, store3, store4, store5, store6, store7, store8, store9, store10]
-store8 = Store.find(8)
-store9 = Store.find(9)
-store10 = Store.find(10)
+stores = [Store.find(1), Store.find(2), Store.find(3), Store.find(4), Store.find(5), Store.find(6), Store.find(7), Store.find(8), Store.find(9), Store.find(10)]
+# store8 = Store.find(8)
+# store9 = Store.find(9)
+# store10 = Store.find(10)
 
 # SET STORE STATUS
 # store1.update_attributes({status: 'online'}, as: :uber)
@@ -81,12 +81,12 @@ store10 = Store.find(10)
 # CREATE PRODUCTS
 # stores.each { |store| seed_products(store, 10_000) }
 
-seed_products(store8, 6_000)
-seed_products(store9, 10_000)
-seed_products(store10, 10_000)
+# seed_products(store8, 6_000)
+# seed_products(store9, 10_000)
+# seed_products(store10, 10_000)
 
 # CREATE USERS
-seed_users(10_000)
+# seed_users(10_000)
 
 # CREATE ROLES
 stores.each do |store|
