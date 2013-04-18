@@ -2,32 +2,33 @@
   <td>
     <%= link_to store.name, store_home_path(store) %>
     <br>
+    <br>
     <%= link_to 'Administer', store_admin_manage_path(store) %>
   </td>
   <td><%= store.path %></td>
   <td><%= store.description.slice(0, 32) %></td>
-  <td><%= store.status %></td>
+  <td class="span2"><%= store.status %></td>
   <% if store.status == 'pending' %>
   <td>
     <%= button_to 'Approve',
                 approve_uber_store_path(store.id),
-                method: :put, class: 'btn' %>
+                method: :put, class: 'btn span2' %>
 
     <%= button_to 'Decline',
                 decline_uber_store_path(store.id),
-                method: :put, class: 'btn' %>
+                method: :put, class: 'btn span2' %>
   </td>
   <% elsif store.status == 'online' %>
   <td>
     <%= button_to 'Disable',
                 toggle_online_status_uber_store_path(store.id),
-                method: :put, class: 'btn' %>
+                method: :put, class: 'btn span2' %>
   </td>
   <% elsif store.status == 'offline' %>
   <td>
     <%= button_to 'Enable',
                 toggle_online_status_uber_store_path(store.id),
-                method: :put, class: 'btn' %>
+                method: :put, class: 'btn span2' %>
   </td>
   <% end %>
 </tr>

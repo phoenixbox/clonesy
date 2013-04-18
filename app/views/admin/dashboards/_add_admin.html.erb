@@ -2,5 +2,5 @@
 <%= simple_form_for admin, url: store_admin_create_role_path(current_store) do |s| %>
   <%= s.hidden_field :role, value: :admin %>
   <%= s.input :email %>
-  <%= s.submit "Add Admin", class: "btn btn-primary" %>
+  <%= s.submit "Add Admin", class: "btn btn-custom-lighten span2" %>
 <% end %>

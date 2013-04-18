@@ -44,11 +44,11 @@
 }
 .nav-pills a{
   color: rgb(57, 89, 116);
-  border: 1px solid #b61435;
+  border: 2px solid #EE3A8C;
 }
 
 .nav-pills li.active a{
-  background-color: #b61435;
+  background-color: #EE3A8C;
 }
 .nav-pills li.active a:hover{
   background-color: rgb(57, 89, 116);
