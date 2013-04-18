@@ -1,11 +1,14 @@
-<div class="span11 center">
+<div class="span11">
 
-  <h1>Stores</h1>
+    <h3>Our Stores</h3>
+    <hr>
 
-    <% @stores.each do |store| %>
-      <h2><%= link_to store.name, store.path %></h2>
-      <p><%= store.description %></p>
-      <br />
-    <% end %>
+      <% @stores.each do |store| %>
+        <h3><%= link_to store.name, store.path %></h3>
+        <p><%= store.description %></p>
+        <br />
+      <% end %>
+
+  </div>
 
 </div>

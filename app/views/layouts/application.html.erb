@@ -1,44 +1,44 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : t('store.name') %></title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= favicon_link_tag "/favicon.ico?1" %>
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-    <%= yield(:head) %>
-  </head>
-  <body>
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </header>
-    <div id="main" role="main">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : t('store.name') %></title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= favicon_link_tag "/favicon.ico?1" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+</head>
+<body>
+  <header class="navbar navbar-fixed-top">
+    <nav class="navbar-inner">
       <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>
-        </div> <!--! end of content-->
-        <div id="footer">
-          <%= link_to(image_tag('github_25.png'), '/code', id: 'github') %>
-          <a href="/code">View the Source Code</a>
-          <br>
-          <p id="love">Made in Denver with love by Brad, Paul, Jorge and Raphael</p>
-          <br>
+        <%= render 'layouts/navigation' %>
+      </div>
+    </nav>
+  </header>
+  <% if request.fullpath == root_path %>
+    <%= render 'layouts/index' %>
+  <% end %>
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="span12">
+          <%= render 'layouts/messages' %>
+          <%= yield %>
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
-  </body>
+      </div>
+    </div> <!--! end of content-->
+  </div>
+  <div id="footer">
+    <%= link_to(image_tag('github_25.png'), '/code', id: 'github') %>
+    <a href="/code">View the Source Code</a>
+    <br>
+    <p id="love">Made in Denver with love by Brad, Paul, Jorge and Raphael</p>
+    <br>
+  </div>
+</body>
 </html>

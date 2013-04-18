@@ -1,8 +1,18 @@
-<h1>Confirmation</h1>
-
-<p>Your store is pending approval.</p>
-<br>
-<p>Name: <%= @new_store.name %></p>
-<p>Path: <%= @new_store.path %></p>
-<p>Description: <%= @new_store.description %></p>
-<p>Status: Pending</p>
+<div class="login-form">
+  <h1>Confirmation</h1>
+  <hr>
+  <p>Your store is pending approval.</p>
+  <br>
+  <h4>Name</h4>
+  <p><%= @new_store.name %></p>
+  <br>
+  <h4>Path</h4>
+  <p><%= @new_store.path %></p>
+  <br>
+  <h4>Description</h4>
+  <p><%= @new_store.description %></p>
+  <br>
+  <h4>Status</h4>
+  <p> Pending</p>
+  <br>
+</div>
