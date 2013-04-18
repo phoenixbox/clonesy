@@ -1,9 +1,13 @@
 class Admin::ProductsController < ApplicationController
   before_filter :require_admin_or_stocker
-  before_filter :find_product, only: [ :edit, :update, :destroy, :toggle_status ]
+  before_filter :find_product, only: [ :edit,
+                                       :update,
+                                       :destroy,
+                                       :toggle_status ]
 
   def index
-    @products = current_store.products.includes(:categories).order('created_at DESC').page(params[:page]).per(20)
+    @products = current_store.products.order('created_at DESC')
+                             .page(params[:page]).per(20)
   end
 
   def new

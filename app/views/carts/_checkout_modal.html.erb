@@ -10,15 +10,15 @@
       <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
       <%= f.input :password %>
       <%= f.hidden_field :next_page, value: store_checkout_path(current_store) %>
-      <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
+      <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten btn-block" %>
     <% end %>
     <%= link_to t('account.create'), signup_path(next_page: store_checkout_path(current_store)) %>
     </div>
     <div style="width: 225px; float:left">
-    <h4>Checkout as guest</h4>
+    <h4>Checkout as Guest</h4>
       <%= link_to 'Continue',
                    store_checkout_path(current_store),
-                   class: 'btn pull-right' %>
+                   class: 'btn btn-block' %>
     </div>
     <div style="clear:both"></div>
   </div>

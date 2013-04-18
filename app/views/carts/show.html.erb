@@ -25,6 +25,9 @@
         <span class="btn-group pull-right">
 
           <%= render partial: 'checkout_button' %><br /><br />
+
+          <%= button_to t('cart.empty'), store_cart_path(current_store), class: 'btn btn-block', method: :delete %>
+
         </span>
         <div class="pull-left">
           <%= button_to t('cart.empty'), store_cart_path(current_store), class: 'btn span3', method: :delete %>

@@ -1,19 +1,58 @@
 @import "bootstrap";
 
+@import "bootstrap-responsive";
+
 body {
   padding-top: 60px;
-  background-color: rgba(68, 117, 123, 0.32);
-  color: #395974;
+  background-color: #ddd;
+  color: #333;
   font-family: 'Tahoma', sans-serif;
   font-size: 100%;
 }
 
-@import "bootstrap-responsive";
+h1, h2, h3, h4 {
+  letter-spacing: -.05em;
+}
 
-// FORM
+// PAGINATION
 
-input.span2 {
-  width: 110px;
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 8px;
+  text-align:center;
+}
+
+// INDEX STYLES
+
+.lead_background {
+  background: url('robot-background.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+.lead_text {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 12em;
+}
+
+.white {
+  color: white;
+}
+
+// LINKS
+
+a {
+  color: #EE3A8C;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #8B2252;
 }
 
 // NAVIGATION
@@ -34,10 +73,11 @@ input.span2 {
 }
 
 .navbar a.brand {
-  font-size: 250%;
-  font-family: 'Josefin Sans', sans-serif;
-  color: #b61435;
-  padding-top:18px;
+  font-size: 100%;
+  font-weight: bold;
+  font-family: 'Helvetica', 'Arial' , sans-serif;
+  letter-spacing: -.05em;
+  color: #333;
 }
 
 .navbar a.brand:hover {
@@ -58,9 +98,8 @@ input.span2 {
 /* Single-direction drop shadow */
 
 hr {
-    height: 12px;
-    border: 0;
-    box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+    border: 2px solid;
+    color: #333;
 }
 
 //PRODUCTS
@@ -74,7 +113,7 @@ hr {
 }
 
 .content {
-  background: url('texture.jpg') repeat fixed center;
+  background-color: white;
   -moz-border-radius: 5px;
   border-radius: 5px;
   margin: auto;
@@ -129,16 +168,16 @@ hr {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #c8163a;
-  background-image: -moz-linear-gradient(top, #b61435, #e41942);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b61435), to(#e41942));
-  background-image: -webkit-linear-gradient(top, #b61435, #e41942);
-  background-image: -o-linear-gradient(top, #b61435, #e41942);
-  background-image: linear-gradient(to bottom, #b61435, #e41942);
+  background-image: -moz-linear-gradient(top, #EE3A8C, #8B2252);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EE3A8C), to(#8B2252));
+  background-image: -webkit-linear-gradient(top, #EE3A8C, #8B2252);
+  background-image: -o-linear-gradient(top, #EE3A8C, #8B2252);
+  background-image: linear-gradient(to bottom, #EE3A8C, #8B2252);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb61435', endColorstr='#ffe41942', GradientType=0);
-  border-color: #e41942 #e41942 #9f112e;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffEE3A8C', endColorstr='#ff8B2252', GradientType=0);
+  border-color: #8B2252 #8B2252 #9f112e;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #e41942;
+  *background-color: #8B2252;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -150,12 +189,12 @@ hr {
 .btn-custom-lighten.disabled,
 .btn-custom-lighten[disabled] {
   color: #ffffff;
-  background-color: #e41942;
+  background-color: #8B2252;
   *background-color: #cd173c;
 }
 .btn-custom-lighten:active,
 .btn-custom-lighten.active {
-  background-color: #b61435 ;
+  background-color: #EE3A8C ;
 }
 
 .btn-custom-lighten.dropdown-toggle span.caret{
@@ -165,7 +204,7 @@ hr {
 
 
 .btn-group.open .btn.dropdown-toggle{
-  background-color:#b61435;
+  background-color:#EE3A8C;
 }
 
 // ORDERS
@@ -197,12 +236,6 @@ table.center {
   line-height: 40px;
 }
 
-#footer a {
-  color: #395974;
-}
-#footer a:hover {
-  color:  #b61435;
-}
 #footer #github {
   max-width: 50%;
 }

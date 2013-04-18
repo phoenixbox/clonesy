@@ -2,22 +2,28 @@
   <div class="prod_detail_img span6">
     <p><%= image_tag gen_image_url(@product.id) %></p>
   </div>
-  <div class="prod_detail_text span6">
+
+  <div class="prod_detail_text span5">
     <h2><% t('product.title') %><%= @product.title %></h2>
+    <hr>
     <p><% t('product.description') %><%= @product.description %></p>
+
     <div id="product-categories">
       <b><%= t('categories.self') %>:</b>
       <% @product.categories.each do |category| %>
-          <a href='/products/?category_id=<%= category.id %>'><span class="label"><%= category.title %></span></a>
+      <a href='/products/?category_id=<%= category.id %>'><span class="label"><%= category.title %></span></a>
       <% end %>
     </div>
+
     <br>
-    <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
+    <h4><%= t('product.price') %>: <%= number_to_currency(@product.price) %></h4>
+    <br>
+
     <% if @product.status == 'active' %>
-      <%= render partial: 'add_to_cart_button', locals: {product: @product} %>
-      <%= render partial: 'buy_now_button', locals: {product: @product} %>
+    <%= render partial: 'add_to_cart_button', locals: {product: @product} %> <%= render partial: 'buy_now_button', locals: {product: @product} %>
     <% else %>
-      <p> Product is retired! </p>
+    <p> Product is retired! </p>
     <% end %>
+
   </div>
 </div>

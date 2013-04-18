@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_cart, :current_store, :flag,
+  helper_method :current_cart, :current_store, :flag, :store_theme,
                 :store_products_path, :edit_store_product_path
 
   before_filter :locale
+
+  def store_theme
+    @store_theme ||= current_store ? current_store.theme : 'default'
+  end
 
   def require_admin
     if current_store.nil? || !current_store.is_admin?(current_user)
