@@ -19,15 +19,16 @@
     </table>
 
     <div id="shopping_cart_summary">
-      <h5>Total: <%= number_to_currency(current_cart.total) %></h5>
+      <div class="pull-right"><h5>Total: <%= number_to_currency(current_cart.total) %></h5></div>
 
       <div class ="btn-toolbar">
-        <span class="btn-group">
+        <span class="btn-group pull-right">
 
           <%= render partial: 'checkout_button' %><br /><br />
-          <%= button_to t('cart.empty'), store_cart_path(current_store), class: 'btn span3', method: :delete %>
-
         </span>
+        <div class="pull-left">
+          <%= button_to t('cart.empty'), store_cart_path(current_store), class: 'btn span3', method: :delete %>
+        </div>
       </div>
 
     </div>
