@@ -81,9 +81,9 @@ store10 = Store.find(10)
 # CREATE PRODUCTS
 # stores.each { |store| seed_products(store, 10_000) }
 
-seed_products(stores8, 6_000)
-seed_products(stores9, 10_000)
-seed_products(stores10, 10_000)
+seed_products(store8, 6_000)
+seed_products(store9, 10_000)
+seed_products(store10, 10_000)
 
 # CREATE USERS
 seed_users(10_000)
