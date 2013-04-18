@@ -1,5 +1,5 @@
 class Store < ActiveRecord::Base
-  attr_accessible :description, :name, :path
+  attr_accessible :description, :name, :path, :theme
   attr_accessible :status, as: :uber
 
   has_many :categories
@@ -10,18 +10,28 @@ class Store < ActiveRecord::Base
 
   validates :name, presence: true,
                    uniqueness: true
+
   validates :path, presence: true,
                    uniqueness: true
+
   validates :status, presence: true,
                      inclusion: { in: %w(online offline pending declined) }
 
+  validates :theme, presence: true,
+                    inclusion: { in: %w(default wood soft mocha scale escheresque metal) }
+
   scope :approved, lambda { where("status <> 'declined'") }
+
   scope :online, lambda { where(status: 'online') }
 
   def is_admin?(user)
     user.uber? || UserStoreRole.exists?(store_id: self,
                                         user_id: user,
                                         role: :admin)
+  end
+
+  def self.themes
+    %w(default wood soft mocha scale escheresque metal)
   end
 
   def is_stocker?(user)

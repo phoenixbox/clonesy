@@ -14,6 +14,7 @@ class Admin::DashboardsController < ApplicationController
   end
 
   def edit
+    @themes = Store.themes
     @store = current_store
   end
 
