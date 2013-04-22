@@ -46,4 +46,10 @@ FactoryGirl.define do
     city    'The Angels'
   end
 
+  factory :store do
+    name  'Da best'
+    description   'The bestest store'
+    path 'a-store'
+    status 'online'
+  end
 end
