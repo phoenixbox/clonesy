@@ -82,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20130417213010) do
     t.string   "theme",       :default => "default"
   end
 
+  add_index "stores", ["path"], :name => "index_stores_on_path"
+  add_index "stores", ["status"], :name => "index_stores_on_status"
+
   create_table "user_store_roles", :force => true do |t|
     t.integer  "store_id"
     t.integer  "user_id"
