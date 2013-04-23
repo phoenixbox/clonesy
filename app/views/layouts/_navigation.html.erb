@@ -14,8 +14,6 @@
     <% end %>
     <% if logged_in? && current_store && current_store.is_admin?(current_user) %>
       <li><%= link_to t('admin.self'), store_admin_manage_path(current_store) %></li>
-    <% elsif logged_in? && current_store && current_store.is_stocker?(current_user) %>
-      <li><%= link_to 'Stocker', store_stock_products_path(current_store) %></li>
     <% end %>
 
     <% if logged_in? %>

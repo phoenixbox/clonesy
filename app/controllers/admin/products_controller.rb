@@ -1,5 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  before_filter :require_admin_or_stocker
+  before_filter :require_admin
   before_filter :find_product, only: [ :edit,
                                        :update,
                                        :destroy,
@@ -17,7 +17,7 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = current_store.products.new(params[:product])
     if @product.save
-      redirect_to store_products_path(@role, current_store),
+      redirect_to store_admin_products_path(current_store),
         :notice => "Successfully created product."
     else
       render :action => 'new', :notice  => "Product creation failed."
@@ -29,7 +29,7 @@ class Admin::ProductsController < ApplicationController
 
   def update
     if @product.update_attributes(params[:product])
-      redirect_to store_products_path(@role, current_store),
+      redirect_to store_admin_products_path(current_store),
         :notice  => "Successfully updated product."
     else
       render :action => 'edit', :notice  => "Update failed."
@@ -38,13 +38,13 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to store_products_path(@role, current_store),
+    redirect_to store_admin_products_path(current_store),
       :notice => "Successfully destroyed product."
   end
 
   def toggle_status
     if @product.toggle_status
-      redirect_to store_products_path(@role, current_store),
+      redirect_to store_admin_products_path(current_store),
         :notice  => "Product status successfully set to '#{@product.status}'."
     else
       head 400

@@ -5,7 +5,7 @@ describe Admin::ProductsController do
   before(:each) do
     @user = FactoryGirl.create(:user)
     @store = FactoryGirl.create(:store)
-    controller.stub(:require_admin_or_stocker => true)
+    controller.stub(:require_admin => true)
     controller.stub(:current_user => @user)
     controller.stub(:current_store => @store)
   end
