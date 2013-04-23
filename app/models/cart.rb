@@ -26,7 +26,9 @@ class Cart
   def update(carts_param)
     if id = carts_param[:product_id]
       quantity = carts_param[:quantity]
-      @cart_data[id] = quantity || (@cart_data[id].to_i + 1).to_s
+      unless quantity.to_i < 0
+        @cart_data[id] = quantity || (@cart_data[id].to_i + 1).to_s
+      end
     end
     @cart_data
   end
