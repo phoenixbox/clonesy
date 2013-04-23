@@ -16,6 +16,13 @@ describe CartsController do
       put :update, carts: {product_id: p.id, quantity: '10'}
       expect(@cart.count).to eq "(10)"
     end
+
+    it "does not update the cart details with invalid quantity" do
+      put :update, carts: {product_id: p.id, quantity: '5'}
+      expect(@cart.count).to eq "(5)"
+      put :update, carts: {product_id: p.id, quantity: '-10'}
+      expect(@cart.count).to eq "(5)"
+    end
   end
 
   describe "Carts#Remove_Item" do
