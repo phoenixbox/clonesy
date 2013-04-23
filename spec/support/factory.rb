@@ -23,20 +23,31 @@ FactoryGirl.define do
     status 'active'
   end
 
+  sequence :name do |n|
+    "unique_store_#{n}"
+  end
+
+  sequence :path do |n|
+    "unique_store_#{n}"
+  end
+
+  factory :store do
+    name
+    description "Store description"
+    path
+    status "status"
+    theme "default"
+  end
+
   factory :user do
     full_name 'Raphael Weiner'
     email 'raphael@example.com'
     display_name 'raphweiner'
     password 'password'
-    uber false
-  end
 
-  factory :uber, parent: :user do
-    full_name 'Logan Sears'
-    email 'logan@gmail.com'
-    display_name 'lsears'
-    password 'password'
-    uber true
+    factory :invalid_user do
+      full_name nil
+    end
   end
 
   factory :address do
