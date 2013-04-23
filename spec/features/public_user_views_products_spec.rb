@@ -10,7 +10,7 @@ feature "Public User Views Products" do
     end
 
     it "displays products" do
-      page.should have_content(@product.title)
+      page.should have_content(@product.title.titleize)
     end
   end
 

@@ -18,8 +18,8 @@ describe Product do
   end
 
   it 'is invalid if title already exists (case insensitive)' do
-    FactoryGirl.create(:product, store: @store)
-    product = FactoryGirl.build(:product, store: @store)
+    FactoryGirl.create(:product, title: 'shane', store: @store)
+    product = FactoryGirl.build(:product, title: 'Shane', store: @store)
     expect(product.valid?).to be_false
   end
 
