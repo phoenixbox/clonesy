@@ -2,13 +2,17 @@ require 'spec_helper'
 
 describe StoresController do
 
-  let!(:store) {FactoryGirl.create(:store)}
+  let!(:store) {FactoryGirl.build(:store)}
+
+  before (:each) do 
+    store.status = "online"
+    store.save!
+  end
   
   def valid_attributes
     { name: "store_name", 
       description: "store_description",
       path: "store_path", 
-      status: "online", 
       theme: "default" }
   end
 
