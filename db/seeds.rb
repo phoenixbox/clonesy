@@ -83,7 +83,7 @@ seed_users(10_000)
 
 # CREATE ROLES
 stores.each do |store|
-  ['admin', 'admin', 'stocker', 'stocker'].each do |role|
+  ['admin', 'admin'].each do |role|
     begin
       UserStoreRole.create({user_id: rand(10_000),
                             store_id: store.id,

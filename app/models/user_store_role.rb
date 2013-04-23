@@ -5,16 +5,12 @@ class UserStoreRole < ActiveRecord::Base
   belongs_to :user
 
   validates :role, presence: true,
-                   inclusion: {in: %w(admin stocker) }
+                   inclusion: {in: %w(admin) }
 
   validates :store_id, presence: true
   validates :user_id, presence: true
 
   def admin?
     self.role == 'admin'
-  end
-
-  def stocker?
-    self.role == 'stocker'
   end
 end

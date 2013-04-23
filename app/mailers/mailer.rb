@@ -1,5 +1,4 @@
 class Mailer < ActionMailer::Base
-  add_template_helper(MailerHelper)
   default from: "white@mrwhite-sose.herokuapp.com"
 
   def welcome_email(email, full_name)

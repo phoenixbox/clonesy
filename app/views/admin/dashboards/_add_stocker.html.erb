@@ -1,6 +1,0 @@
-<h3>Stockers</h3>
-<%= simple_form_for @stocker, url: store_admin_create_role_path(current_store) do |s| %>
-  <%= s.hidden_field :role, value: :stocker %>
-  <%= s.input :email %>
-  <%= s.submit "Add Stocker", class: "btn btn-custom-lighten span2" %>
-<% end %>

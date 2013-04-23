@@ -3,7 +3,7 @@ Dear <%= @user["full_name"].titleize %>,
 
 You've been promoted to a <%= @role %> for <%= @store["name"] %>
 
-Check out the store here: <%= role_link(@role, @store["id"]) %>
+Check out the store here: <%= store_admin_manage_url(@store["id"], host: HOST_DOMAIN) %>
 
 
 Have fun!
