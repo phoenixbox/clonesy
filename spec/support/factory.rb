@@ -31,14 +31,6 @@ FactoryGirl.define do
     "unique_store_#{n}"
   end
 
-  factory :store do
-    name
-    description "Store description"
-    path
-    status "status"
-    theme "default"
-  end
-
   factory :user do
     full_name 'Raphael Weiner'
     email 'raphael@example.com'
