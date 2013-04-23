@@ -2,30 +2,28 @@ require 'spec_helper'
 
 describe "admin dashboard" do
   before(:each) do
-      FactoryGirl.create(:admin)
-      visit login_path
-      fill_in 'sessions_email', with: 'logan@gmail.com'
-      fill_in 'sessions_password', with: 'password'
-      click_button 'Login'
+    admin = FactoryGirl.create(:user)
+    @store = FactoryGirl.create(:store)
+    Role.promote(admin, @store, 'admin')
+    visit login_path
+    fill_in 'sessions_email', with: 'raphael@example.com'
+    fill_in 'sessions_password', with: 'password'
+    click_button 'Login'
 
-      @user = FactoryGirl.create(:user, email: 'wtfz@whatthefuckzzzz.com')
-      FactoryGirl.create(:order, user: @user, status: 'paid')
-      FactoryGirl.create(:order, user: @user, status: 'paid')
-      FactoryGirl.create(:order, user: @user, status: 'returned')
+    @user = FactoryGirl.create(:user, email: 'wtfz@whatthefuckzzzz.com')
+    @order1 = FactoryGirl.create(:order, user: @user, status: 'paid', store: @store)
+    @order2 = FactoryGirl.create(:order, user: @user, status: 'paid', store: @store)
+    @order3 = FactoryGirl.create(:order, user: @user, status: 'returned', store: @store)
   end
 
   context "when an admin visits their dashboard" do
+    before(:each) { visit store_admin_dashboard_path(@store) }
     it "should have a list of all orders and link to each" do
-      order1 = FactoryGirl.create(:order, user: @user)
-      order2 = FactoryGirl.create(:order, user: @user)
-
-      visit '/admin/dashboard'
-      expect(page).to have_xpath("//a[@href='#{admin_order_path(order1)}']")
-      expect(page).to have_xpath("//a[@href='#{admin_order_path(order2)}']")
+      expect(page).to have_xpath("//a[@href='#{store_admin_order_path(@store, @order1.id)}']")
+      expect(page).to have_xpath("//a[@href='#{store_admin_order_path(@store, @order2.id)}']")
     end
 
     it "should show a total number of orders by status" do
-      visit '/admin/dashboard'
       expect(page).to have_content('0 Pending')
       expect(page).to have_content('2 Paid')
       expect(page).to have_content('1 Returned')
@@ -34,17 +32,16 @@ describe "admin dashboard" do
     end
 
     it "should allow for filtering by status" do
-      visit '/admin/dashboard'
       click_link('Paid')
       expect(page).to have_css('tr', count: 2)
     end
 
     context "within an individual order" do
       before(:each) do
-        @order = FactoryGirl.create(:order, user: @user)
-        @product = FactoryGirl.create(:product)
+        @order = FactoryGirl.create(:order, user: @user, store: @store)
+        @product = FactoryGirl.create(:product, store: @store)
         @order_item = FactoryGirl.create(:order_item, order: @order, product: @product)
-        visit admin_order_path(@order)
+        visit store_admin_order_path(@store, @order.id)
       end
 
       it "displays order creation date and time" do
@@ -59,7 +56,7 @@ describe "admin dashboard" do
       it "displays each product of the order with associated data" do
         expect(page).to have_content(@product.title)
         expect(page).to have_link(@product.title)
-        expect(page).to have_xpath("//a[@href='#{product_path(@product)}']")
+        expect(page).to have_xpath("//a[@href='#{store_product_path(@product.store, @product)}']")
         expect(find("input#admin_order_item_quantity").value.to_i).to eq @order_item.quantity
         expect(page).to have_content(@order_item.unit_price)
         expect(page).to have_content(@order_item.subtotal)
@@ -77,16 +74,16 @@ describe "admin dashboard" do
         it "progressing status based on rules" do
           expect(page).to have_button('cancel')
 
-          order = FactoryGirl.create(:order, user: @user, status: 'paid')
-          visit admin_order_path(order)
+          order = FactoryGirl.create(:order, user: @user, status: 'paid', store: @store)
+          visit store_admin_order_path(@store, order.id)
           expect(page).to have_button('mark as shipped')
 
-          order = FactoryGirl.create(:order, user: @user, status: 'shipped')
-          visit admin_order_path(order)
+          order = FactoryGirl.create(:order, user: @user, status: 'shipped', store: @store)
+          visit store_admin_order_path(@store, order.id)
           expect(page).to have_button('mark as returned')
 
-          order = FactoryGirl.create(:order, user: @user, status: 'cancelled')
-          visit admin_order_path(order)
+          order = FactoryGirl.create(:order, user: @user, status: 'cancelled', store: @store)
+          visit store_admin_order_path(@store, order.id)
           expect(page).to_not have_button('mark as returned')
           expect(page).to_not have_button('mark as shipped')
           expect(page).to_not have_button('cancel')
