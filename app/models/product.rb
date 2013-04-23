@@ -20,6 +20,7 @@ class Product < ActiveRecord::Base
 
   scope :active, lambda { where(status: 'active') }
 
+  scope :by_category, lambda { |category_id| Category.find(category_id)}
   def self.by_category(category_id)
     if category_id.present?
       Category.find(category_id).products

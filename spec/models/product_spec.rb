@@ -77,17 +77,21 @@ describe Product do
     
     context "on a product with a category_id" do
       it "finds the products by the category_id" do
-      current_store = FactoryGirl.create(:store)
-      controller_store = FactoryGirl.create(:store)
-      product1 = FactoryGirl.create(:product, store: current_store)
-      product2 = FactoryGirl.create(:product, store: current_store)
-      product3 = FactoryGirl.create(:product, store: current_store)
-      expect(Product.by_category(category)).to eq [product1, product2]
+      nicknacks = FactoryGirl.create(:category, title: 'nicknacks')
+      product1 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
+      product2 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
+      product3 = FactoryGirl.create(:product, store: @store)
+      expect(Product.by_category(nicknacks.id)).to eq [product1, product2]
       end
     end
 
     context "on a product without a category_id" do
-      it "scopes??" do
+      it "scopes" do
+      nicknacks = FactoryGirl.create(:category, title: 'nicknacks')
+      product1 = FactoryGirl.create(:product, store: @store, catego )
+      product2 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
+      product3 = FactoryGirl.create(:product, store: @store)
+      expect(Product.by_category(nicknacks.id)).to eq [product1, product2]
       end
     end
     
