@@ -1,5 +1,17 @@
 FactoryGirl.define do
 
+  sequence :name do |n|
+    "unique_store_#{n}"
+  end
+
+  sequence :title do |n|
+    "unique_title_#{n}"
+  end
+
+  sequence :path do |n|
+    "unique_store_#{n}"
+  end
+
   factory :category do
     title 'Dark Matter'
   end
@@ -17,19 +29,13 @@ FactoryGirl.define do
 
   factory :product do
     categories { [FactoryGirl.build(:category)] }
-    title 'Itchy Sweater'
+    title 
+    # title 'Itchy Sweater'
     description 'Hurts so good'
     price 12.99
     status 'active'
   end
 
-  sequence :name do |n|
-    "unique_store_#{n}"
-  end
-
-  sequence :path do |n|
-    "unique_store_#{n}"
-  end
 
   factory :user do
     full_name 'Raphael Weiner'
@@ -52,7 +58,7 @@ FactoryGirl.define do
   factory :store do
     name  'Da best'
     description   'The bestest store'
-    path 'a-store'
+    path
     status 'online'
   end
 end
