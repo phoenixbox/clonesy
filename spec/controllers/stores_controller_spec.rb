@@ -8,7 +8,6 @@ describe StoresController do
     { name: "store_name", 
       description: "store_description",
       path: "store_path", 
-      status: "online", 
       theme: "default" }
   end
 
