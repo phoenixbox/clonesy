@@ -40,11 +40,6 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def store
-    # TODO: Refactor this (used on _order_item.html.erb)
-    order_items.first.store
-  end
-
   def update_status
     next_status = { 'pending' => 'cancelled',
                     'paid' => 'shipped',

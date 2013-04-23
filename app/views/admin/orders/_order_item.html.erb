@@ -2,7 +2,7 @@
   <td><%= link_to order_item.product.title, store_product_path(@order.store, order_item.product) %></td>
   <% if @order.status == 'pending' || @order.status == 'paid' %>
   <td>
-    <%= simple_form_for :admin_order_item, url: store_admin_order_path(@order.store, order_item), method: :put do |f| %>
+    <%= simple_form_for :admin_order_item, url: store_admin_order_item_path(order_item.store, order_item), method: :put do |f| %>
       <%= f.hidden_field :order_item_id, value: order_item.id %>
       <%= f.input_field :quantity, value: order_item.quantity, class: 'span1' %>
       <%= f.button :submit, t('crud.update'), class: 'btn-mini' %>

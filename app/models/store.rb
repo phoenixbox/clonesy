@@ -4,6 +4,7 @@ class Store < ActiveRecord::Base
 
   has_many :categories
   has_many :products
+  has_many :orders
   has_many :user_store_roles
 
   before_validation :parameterize_path
