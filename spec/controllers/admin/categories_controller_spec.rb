@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe Admin::CategoriesController do
-#  controller.stub(:require_admin => true) #use this line to give the test priveledge to access the controller as an admin
+  before (:each) do
+    @store = FactoryGirl.create(:store)
+    @category = FactoryGirl.create(:category)
+    @admin = FactoryGirl.create(:user)
+    controller.stub(:require_admin => true)
+    controller.stub(:current_user => @user)
+  end
 
+  context "" do
+
+  end
 end
