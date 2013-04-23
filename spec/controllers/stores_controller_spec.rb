@@ -12,8 +12,7 @@ describe StoresController do
   def valid_attributes
     { name: "store_name", 
       description: "store_description",
-      path: "store_path", 
-      theme: "default" }
+      path: "store_path" }
   end
 
   def valid_session

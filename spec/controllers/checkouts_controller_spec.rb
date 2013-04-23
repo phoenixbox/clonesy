@@ -63,11 +63,12 @@ describe CheckoutsController do
         user.shipping_address = user_shipping
         user.billing_address = user_billing
         user.save! 
+
+        controller.stub(:send_order_email)
       end
 
       it "allows that user to place an order" do 
 
-        controller.stub(:send_order_email)
         ApplicationController.any_instance.stub(:current_cart).and_return(cart)
 
         post :create
@@ -78,8 +79,6 @@ describe CheckoutsController do
     context "the user enters incorrect information" do 
 
       it "does not allow that user to place an order" do 
-
-        controller.stub(:send_order_email)
 
         post :create
         expect(Order.count).to eq 0
