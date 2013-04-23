@@ -6,7 +6,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by_guid!(params[:guid])
+    unless @order = Order.find_by_guid(params[:guid])
+      redirect_to :back
+      return
+    end
     @order_items = @order.order_items
   end
 end

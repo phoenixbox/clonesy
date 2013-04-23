@@ -21,7 +21,7 @@ describe OrdersController do
         it 'assigns order variables' do
           user = FactoryGirl.create(:user)
           login_user user
-          orders = Order.create(user_id: user.id, status:"pending")
+          orders = [ FactoryGirl.create(:order, user: user) ]
           get :index
           assigns(orders).should eq @orders
         end
@@ -37,35 +37,18 @@ describe OrdersController do
   end
 
   describe 'show' do
-    context 'when the user is logged in' do
-
-      context 'when the order belongs to the user' do
-        it 'assigns the order variable' do
-          user = FactoryGirl.create(:user)
-          order = FactoryGirl.create(:order, user: user)
-          login_user user
-          get :show, params = {id: order.id}
-          assigns(order).should eq @order
-        end
+      it 'assigns the order variable when found' do
+        user = FactoryGirl.create(:user)
+        order = FactoryGirl.create(:order, user: user)
+        login_user user
+        get :show, params = {guid: order.guid}
+        assigns(order).should eq @order
       end
 
-      context 'when the order does NOT belong to the user' do
-        it 'redirects to the order history' do
-          user = FactoryGirl.create(:user)
-          user2 = FactoryGirl.create(:user, email: 'sneaky@laura.com')
-          order = FactoryGirl.create(:order, user: user)
-          login_user user2
-          get :show, params = {id: order.id}
-          expect(response).to redirect_to account_orders_path
-        end
-      end
-    end
-
-    context 'when the user is not logged in' do
-      it 'redirects the user to the login page' do
+      it 'redirects the user to the login page when not found' do
+        request.env["HTTP_REFERER"] = '/'
         get :show
-        expect(response).to redirect_to login_path
+        expect(response).to redirect_to root_path
       end
-    end
   end
 end
