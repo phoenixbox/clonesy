@@ -65,11 +65,35 @@ describe Product do
     end
 
     context 'on a retired product' do
-      it 'sets the statusto active' do
+      it 'sets the status to active' do
         product = FactoryGirl.create(:product, store: @store, status: 'retired')
         product.toggle_status
         expect(product.status).to eq 'active'
       end
     end
+  end
+
+  describe 'self.category id' do
+
+    context "on a product with a category_id" do
+      it "finds the products by the category_id" do
+      nicknacks = FactoryGirl.create(:category, title: 'nicknacks')
+      product1 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
+      product2 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
+      product3 = FactoryGirl.create(:product, store: @store)
+      expect(Product.by_category(nicknacks.id)).to eq [product1, product2]
+      end
+    end
+
+    context "on a product without a category_id" do
+      it "scopes" do
+      nicknacks = FactoryGirl.build(:category, title: 'nicknacks')
+      product1 = FactoryGirl.create(:product, store: @store)
+      product2 = FactoryGirl.create(:product, store: @store)
+      product3 = FactoryGirl.create(:product, store: @store)
+      expect(Product.by_category(nicknacks.id)).to eq [product1, product2, product3]
+      end
+    end
+
   end
 end

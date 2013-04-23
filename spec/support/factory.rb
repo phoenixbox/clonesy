@@ -33,7 +33,6 @@ FactoryGirl.define do
     status 'active'
   end
 
-
   factory :user do
     full_name 'Raphael Weiner'
     email 'raphael@example.com'
@@ -53,7 +52,7 @@ FactoryGirl.define do
   end
 
   factory :store do
-    name  'Da best'
+    name
     description   'The bestest store'
     path
     status 'online'
