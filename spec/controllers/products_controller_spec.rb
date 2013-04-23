@@ -7,5 +7,9 @@ describe ProductsController do
       get :index
       response.should render_template(:index)
     end
+
+    it "populates an array of messages" do
+      
+    end
   end
 end
