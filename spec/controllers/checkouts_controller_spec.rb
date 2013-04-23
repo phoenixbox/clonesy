@@ -86,4 +86,25 @@ describe CheckoutsController do
       end
     end
   end
+
+  describe "an unauthenticated user clicks 'buy now'" do 
+
+    it "directs the user to the sign up page" do 
+      post :buy_now, { product_id: product.id }
+      expect(page).to redirect_to(login_path)
+    end
+  end
+
+  describe "an authenticated user clicks 'buy now" do 
+
+    before do 
+      ApplicationController.any_instance.stub(:current_user).and_return(user)
+      controller.stub(:send_order_email)
+    end
+
+    it "allows that user to check out" do 
+      post :buy_now, { product_id: product.id }
+      expect(Order.count).to eq 1
+    end
+  end
 end 
