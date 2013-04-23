@@ -2,19 +2,14 @@ class Admin::DashboardsController < ApplicationController
   before_filter :require_admin
 
   def manage
-    @stockers = UserStoreRole.where(store_id: current_store.id,
-                                    role: 'stocker')
-                                    .map(&:user)
     @admins = UserStoreRole.where(store_id: current_store.id,
                                   role: 'admin')
                                   .map(&:user)
 
     @admin = User.new
-    @stocker = User.new
   end
 
   def edit
-    @themes = Store.themes
     @store = current_store
   end
 

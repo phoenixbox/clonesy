@@ -18,9 +18,6 @@ class Store < ActiveRecord::Base
   validates :status, presence: true,
                      inclusion: { in: %w(online offline pending declined) }
 
-  validates :theme, presence: true,
-                    inclusion: { in: %w(default wood soft mocha scale escheresque metal) }
-
   scope :approved, lambda { where("status <> 'declined'") }
 
   scope :online, lambda { where(status: 'online') }
@@ -29,24 +26,6 @@ class Store < ActiveRecord::Base
     user.uber? || UserStoreRole.exists?(store_id: self,
                                         user_id: user,
                                         role: :admin)
-  end
-
-  def self.themes
-    %w(default wood soft mocha scale escheresque metal)
-  end
-
-  def is_stocker?(user)
-    UserStoreRole.exists?(store_id: self,
-                          user_id: user,
-                          role: :stocker)
-  end
-
-  def admin_or_stocker?(user)
-    if is_admin?(user)
-      :admin
-    elsif is_stocker?(user)
-      :stocker
-    end
   end
 
   def to_param

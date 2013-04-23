@@ -1,23 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_cart, :current_store, :flag, :store_theme,
-                :store_products_path, :edit_store_product_path
+  helper_method :current_cart,
+                :current_store,
+                :flag
 
   before_filter :locale
 
-  def store_theme
-    @store_theme ||= current_store ? current_store.theme : 'default'
-  end
-
   def require_admin
     if current_store.nil? || !current_store.is_admin?(current_user)
-      not_authenticated
-    end
-  end
-
-  def require_admin_or_stocker
-    @role = current_store.admin_or_stocker?(current_user)
-    if current_store.nil? || !@role
       not_authenticated
     end
   end
@@ -52,22 +42,6 @@ class ApplicationController < ActionController::Base
 
   def locale
     I18n.locale = session[:i18n] || I18n.default_locale || :en
-  end
-
-  def store_products_path(role, store)
-    if role == :admin
-      store_admin_products_path(store)
-    elsif role == :stocker
-      store_stock_products_path(store)
-    end
-  end
-
-  def edit_store_product_path(role, store, product)
-    if role == :admin
-      edit_store_admin_product_path(store, product)
-    elsif role == :stocker
-      store_stock_edit_product_path(store, product)
-    end
   end
 
   def flag

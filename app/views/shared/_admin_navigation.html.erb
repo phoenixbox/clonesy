@@ -1,6 +1,5 @@
 <div class="span3">
   <ul class="nav nav-list">
-    <% if current_store.is_admin?(current_user) %>
     <li class="nav-header"><%= t('admin.self') %></li>
     <li class="<%= active == :manage ? 'active' : '' %>">
       <%= link_to 'Manage', store_admin_manage_path(current_store) %>
@@ -14,11 +13,5 @@
     <li class="<%= active == :categories ? 'active' : '' %>">
       <%= link_to t('categories.self'), store_admin_categories_path(current_store) %>
     </li>
-    <% elsif current_store.is_stocker?(current_user) %>
-    <li class="nav-header">Stocker</li>
-    <li class="<%= active == :products ? 'active' : '' %>">
-      <%= link_to t('product.collection'), store_stock_products_path(current_store) %>
-    </li>
-    <% end %>
   </ul>
 </div>

@@ -30,17 +30,5 @@
         <%= render partial: 'admin', collection: @admins %>
       </tbody>
     </table>
-    <hr>
-    <%= render partial: 'add_stocker', locals: { stocker: @stocker } %>
-    <table class="table table-striped">
-      <thead>
-        <th>Email</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <%= render partial: 'stocker', collection: @stockers %>
-      </tbody>
-    </table>
-
   </div>
 </div>
