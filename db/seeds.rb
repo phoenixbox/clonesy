@@ -76,10 +76,10 @@ store10.update_attributes({status: 'offline'}, as: :uber)
 stores.each { |store| seed_categories(store, 10) }
 
 # CREATE PRODUCTS
-stores.each { |store| seed_products(store, 10_000) }
+stores.each { |store| seed_products(store, 100) }
 
 # CREATE USERS
-seed_users(10_000)
+seed_users(100)
 
 # CREATE ROLES
 stores.each do |store|
@@ -98,7 +98,7 @@ end
 # CREATE ORDERS
 STATUSES = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
 stores.each do |store|
-  50.times do |i|
+  20.times do |i|
     begin
       puts "Seeding order #{i} for store #{store.id}"
       order = Order.create(status: STATUSES.sample,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130417213010) do
+ActiveRecord::Schema.define(:version => 20130411163716) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(:version => 20130417213010) do
     t.string   "status",      :default => "pending"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-    t.string   "theme",       :default => "default"
   end
 
   add_index "stores", ["path"], :name => "index_stores_on_path"

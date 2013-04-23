@@ -21,14 +21,7 @@ FactoryGirl.define do
     description 'Hurts so good'
     price 12.99
     status 'active'
-  end
-
-  sequence :name do |n|
-    "unique_store_#{n}"
-  end
-
-  sequence :path do |n|
-    "unique_store_#{n}"
+    store
   end
 
   factory :user do
@@ -42,17 +35,35 @@ FactoryGirl.define do
     end
   end
 
-  factory :address do
+  factory :shipping_address, class: ShippingAddress do
     street  '43 Logan Street'
     state   'CA'
     zipcode '90100'
     city    'The Angels'
+    type "shipping"
+  end
+
+  factory :billing_address, class: BillingAddress do
+    street  '43 Logan Street'
+    state   'CA'
+    zipcode '90100'
+    city    'The Angels'
+    type "billing"
+  end
+
+
+  sequence :name do |n|
+    "unique_store_#{n}"
+  end
+
+  sequence :path do |n|
+    "unique_store_#{n}"
   end
 
   factory :store do
-    name  'Da best'
+    name  
     description   'The bestest store'
-    path 'a-store'
+    path 
     status 'online'
   end
 end

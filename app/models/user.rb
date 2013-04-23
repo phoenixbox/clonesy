@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
                   :full_name,
                   :password,
                   :password_confirmation,
-                  :orphan
+                  :orphan, 
+                  :shipping_address, 
+                  :billing_address
 
   has_one :billing_address, validate: true, autosave: true
   has_one :shipping_address, validate: true, autosave: true

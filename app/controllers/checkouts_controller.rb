@@ -5,6 +5,10 @@ class CheckoutsController < ApplicationController
   def show
   end
 
+  def cart
+
+  end
+
   def create
     if @user.save
       order = create_order(@user, current_cart)
@@ -34,11 +38,11 @@ private
 
   def build_user
     @user = if logged_in?
-      current_user.attributes = params[:user]
-      current_user
-    else
-      User.new_guest(params[:user])
-    end
+              current_user.attributes = params[:user]
+              current_user
+            else
+              User.new_guest(params[:user])
+            end
 
     @user.build_shipping_address if @user.shipping_address.nil?
     @user.build_billing_address if @user.billing_address.nil?
@@ -46,7 +50,13 @@ private
 
   def create_order(user, cart_items)
     Order.create_pending_order(user, cart_items).tap do |order|
-      Resque.enqueue(OrderConfirmEmailJob, user, order.id, order.total)
+      send_order_email(user, order.id, order.total)
     end
+  end
+
+  private 
+
+  def send_order_email(user, order_id, order_total)
+    Resque.enqueue(OrderConfirmEmailJob, user, order_id, order_total)
   end
 end
