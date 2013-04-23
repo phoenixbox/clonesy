@@ -87,11 +87,11 @@ describe Product do
 
     context "on a product without a category_id" do
       it "scopes" do
-      nicknacks = FactoryGirl.create(:category, title: 'nicknacks')
-      product1 = FactoryGirl.create(:product, store: @store, catego )
-      product2 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
+      nicknacks = FactoryGirl.build(:category, title: 'nicknacks')
+      product1 = FactoryGirl.create(:product, store: @store)
+      product2 = FactoryGirl.create(:product, store: @store)
       product3 = FactoryGirl.create(:product, store: @store)
-      expect(Product.by_category(nicknacks.id)).to eq [product1, product2]
+      expect(Product.by_category(nicknacks.id)).to eq [product1, product2, product3]
       end
     end
     
