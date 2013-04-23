@@ -10,21 +10,54 @@ describe 'user account detail view' do
       click_button 'Login'
     end
 
-    it 'display the main page of their account details' do
-      visit 'account'
+    it 'displays the main page of their account details' do
+      visit 'profile'
       expect(page).to have_content("Account")
     end
 
     it 'cannot update their profile with incorrect information' do
-      visit 'account'
+      visit 'profile'
       fill_in 'Full Name', with: ''
-      click_button 'Update Account'
+      click_button 'Submit'
       expect(page).to have_content("can't be blank")
+    end
+
+    context 'when they click the link to create a store' do
+      it 'takes them to the create a new store page' do
+        visit 'profile'
+        click_link "Create New Store"
+        expect(page).to have_content("New Store")
+      end
+    end
+
+    context 'when they fill in the new store creation form' do
+      it "can create a new store with valid information" do
+        visit new_store_path
+        fill_in 'store_name', with: "jewellery"
+        fill_in 'store_path', with: "jewellery"
+        fill_in 'store_description', with: "the finest jewellery"
+        click_button "Create Store"
+        expect(page).to have_content("Your store is pending approval")
+      end
+
+      it "cannot create a new store with invalid information" do
+        visit new_store_path
+        click_button "Create Store"
+        expect(page).to have_content("can't be blank")
+      end
+    end
+
+    context 'when they click the link to edit their account details' do
+      it "should take them to their account details edit page" do
+        visit profile_path
+        click_link "Edit"
+        expect(page).to have_content("Edit")
+      end
     end
 
     context 'when they click the link to their order history page' do
       it 'takes them to their order history page' do
-        visit 'account/'
+        visit 'profile'
         click_link "Order History"
         expect(page).to have_content("Order History")
       end
