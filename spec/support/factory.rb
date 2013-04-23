@@ -5,8 +5,8 @@ FactoryGirl.define do
   end
 
   factory :order_item do
-    product { FactoryGirl.build(:product) }
-    order { FactoryGirl.build(:order) }
+    # product { FactoryGirl.build(:product) }
+    # order { FactoryGirl.build(:order) }
     unit_price 20.00
     quantity 3
   end
