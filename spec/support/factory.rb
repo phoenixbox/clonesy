@@ -53,5 +53,6 @@ FactoryGirl.define do
     name  'Da best'
     description   'The bestest store'
     path 'a-store'
+    status 'online'
   end
 end
