@@ -8,6 +8,68 @@ describe UsersController do
     end
   end
 
+  describe "POST#create" do
+    
+    let(:valid_attributes) do {
+      user: {full_name: "John Smith", email: "example@example.com", password: "password", password_confirmation: "password"} }
+    end
+    let(:invalid_attributes) do {
+      user: {full_name: "", email: "example@example.com", password: "", password_confirmation: "password"} }
+    end
+
+    context "with valid attributes" do
+      it "saves the new user in the database" do
+        controller.stub(:enqueue_welcome_email)
+        expect {
+          post :create, valid_attributes}.to change(User, :count).by(1)
+      end
+
+      it "redirects to the home page" do
+        controller.stub(:enqueue_welcome_email)
+        post :create, valid_attributes
+        response.should redirect_to(root_path)
+      end
+    end
+
+    context "with invalid attributes" do
+      it "does not save the new user in the database" do
+        controller.stub(:enqueue_welcome_email)
+        expect {
+          post :create, invalid_attributes}.to_not change(User, :count).by(1)
+      end
+
+      it "renders the new user page" do
+        controller.stub(:enqueue_welcome_email)
+        post :create, invalid_attributes
+        response.should render_template("new")
+      end
+    end
+
+    context "user exists and is an orphan" do
+      it "updates the orphan attribute to false" do
+        controller.stub(:enqueue_welcome_email)
+        @user = FactoryGirl.create(:user, orphan: true)
+        post :create, user: {email: 'raphael@example.com'}
+        @user.reload
+        expect(@user.orphan).to be false
+      end
+    end
+
+    # Blog Example
+    # Controller -> Resque.enqueue(RailsBuild, @project.id)
+    # Spec -> Resque.expects(:enqueue).with(RailsBuild, project.id).once
+      
+
+    context "user is valid" do
+      xit "welcome email is enqueued" do
+        post :create, valid_attributes
+        Resque.stubs(:enqueue)
+        Resque.expects(:enqueue).with(WelcomeEmailJob, @user.email, @user.full_name).once
+      end
+    end
+
+  end
+
   describe "GET#show" do
     context 'when a user is logged in' do
 
