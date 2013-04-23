@@ -61,16 +61,16 @@ describe 'the admin products view', type: :feature do
     expect(Product.all).to eq []
   end
 
-  xit 'can retire an active product' do
+  it 'can retire an active product' do
     product = FactoryGirl.create(:product, store: @store)
     page.driver.post toggle_status_store_admin_product_path(@store, product)
-    expect(product.status).to eq 'retired'
+    expect(product.reload.status).to eq 'retired'
   end
 
-  xit 'can activate a retired product' do
+  it 'can activate a retired product' do
     product = FactoryGirl.create(:product, status: 'retired', store: @store)
     page.driver.post toggle_status_store_admin_product_path(@store, product)
-    expect(product.status).to eq 'active'
+    expect(product.reload.status).to eq 'active'
   end
 end
 
