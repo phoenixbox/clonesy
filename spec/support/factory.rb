@@ -17,8 +17,6 @@ FactoryGirl.define do
   end
 
   factory :order_item do
-    # product { FactoryGirl.build(:product) }
-    # order { FactoryGirl.build(:order) }
     unit_price 20.00
     quantity 3
   end
@@ -29,8 +27,7 @@ FactoryGirl.define do
 
   factory :product do
     categories { [FactoryGirl.build(:category)] }
-    title 
-    # title 'Itchy Sweater'
+    title
     description 'Hurts so good'
     price 12.99
     status 'active'
