@@ -17,10 +17,14 @@ FactoryGirl.define do
 
   factory :product do
     categories { [FactoryGirl.build(:category)] }
-    title 'Itchy Sweater'
+    title
     description 'Hurts so good'
     price 12.99
     status 'active'
+  end
+  
+  sequence :title do |n|
+    "unique_title_#{n}"
   end
 
   sequence :name do |n|
@@ -50,9 +54,9 @@ FactoryGirl.define do
   end
 
   factory :store do
-    name  'Da best'
+    name 
     description   'The bestest store'
-    path 'a-store'
+    path 
     status 'online'
   end
 end

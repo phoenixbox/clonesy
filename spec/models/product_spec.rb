@@ -18,8 +18,8 @@ describe Product do
   end
 
   it 'is invalid if title already exists (case insensitive)' do
-    FactoryGirl.create(:product, store: @store)
-    product = FactoryGirl.build(:product, store: @store)
+    FactoryGirl.create(:product, title: "gap", store: @store)
+    product = FactoryGirl.build(:product, title: "gap", store: @store)
     expect(product.valid?).to be_false
   end
 
@@ -65,11 +65,31 @@ describe Product do
     end
 
     context 'on a retired product' do
-      it 'sets the statusto active' do
+      it 'sets the status to active' do
         product = FactoryGirl.create(:product, store: @store, status: 'retired')
         product.toggle_status
         expect(product.status).to eq 'active'
       end
     end
+  end
+
+  describe 'self.category id' do
+    
+    context "on a product with a category_id" do
+      it "finds the products by the category_id" do
+      current_store = FactoryGirl.create(:store)
+      controller_store = FactoryGirl.create(:store)
+      product1 = FactoryGirl.create(:product, store: current_store)
+      product2 = FactoryGirl.create(:product, store: current_store)
+      product3 = FactoryGirl.create(:product, store: current_store)
+      expect(Product.by_category(category)).to eq [product1, product2]
+      end
+    end
+
+    context "on a product without a category_id" do
+      it "scopes??" do
+      end
+    end
+    
   end
 end
