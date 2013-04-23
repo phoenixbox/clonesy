@@ -29,8 +29,9 @@ describe Admin::OrderItemsController do
     context "can destroy the order item" do
       it "should destroy" do
         request.env["HTTP_REFERER"] = '/'
-        delete :destroy, id: @order_item.id, store_path: @store.path
-        # expect(@order_item.id).to eq nil
+        delete :destroy,  store_path: @store.path,
+                          id: @order_item.id
+        expect(OrderItem.find_by_id(@order_item.id)).to eq nil
       end
     end
   end
