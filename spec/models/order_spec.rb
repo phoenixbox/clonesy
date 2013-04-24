@@ -2,22 +2,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Order do
 
-  let(:user){ FactoryGirl.create(:user_2) }
-  let(:product){ FactoryGirl.build(:product) }
+  let(:store) { FactoryGirl.create(:store) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:product) { FactoryGirl.create(:product, store: store) }
   let(:cart_contents) { {product.store_id => {product.id => 1} } }
-  let(:cart){ SessionCart.new(cart_contents, product.store) }
-  let(:order){ FactoryGirl.build(:order) }
-  let!(:store) {FactoryGirl.create(:store)}
-
-  before(:each) do
-    order.user_id = user.id
-    order.save! 
-
-    product.store_id = store.id
-    product.save!
-
-  
-  end
+  let(:cart) { SessionCart.new(cart_contents, product.store) }
 
   it 'has a valid factory' do
     expect(FactoryGirl.build(:order, user: user)).to be_valid
@@ -37,17 +26,16 @@ describe Order do
     expect(FactoryGirl.build(:order, user: user, status: 'abracadabra')).to_not be_valid
   end
 
+  context "when orders exist" do
+    before(:each) { FactoryGirl.create(:order, user: user) }
 
-  context "when orders exist" do 
-
-    it "returns orders by status" do 
+    it "returns orders by status" do
       expect((Order.by_status("pending")).count).to eq 1
     end
   end
 
-  context "when an order has been placed" do 
-
-    it "creates a pending order" do 
+  context "when an order has been placed" do
+    it "creates a pending order" do
       expect{
         Order.create_pending_order(user, cart)
         }.to change{ Order.count}.by(1)
@@ -55,21 +43,23 @@ describe Order do
     end
   end
 
-  context "when an order exists" do 
+  context "when an order exists" do
+    let(:order) { FactoryGirl.create(:order, user: user) }
 
-    it "updates its status" do 
+    it "updates its status" do
       order.update_status
       expect(order.status).to eq 'cancelled'
     end
   end
 
-  context "for an existing order" do 
+  context "for an existing order" do
+    let(:order) { FactoryGirl.create(:order, user: user) }
 
     it "returns its total with no items" do
       expect(order.total).to eq 0
     end
 
-    it "returns its total with items" do 
+    it "returns its total with items" do
       order = Order.create_pending_order(user, cart)
       expect(order.total).to eq 12.99
     end
