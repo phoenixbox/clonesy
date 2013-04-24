@@ -20,13 +20,12 @@ FactoryGirl.define do
     unit_price 20.00
     quantity 3
   end
-
+  
   factory :order do
     status 'pending'
   end
 
   factory :product do
-    categories { [FactoryGirl.build(:category)] }
     title
     description 'Hurts so good'
     price 12.99
