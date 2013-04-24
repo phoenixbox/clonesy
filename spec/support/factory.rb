@@ -26,7 +26,7 @@ FactoryGirl.define do
   end
 
   factory :product do
-    categories { [FactoryGirl.build(:category)] }
+    # categories { [FactoryGirl.build(:category)] }
     title
     description 'Hurts so good'
     price 12.99
@@ -52,7 +52,7 @@ FactoryGirl.define do
   end
 
   factory :store do
-    name
+    name 
     description   'The bestest store'
     path
     status 'online'

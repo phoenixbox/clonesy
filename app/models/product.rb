@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
                   :description,
                   :price, :status,
                   :category_ids,
+                  :categories,
                   :store_id
 
   has_and_belongs_to_many :categories
