@@ -5,10 +5,6 @@ class CheckoutsController < ApplicationController
   def show
   end
 
-  def cart
-
-  end
-
   def create
     if @user.save
       order = create_order(@user, current_cart)
@@ -54,7 +50,7 @@ private
     end
   end
 
-  private 
+  private
 
   def send_order_email(user, order_id, order_total)
     Resque.enqueue(OrderConfirmEmailJob, user, order_id, order_total)
