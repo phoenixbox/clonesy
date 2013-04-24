@@ -15,12 +15,6 @@ describe 'Index page spec' do
         expect(current_path).to eq signup_path
       end
 
-      # TODO: waiting on cart image
-      it 'has a link to the cart' do
-        click_link 'cart'
-        expect(current_path).to eq root_path
-      end
-
       it 'has a search bar input with no contents' do
         expect(find_field('search-query').value).to eq nil
       end

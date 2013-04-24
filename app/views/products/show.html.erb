@@ -1,6 +1,6 @@
 <div class="row">
   <div class="prod_detail_img span6">
-    <p><%= image_tag gen_image_url(@product.id) %></p>
+    <p><%= image_tag gen_image_url(@product.store.name.downcase, @product.id) %></p>
   </div>
 
   <div class="prod_detail_text span5">

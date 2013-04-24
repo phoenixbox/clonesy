@@ -26,7 +26,7 @@
       <li><%= link_to t('navigation.login'), login_path  %></li>
       <li><%= link_to t('navigation.signup'), signup_path %></li>
     <% end %>
-    <li><%= link_to "waiting on image (crt)", root_path, id: "cart" %></li>
+
     <% if current_store != nil && current_store.id != nil %>
     <li>
       <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path, class: 'btn btn-custom-lighten', method: :get %>
