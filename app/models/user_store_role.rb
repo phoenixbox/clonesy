@@ -9,8 +9,4 @@ class UserStoreRole < ActiveRecord::Base
 
   validates :store_id, presence: true
   validates :user_id, presence: true
-
-  def admin?
-    self.role == 'admin'
-  end
 end

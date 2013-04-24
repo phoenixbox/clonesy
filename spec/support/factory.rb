@@ -20,13 +20,13 @@ FactoryGirl.define do
     unit_price 20.00
     quantity 3
   end
-
+  
   factory :order do
     status 'pending'
   end
 
   factory :product do
-    categories { [FactoryGirl.build(:category)] }
+    # categories { [FactoryGirl.build(:category)] }
     title
     description 'Hurts so good'
     price 12.99
@@ -60,25 +60,10 @@ FactoryGirl.define do
     type "billing"
   end
 
-
-  # sequence :name do |n|
-  #   "unique_store_#{n}"
-  # end
-
-  # sequence :path do |n|
-  #   "unique_store_#{n}"
-  # end
-
   factory :store do
-# <<<<<<< HEAD
-#     name
-#     description   'The bestest store'
-#     path
-# =======
     name
     description   'The bestest store'
     path
-# >>>>>>> checkouts_controller
     status 'online'
   end
 end

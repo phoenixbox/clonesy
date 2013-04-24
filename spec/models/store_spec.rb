@@ -8,9 +8,7 @@ describe Store do
   end
 
   it 'requires a name' do
-    expect(subject).to be_valid
-    subject.name = ''
-    expect(subject).to_not be_valid
+    expect { subject.name = '' }.to change{ subject.valid? }.to(false)
   end
 
   it 'requires a unique name' do
@@ -20,9 +18,7 @@ describe Store do
   end
 
   it 'requires a path' do
-    expect(subject).to be_valid
-    subject.path = ''
-    expect(subject).to_not be_valid
+    expect { subject.path = '' }.to change{ subject.valid? }.to(false)
   end
 
   it 'requires a unique path' do
@@ -32,15 +28,11 @@ describe Store do
   end
 
   it 'requires a status' do
-    expect(subject).to be_valid
-    subject.status = ''
-    expect(subject).to_not be_valid
+    expect { subject.status = '' }.to change{ subject.valid? }.to(false)
   end
 
   it 'requires a status within the valid set' do
-    expect(subject).to be_valid
-    subject.status = 'abc'
-    expect(subject).to_not be_valid
+    expect { subject.status = 'abc' }.to change{ subject.valid? }.to(false)
   end
 
   it 'parameterizes path before validation' do

@@ -15,6 +15,6 @@ class Role
   def self.revoke(user_id, store)
     relationship = UserStoreRole.where(user_id: user_id,
                                        store_id: store.id).first
-    relationship.destroy
+    relationship.destroy if relationship
   end
 end
