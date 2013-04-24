@@ -117,6 +117,4 @@ describe Admin::ProductsController do
       expect(@product.status).to eq 'retired'
     end
   end
-   
-
 end
