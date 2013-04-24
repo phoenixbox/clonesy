@@ -31,10 +31,6 @@ FactoryGirl.define do
     description 'Hurts so good'
     price 12.99
     status 'active'
-# <<<<<<< HEAD
-# =======
-#     store
-# >>>>>>> checkouts_controller
   end
 
   factory :user do
