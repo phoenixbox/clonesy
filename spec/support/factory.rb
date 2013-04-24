@@ -26,6 +26,7 @@ FactoryGirl.define do
   end
 
   factory :product do
+    # categories { [FactoryGirl.build(:category)] }
     title
     description 'Hurts so good'
     price 12.99
@@ -43,11 +44,20 @@ FactoryGirl.define do
     end
   end
 
-  factory :address do
+  factory :shipping_address, class: ShippingAddress do
     street  '43 Logan Street'
     state   'CA'
     zipcode '90100'
     city    'The Angels'
+    type "shipping"
+  end
+
+  factory :billing_address, class: BillingAddress do
+    street  '43 Logan Street'
+    state   'CA'
+    zipcode '90100'
+    city    'The Angels'
+    type "billing"
   end
 
   factory :store do

@@ -43,12 +43,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def toggle_status
-    if @product.toggle_status
-      redirect_to store_admin_products_path(current_store),
-        :notice  => "Product status successfully set to '#{@product.status}'."
-    else
-      head 400
-    end
+    @product.toggle_status
+    redirect_to store_admin_products_path(current_store),
+                :notice  => "Product status successfully set to '#{@product.status}'."
   end
 
   private

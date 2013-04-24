@@ -66,7 +66,7 @@ StoreEngine::Application.routes.draw do
 
       resources :products do
         member do
-          post :toggle_status
+          put :toggle_status
         end
       end
 
