@@ -77,6 +77,4 @@ describe User do
       expect(subject.orphan?).to eq false
     end
   end
-
-
 end
