@@ -23,6 +23,7 @@ FactoryGirl.define do
 
   factory :order do
     status 'pending'
+    user
   end
 
   factory :product do
@@ -31,6 +32,17 @@ FactoryGirl.define do
     description 'Hurts so good'
     price 12.99
     status 'active'
+  end
+
+  sequence :email do |n|
+    "uniqye_email_#{n}@email.com"
+  end
+
+  factory :user_2, class: User do 
+    full_name 'Raphael Weiner'
+    email 
+    display_name 'raphweiner'
+    password 'password'
   end
 
   factory :user do
