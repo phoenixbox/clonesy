@@ -13,32 +13,11 @@
   <%= yield(:head) %>
 </head>
 <body>
-  <header class="navbar navbar-fixed-top">
-    <nav class="navbar-inner">
-      <div class="container">
-        <%= render 'layouts/navigation' %>
-      </div>
-    </nav>
-  </header>
-  <% if request.fullpath == root_path %>
-    <%= render 'layouts/index' %>
-  <% end %>
   <div class="container">
-    <div class="content">
-      <div class="row">
-        <div class="span12">
-          <%= render 'layouts/messages' %>
-          <%= yield %>
-        </div>
-      </div>
-    </div> <!--! end of content-->
+    <%= render partial: 'layouts/main_navbar' %>
+    <%= yield %>
   </div>
-  <div id="footer">
-    <%= link_to(image_tag('github_25.png'), '/code', id: 'github') %>
-    <a href="/code">View the Source Code</a>
-    <br>
-    <p id="love">Made in Denver with love by Brad, Paul, Jorge and Raphael</p>
-    <br>
-  </div>
+
+  <%#= render partial: 'footer' %>
 </body>
 </html>

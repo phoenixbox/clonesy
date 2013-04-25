@@ -1,0 +1,10 @@
+<div class="row-fluid">
+  <div class="span6">
+    <%= image_tag "http://placehold.it/500x500", class: "img-polaroid" %>
+  </div>
+
+  <div class="span6">
+    <h2><%= link_to store.name, store_home_path(store) %></h2>
+    <p><%= store.description %></p>
+  </div>
+</div>

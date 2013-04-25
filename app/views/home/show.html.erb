@@ -1,0 +1,28 @@
+<div class="row-fluid">
+  <% @stores.each do |store, title| %>
+    <div class="span6">
+      <h3><%= title %></h3>
+
+      <div class="store-display">
+        <%= render partial: 'stores/featured_store', locals: {store: store} %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Featured Products:</h3>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <% @products.each do |product| %>
+    <div class="span3">
+      <div class="product-display">
+        <%= render partial: 'products/featured_product', locals: {product: product} %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%#= render partial: 'featured_products' %>
