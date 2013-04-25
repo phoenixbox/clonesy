@@ -9,12 +9,12 @@ describe UsersController do
   end
 
   describe "POST#create" do
-    
-    let(:valid_attributes) do {
-      user: {full_name: "John Smith", email: "example@example.com", password: "password", password_confirmation: "password"} }
+    let(:valid_attributes) do
+      { user: {full_name: "John Smith", email: "example@example.com", password: "password", password_confirmation: "password"} }
     end
-    let(:invalid_attributes) do {
-      user: {full_name: "", email: "example@example.com", password: "", password_confirmation: "password"} }
+
+    let(:invalid_attributes) do
+      { user: {full_name: "", email: "example@example.com", password: "", password_confirmation: "password"} }
     end
 
     context "with valid attributes" do
@@ -58,7 +58,6 @@ describe UsersController do
     # Blog Example
     # Controller -> Resque.enqueue(RailsBuild, @project.id)
     # Spec -> Resque.expects(:enqueue).with(RailsBuild, project.id).once
-      
 
     context "user is valid" do
       xit "welcome email is enqueued" do
@@ -90,7 +89,6 @@ describe UsersController do
     end
 
     context 'when a user is NOT logged in' do
-      render_views
       it 'redirects them to the home page' do
         get :show
         response.should redirect_to(root_path)
@@ -99,7 +97,6 @@ describe UsersController do
   end
 
   describe "PUT #update" do
-
     before :each do
       @user = FactoryGirl.create(:user)
       @user.uber_up
@@ -136,7 +133,5 @@ describe UsersController do
         response.should render_template("show")
       end
     end
-  
   end
-
 end
