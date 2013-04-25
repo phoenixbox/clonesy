@@ -34,6 +34,8 @@ group :development, :test do
   gem 'newrelic_rpm'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "bullet"
+  gem "ruby-growl", "~> 4.0"
 end
 
 group :test do

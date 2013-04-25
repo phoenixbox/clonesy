@@ -41,7 +41,7 @@ class Product < ActiveRecord::Base
     if Store.count > 0
       store_id = rand(Store.count) + 1
       store = Store.find(store_id)
-      store.products.limit(4)
+      store.products.includes(:store).limit(4)
     else
       []
     end
@@ -49,7 +49,7 @@ class Product < ActiveRecord::Base
 
   def self.recent
     if Product.count > 0
-      Product.order("created_at DESC").limit(6)
+      Product.includes(:store).order("created_at DESC").limit(6)
     else
       []
     end
