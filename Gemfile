@@ -13,6 +13,7 @@ gem 'validation-scopes'
 gem "resque", "~>1.24.0"
 gem 'faker', '~>1.1.2'
 gem 'kaminari'
+gem 'paperclip', "~> 3.0"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

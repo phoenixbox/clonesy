@@ -72,5 +72,29 @@ describe 'the admin products view', type: :feature do
     page.driver.put toggle_status_store_admin_product_path(@store, product)
     expect(product.reload.status).to eq 'active'
   end
+
+  describe "admin can upload/manage images" do
+    context "when admin creates product" do
+      it "can upload four images for product" do
+        click_button 'New Product'
+        fill_in "Title", with: 'something'
+        fill_in "Description", with: 'blah blah blah'
+        fill_in "Price", with: '1.99'
+        choose('active')
+        click_button "Upload Image"
+        
+        click_button "Submit"
+        expect(current_path).to eq store_admin_products_path(@store)
+      end
+
+
+
+
+
+
+
+
+    end
+  end
 end
 
