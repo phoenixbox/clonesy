@@ -39,7 +39,7 @@ class Product < ActiveRecord::Base
 
   def self.featured
     if Store.count > 0
-      store_id = rand(1..Store.count)
+      store_id = rand(Store.count) + 1
       store = Store.find(store_id)
       store.products.limit(4)
     else
