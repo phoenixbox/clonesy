@@ -41,7 +41,8 @@ class ApplicationController < ActionController::Base
   end
 
   def locale
-    I18n.locale = session[:i18n] || I18n.default_locale || :en
+    # I18n.locale = session[:i18n] || I18n.default_locale || :en
+    I18n.locale = :en
   end
 
   def flag

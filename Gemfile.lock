@@ -252,7 +252,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   factory_girl_rails
-  faker
+  faker (~> 1.1.2)
   guard-rspec
   jquery-rails
   kaminari
