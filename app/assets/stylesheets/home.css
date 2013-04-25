@@ -12,8 +12,11 @@
 input.search-query {
   width: 85%;
 }
-.etsy-button-color {
+.etsy-search-bar {
   background-color: #e6e6e6;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
 }
 #etsy-logo {
   background-color: #EE3A8C;
@@ -35,4 +38,12 @@ div.store-display {
 /* PRODUCT LOGIC */
 
 div.product-display {
+  background-color: white;
+}
+.prod-section {
+  padding-bottom: 10px;
+}
+
+.prod-price-section {
+  text-align: right;
 }
