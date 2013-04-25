@@ -70,7 +70,7 @@ describe Product do
     it 'assigns twelve most recent products from all stores' do
       Store.stub(:find).and_return(@store)
       stores = []
-      (1..12).each do |i|
+      (1..6).each do |i|
         stores << FactoryGirl.create(:product, store: @store)
       end
       expect(Product.recent).to match_array stores

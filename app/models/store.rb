@@ -49,11 +49,11 @@ class Store < ActiveRecord::Base
   end
 
   def self.featured
-    offset(rand(self.count)).first if self.count > 0
+    self.count > 0 ? offset(rand(self.count)).first : nil
   end
 
   def self.recent
-    self.order("created_at DESC").first if self.count > 0
+    self.count > 0 ? self.order("created_at DESC").first : nil
   end
 
   private

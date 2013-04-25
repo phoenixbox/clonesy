@@ -54,8 +54,8 @@ user2 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartla
 user2.uber_up
 
 # CREATE STORES
-store1 = Store.create!(name: "Bike", path: "bikes", description: "One word: Biketastic")
-store2 = Store.create!(name: "Bracelet", path: "bracelets", description: "Our Bracelets will make you cry with joy")
+store1 = Store.create!(name: "Bike", path: "bikes", description: "One word: Biketastic. Geoff doesn't think this is a terrific description, but we're going with it. Because we can. Yes, this is our site.")
+store2 = Store.create!(name: "Bracelet", path: "bracelets", description: "Our Bracelets will make you cry with joy. Geoff thinks this is overkill. Chelsea is frowning again. She says it's skepticism.")
 # store3 = Store.create!(name: "Paul's PB&Js", path: "pbj", description: "peanut-butter-jelly-time")
 # store4 = Store.create!(name: "Raphael's Rickshaws", path: "rick-roll-rickshaws", description: "rick roll up in this!")
 # store5 = Store.create!(name: "George's Cool Market", path: "cool-market", description: "it's market time")

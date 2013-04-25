@@ -1,0 +1,15 @@
+<a href="<%= store_product_path(product.store, product) %>">
+<%= image_tag gen_image_url(product.store.name.downcase, product.id) %>
+<div class="featured-text-section">
+  <h4><%= link_to product.title, store_product_path(product.store, product) %></h4>
+  <div class="prod-section row-fluid">
+    <div class="prod-store-section span6">
+      <span class="prod-store-text"><%= product.store.name %></span>
+    </div>
+
+    <div class="prod-price-section span6">
+      <span class="prod-price-text"><%= number_to_currency(product.price) %></span>
+    </div>
+  </div>
+</div>
+</a>

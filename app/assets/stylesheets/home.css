@@ -1,0 +1,60 @@
+/*ETSY NAV LOGIC*/
+.etsy-nav {
+  height: 70px;
+  text-align: center;
+}
+.etsy-nav > p, .etsy-nav > form {
+  padding-top: 20px;
+}
+.etsy-nav > a:hover {
+  text-decoration: none;
+}
+input.search-query {
+  width: 85%;
+}
+.etsy-search-bar {
+  background-color: #e6e6e6;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+#etsy-logo {
+  background-color: #EE3A8C;
+  font-family: Georgia;
+  font-size: 200%;
+  color: white;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  padding-top: 24px;
+}
+#account-text-section {
+  text-align: right;
+}
+
+/*HOME STORE LOGIC*/
+div.store-display {
+  background-color: white;
+}
+div.featured-text-section {
+  padding: 5px;
+}
+
+/* PRODUCT LOGIC */
+
+div.product-display {
+  background-color: white;
+}
+.prod-section {
+  padding-bottom: 10px;
+}
+
+.prod-price-section {
+  text-align: right;
+}
+
+/*FOOTER LOGIC*/
+footer {
+  text-align: center;
+  padding: 30px;
+}

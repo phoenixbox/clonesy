@@ -1,0 +1,14 @@
+<% if store %>
+<div class="row-fluid">
+  <div class="span6">
+    <%= image_tag gen_image_url(store.name.downcase, store.products.first.id), class: "img-polaroid" %>
+  </div>
+
+  <div class="span6">
+    <div class="featured-text-section">
+      <h4><%= link_to store.name, store_home_path(store) %></h4>
+      <p><%= store.description %></p>
+    </div>
+  </div>
+</div>
+<% end %>

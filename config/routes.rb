@@ -3,7 +3,7 @@ require 'resque/server'
 StoreEngine::Application.routes.draw do
   mount Resque::Server.new, at: "/resque"
 
-  root to: 'stores#index'
+  root to: 'homepage#show'
 
   get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
   put "/i18n" => "i18n#update"

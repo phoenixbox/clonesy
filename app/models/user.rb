@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     new(params)
   end
 
+  def first_name
+    full_name.split(' ').first
+  end
+
   def uber_up
     self.uber = true
     self.save

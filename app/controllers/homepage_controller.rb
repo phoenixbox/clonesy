@@ -1,6 +1,6 @@
 class HomepageController < ApplicationController
 
-  def index
+  def show
     @featured_products = Product.featured
     @featured_store = Store.featured
     @recent_store = Store.recent
