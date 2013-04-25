@@ -36,4 +36,17 @@ class Product < ActiveRecord::Base
       update_attributes(status: 'active')
     end
   end
+
+  def self.featured
+    if Store.count > 0
+      store_id = rand(1..Store.count)
+      store = Store.find(store_id)
+      store.products.limit(4)
+    end
+  end
+
+  def self.recent
+    Product.order("created_at DESC").limit(12)
+  end
+
 end

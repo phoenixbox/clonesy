@@ -18,9 +18,6 @@ describe 'Index page spec' do
       it 'has a search bar input with no contents' do
         expect(find_field('search-query').value).to eq nil
       end
-
-      xit 'has four featured products' do
-      end
     end
 
     context 'as a registered shopper' do
@@ -37,7 +34,6 @@ describe 'Index page spec' do
       end
     end
   end
-
 
   describe 'searching' do
   end

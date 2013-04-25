@@ -48,6 +48,14 @@ class Store < ActiveRecord::Base
     end
   end
 
+  def self.featured
+    offset(rand(self.count)).first if self.count > 0
+  end
+
+  def self.recent
+    self.order("created_at DESC").first if self.count > 0
+  end
+
   private
 
   def parameterize_path

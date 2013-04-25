@@ -89,4 +89,22 @@ describe Store do
       expect(subject.status).to eq 'pending'
     end
   end
+
+  describe '.featured' do
+    it 'selects a random store' do
+      s1 = FactoryGirl.create(:store)
+      s2 = FactoryGirl.create(:store)
+      featured = Store.featured
+      expect([s1, s2]).to include featured
+    end
+  end
+
+  describe '.recent' do
+    it 'select the most recently added store' do
+      s1 = FactoryGirl.create(:store)
+      s2 = FactoryGirl.create(:store)
+      recent = Store.recent
+      expect(recent).to eq s2
+    end
+  end
 end

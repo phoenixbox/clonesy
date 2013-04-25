@@ -55,6 +55,28 @@ describe Product do
     expect(product.categories.count).to eq 2
   end
 
+  describe '.featured_products' do
+    it 'assigns four random products from a random store' do
+      Store.stub(:find).and_return(@store)
+      p1 = FactoryGirl.create(:product, store: @store)
+      p2 = FactoryGirl.create(:product, store: @store)
+      p3 = FactoryGirl.create(:product, store: @store)
+      p4 = FactoryGirl.create(:product, store: @store)
+      expect(Product.featured).to match_array [p1, p2, p3, p4]
+    end
+  end
+
+  describe '.recent' do
+    it 'assigns twelve most recent products from all stores' do
+      Store.stub(:find).and_return(@store)
+      stores = []
+      (1..12).each do |i|
+        stores << FactoryGirl.create(:product, store: @store)
+      end
+      expect(Product.recent).to match_array stores
+    end
+  end
+
   describe '.toggle_status' do
     context 'on an active product' do
       it 'sets the status from active to retired' do
