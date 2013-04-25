@@ -11,7 +11,7 @@ gem 'sorcery'
 gem 'pg'
 gem 'validation-scopes'
 gem "resque", "~>1.24.0"
-gem 'faker'
+gem 'faker', '~>1.1.2'
 gem 'kaminari'
 
 group :assets do
@@ -37,7 +37,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'faker'
   gem 'guard-rspec'
   gem 'launchy'
 end

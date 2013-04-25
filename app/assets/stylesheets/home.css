@@ -3,7 +3,7 @@
   height: 70px;
   text-align: center;
 }
-.etsy-nav > p, .etsy-nav > form {
+.etsy-nav > form, a.etsy-nav  {
   padding-top: 20px;
 }
 .etsy-nav > a:hover {

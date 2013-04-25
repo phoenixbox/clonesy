@@ -18,12 +18,14 @@
 
   <div class='span3'>
     <div class='row-fluid'>
-      <div class='btn span6 etsy-nav'>
-        <p><%= link_to 'Signup', signup_path %></p>
-      </div>
-      <div class='btn span6 etsy-nav'>
-        <p><%= link_to 'Login', login_path %></p>
-      </div>
+      <% if logged_in? %>
+        <a class="btn span4 etsy-nav" href="#"><i class="icon-heart"></i></a>        
+        <a class="btn span4 etsy-nav" href="#"><i class="icon-user"></i></a>        
+        <a class="btn span4 etsy-nav" href="#"><i class="icon-gift"></i></a>        
+      <% else %>
+        <%= link_to 'Signup', signup_path, class: "btn span6 etsy-nav" %>
+        <%= link_to 'Login', login_path, class: "btn span6 etsy-nav" %>
+      <% end %>
     </div>
   </div>
 
@@ -33,7 +35,5 @@
     </form>
   </div>
 
-  <div class='span2 btn etsy-nav'>
-    <p><i class="icon-shopping-cart"></i> Cart</p>
-  </div>
+  <a class="btn span2 etsy-nav" href="<%= root_path %>"><i class="icon-shopping-cart"></i>Cart</a>        
 </div>
