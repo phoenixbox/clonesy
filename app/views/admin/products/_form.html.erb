@@ -1,6 +1,7 @@
-<%# TODO: Should have Photo URL here to edit? Requires change to our URL strategy %>
-
-<%= simple_form_for [current_store, :admin, @product] do |f| %>
+<%= simple_form_for [current_store, :admin, @product], :html => { :multipart => true }  do |f| %>
+  <%= f.simple_fields_for :image do |i| %>
+    <%= i.file_field :photo %>
+  <% end %>
   <%= f.input :title, input_html: { placeholder: t('placeholder.product.title') } %>
   <%= f.input :description, input_html: { placeholder: t('placeholder.product.description') } %>
   <%= f.input :price, wrapper: :prepend do %>
