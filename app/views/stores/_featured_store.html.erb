@@ -1,7 +1,9 @@
 <% if store %>
 <div class="row-fluid">
   <div class="span6">
+    <a href="<%= store_home_path(store) %>">
     <%= image_tag gen_image_url(store.name.downcase, store.products.first.id), class: "img-polaroid" %>
+    </a>
   </div>
 
   <div class="span6">

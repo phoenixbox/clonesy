@@ -1,1 +1,3 @@
-<%= image_tag gen_image_url(listing.store.name.downcase, listing.id), class: 'img-polaroid' %>
+<a href="<%= store_product_path(listing.store, listing)%>">
+  <%= image_tag gen_image_url(listing.store.name.downcase, listing.id), class: 'img-polaroid' %>
+</a>
