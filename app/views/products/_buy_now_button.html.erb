@@ -3,7 +3,8 @@
     <%= hidden_field_tag :product_id, product.id %>
     <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button btn-custom-lighten btn-block"
             data-key="pk_test_osSOH0LyEEACshdRsLjyvGSz"
-            data-image="<%= gen_image_url(7) %>"
+            // TODO: add store favicon or logo here
+            data-image=""
             data-name="<%= t('store.name') %>"
             data-label="<%= t('product.buynow') %>"
             data-amount="<%= product.price * 100 %>">
