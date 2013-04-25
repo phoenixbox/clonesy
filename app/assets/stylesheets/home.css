@@ -33,7 +33,9 @@ input.search-query {
 div.store-display {
   background-color: white;
 }
-
+div.featured-text-section {
+  padding: 5px;
+}
 
 /* PRODUCT LOGIC */
 
@@ -46,4 +48,10 @@ div.product-display {
 
 .prod-price-section {
   text-align: right;
+}
+
+/*FOOTER LOGIC*/
+footer {
+  text-align: center;
+  padding: 30px;
 }

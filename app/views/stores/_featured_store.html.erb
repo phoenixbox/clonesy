@@ -4,7 +4,9 @@
   </div>
 
   <div class="span6">
-    <h2><%= link_to store.name, store_home_path(store) %></h2>
-    <p><%= store.description %></p>
+    <div class="featured-text-section">
+      <h4><%= link_to store.name, store_home_path(store) %></h4>
+      <p><%= store.description %></p>
+    </div>
   </div>
 </div>
