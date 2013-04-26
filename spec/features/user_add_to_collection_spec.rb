@@ -15,6 +15,26 @@ describe "user adds product to collection" do
 
   context "given a user is logged in" do
 
+    context "given a user has not already made a collection" do
+
+      it "has an option to create a new collection" do
+        visit store_product_path(store, product)
+        within(:css, 'ul#collection-list'){
+          expect(page).to have_css('a#create-new')
+        }
+      end
+
+      it "when clicked 'create collection' redirects to collection#new page" do
+        visit store_product_path(store, product)
+        within(:css, 'ul#collection-list'){
+          click_link 'Create New Collection'
+        }
+        expect(current_path).to eq new_store_collection_path(store)
+      end
+
+
+    end
+
     context "given a user has already made a collection" do
 
       before do
@@ -32,12 +52,6 @@ describe "user adds product to collection" do
       end
     end
 
-    context "given a user has not already made a collection" do
-
-      it "has an option to create a new collection"
-      it "when clicked 'create collection' redirects to collection#new page"
-
-    end
 
 
   context "given a user is not logged in" do

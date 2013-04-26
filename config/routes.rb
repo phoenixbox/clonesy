@@ -43,6 +43,7 @@ StoreEngine::Application.routes.draw do
     post "/buy_now" => "checkouts#buy_now", as: :buy_now
 
     resources :products, only: [ :show ]
+    resources :collections
 
     resource :cart, only: [ :update, :show, :destroy ] do
       member do

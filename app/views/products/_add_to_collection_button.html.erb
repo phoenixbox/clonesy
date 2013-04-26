@@ -3,9 +3,9 @@
   <button class="btn dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" id="collection-list">
     <li>
-      <a href="#">Create New Collection</a>
+      <%= link_to "Create New Collection", new_store_collection_path(current_store), id: "create-new" %>
     </li>
   </ul>
 </div>
