@@ -2,7 +2,7 @@
 <tr>
   <td><%= image_tag cart_item.product.img.url(:medium) %></td>
   <td>
-    <h2><%= link_to cart_item.title,gen_ store_product_path(current_store, cart_item.product) %></h2>
+    <h2><%= link_to cart_item.title, store_product_path(current_store, cart_item.product) %></h2>
     <br>
     <%= cart_item.product.description %>
     <br>

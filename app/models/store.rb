@@ -1,5 +1,5 @@
 class Store < ActiveRecord::Base
-  attr_accessible :description, :name, :path, :theme
+  attr_accessible :description, :name, :path
   attr_accessible :status, as: :uber
 
   has_many :categories

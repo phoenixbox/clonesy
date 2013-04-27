@@ -1,0 +1,130 @@
+stores:
+  - name: 'Bike'
+    path: 'bike'
+    description: 'Handcrafted bicycles made in SF.'
+  - name: 'Bracelet'
+    path: 'bracelet'
+    description: 'Family owned knickknackery. We build custom treasures.'
+products:
+  bike:
+    - title: 'Folding Bicycle Hercules Auto Velo Bike Fold up German made'
+      description: |
+        Collectible folding bicycle vintage 1972 functional with original German case, labels printed in German Hercules Auto Velo Bike. The bicycle was lightly used and is in good condition and has not been out of the case since 1980.
+        Equipment/technical data:
+        -Size of frame: 30cm=11,81 inch. Space from seat post to head set (top tube, from center to center of tubes): 55cm=21,65 inch.
+        The frame is made of steel, weight - 12,20 kg.
+        -Wheels: 16 inch, Hubs: rear - Sachs Torpedo, front - Weco. Rims: Steel (chromed)
+        -Tires: Continental 16x1,75''
+        -head set: 1''
+        -Stem: Height: 135mm, length: 20mm
+        -Bar: made of steel, original
+        -fork: original
+        -brakes: rear - in Torpedo, front: Royal
+        -crank: Made of steel, length of arms: 165mm
+        -chain: original
+        -Shifters
+        -Brake levers: (only front) Weinmann
+        -Bottom bracket: ball bearings
+        -cassette sprocket: 1 speed
+        Contact us for more photos.
+        Send your shipping address for a custom shipping quote.
+      status: 'active'
+      price: 775
+      images:
+        - url: 'http://img1.etsystatic.com/013/0/6974363/il_570xN.426316265_6xmc.jpg'
+        - url: 'http://img1.etsystatic.com/015/0/6974363/il_570xN.426316333_hqd4.jpg'
+        - url: 'http://img1.etsystatic.com/013/0/6974363/il_570xN.426316393_cdhk.jpg'
+    - title: 'Bicycle Tie Bar'
+      description: |
+        Bicycle handstamped tie bar aluminum. One of several designs available in this aluminum tie bar the bicycle is perfect for anyone who's a bike enthusiast. Handstamped aluminum tie bar is given a brushed matt finish and tumbled for strength. Other designs available here http://www.etsy.com/shop/CallaToo?section_id=12157110 Perfect for groomsmen gifts.
+      status: 'active'
+      price: 18
+      images:
+        - url: 'http://img2.etsystatic.com/005/0/6848209/il_570xN.382536118_d0bb.jpg'
+        - url: 'http://img2.etsystatic.com/002/0/6848209/il_570xN.382535986_thi0.jpg'
+        - url: 'http://img3.etsystatic.com/006/0/6848209/il_570xN.382531599_oagd.jpg'
+        - url: 'http://img2.etsystatic.com/003/0/6848209/il_570xN.382536198_l24v.jpg'
+    - title: 'Waxed Canvas Pannier'
+      description: |
+        This bag has been made from waxed canvas and vegtable tanned leather, I love the combination of these materials.The natural leather has been treated with a wax finish and will darken beautifully with age.
+        I made it big enough for a small laptop or I-pad, and all your other necessaties.
+        This is perfect for your Spring and Summer pick nic.
+        The bag closes with a buckle and strap and is attached to the bike with a double buckle and strap.
+        There is a handle on top of the bag to carry the bag in hand.
+        The bag is made in fire-engine red waxed canvas, and has a closing flap in MOD olive green.
+        Fully lined with a blue cotton.
+        The size of this bag measures 30 cm tall and 38 cm wide, about 8cm deep
+        which is in inches, 11.8 inch tall and 14.9 inch wide and 3 deep
+        This bag is made with a lot of care and attention to detail in my home studio.
+      status: 'active'
+      price: 189.00
+      images:
+        - url: 'http://img0.etsystatic.com/011/2/6057565/il_570xN.443631476_6osb.jpg'
+        - url: 'http://img0.etsystatic.com/009/0/6057565/il_570xN.443631488_s1x8.jpg'
+        - url: 'http://img2.etsystatic.com/012/0/6057565/il_570xN.443631494_tipy.jpg'
+        - url: 'http://img0.etsystatic.com/009/0/6057565/il_570xN.443631536_5a5w.jpg'
+    - title: 'Leather Bike U-Lock Holster'
+      description: |
+        Finally a convenient and stylish way to carry your u-lock on your bicycle!
+        Inspired by Brooks saddles, I designed this holster after searching for months for a stylish, non-plastic way to carry my u-lock on my bike rather than in my bag, and refined the design on my bike commutes to ensure it stays put in a rattle-free way.
+        The u-lock holster has been featured on The Awesomer, Gear Culture, and Biped Fred.
+        Super-strong stitching keeps your lock tightly secured and rattle-free.
+        Hand-finished, hand-stitched thick leather holster attaches to your bike in two places on your front or rear rack using Chicago screws and a buckle closure.
+        It requires a flathead screwdriver to mount.
+        This u-lock holster is designed to fit the Kryptonite Evolution Mini-Evo 5 u-lock (or any lock with exterior dimensions approximately 5.5" wide crossbar x 7.25" long). U-lock companies include the inside dimensions of their u-locks in their specs rather than the outside (they measure the "hole" in the middle rather than the dimensions of the lock itself) - the Mini-5 is 5.5 x 7.25 on the outside and 3.25 x 5.5 on the inside.
+      status: 'active'
+      price: 73
+      images:
+        - url: 'http://img0.etsystatic.com/000/0/5676972/il_570xN.284908636.jpg'
+        - url: 'http://img0.etsystatic.com/000/0/5676972/il_570xN.284909464.jpg'
+        - url: 'http://img3.etsystatic.com/000/0/5676972/il_570xN.284782003.jpg'
+        - url: 'http://img0.etsystatic.com/000/0/5676972/il_570xN.164961592.jpg'
+    - title: 'Red Bike Business Card Case'
+      description: |
+        Metal Business Card Case Red Bike Bicycle Industrial Retro Style Metal Card Holder Men's Accessories & Gifts
+        Retro Industrial Design Style Shiny Nickel-Silver Plated Business Card Case / Credit Card Holder
+        Original Design Handcrafted By Cosmic Firefly Las Vegas
+        Limited Edition only a few pieces produced
+        • New
+        • Slender holds 10-12 standard size business cards
+        • The case itself is super shiny nickel silver plated metal with black perforated accent
+        • Raised Bicycle embellishment is red, black, and silver
+        • Size of case is 3 5/8 inches long by 2 1/4 inches wide by 3/8h of an inch thick
+        • Free black velour drawstring gift bag included for easy gift-giving
+        • We send all of our cases in a corrugated shipping box to arrive in perfect condition      status: 'active'
+      status: 'active'
+      price: 35
+      images:
+        - url: 'http://img3.etsystatic.com/008/1/5478368/il_570xN.376690383_53c8.jpg'
+        - url: 'http://img3.etsystatic.com/002/0/5478368/il_570xN.376690343_e83l.jpg'
+        - url: 'http://img2.etsystatic.com/006/0/5478368/il_570xN.376678842_lsxi.jpg'
+        - url: 'http://img2.etsystatic.com/000/0/5478368/il_570xN.235611250.jpg'
+    - title: 'Bike Planter in Teal'
+      description: |
+        Do you love riding your bike? What about plants? Bring your plants on an adventure and let them enjoy some sunshine and fresh air! If you’ve ever dreamed about attaching a plant to your bike, now you’re in luck! This bike planter is made using 3D printing technology, so not only will you be showing off your love of nature, but you’ll be participating in a little piece of the future.
+        This bike planter is created digitally with modeling software. It is then 3d printed out of nylon, hand dyed teal, and sealed with a UV protective varnish to protect the color. Due to the hand dying process, the color of this planter may vary slightly. This planter works best with a clipping from a succulent that has been allowed to take root or a large air plant.
+        This planter attaches firmly to your bike with an elastic nylon cord, and will fit snugly on most tube sizes. You’ll have to supply your own plant and bicycle to make your next adventure fully amazing!
+        Measures 2.3” tall, 1.4” wide, and 1” deep. This listing is for a teal bike planter with a yellow elastic cord. Directions for use are included with the planter. This item ships domestically via USPS Priority Mail, and internationally by USPS first class mail. This item is made to order, and takes about 2 weeks to ship. If you would like to use a different shipping method for this item, please contact me before ordering to arrange.      price: 35
+      status: 'active'
+      price: 45
+      images:
+        - url: 'http://img0.etsystatic.com/000/0/6170339/il_570xN.311474044.jpg'
+        - url: 'http://img1.etsystatic.com/000/0/6170339/il_570xN.311341309.jpg'
+        - url: 'http://img3.etsystatic.com/000/0/6170339/il_570xN.311341299.jpg'
+        - url: 'http://img1.etsystatic.com/000/0/6170339/il_570xN.310682145.jpg'
+  bracelet:
+    - title: 'Motion Sickness Anti Nausea Bracelets '
+      description: |
+        Fully adjustable black cotton band trimmed in blues and greens with blue rose.
+        Bracelets alleviate the symptoms associated with motion sickness, sea sickness, morning sickness, treatment related nausea, heartburn, indigestion, stomachaches, anxiety, and palpitations.
+        Bracelets (pair) are placed two fingers width from your wrist bone at pressure point P6 on both wrists (full directions enclosed). The effectiveness of these bracelets depends on proper placement of the pressure bead.
+        Bracelets are 5/8 inch in width. The material is soft and elasticated with a velcro closure for adjustability.
+        All designs are unique and may vary.
+        They are machine washable on delicate/handwash cycle. Please place in a lingerie bag for protection.
+      status: 'active'
+      price: 19.95
+      images:
+        - url: 'http://img2.etsystatic.com/012/0/6836338/il_570xN.447311686_2xkr.jpg'
+        - url: 'http://img3.etsystatic.com/016/0/6836338/il_570xN.447318063_4yir.jpg'
+        - url: 'http://img3.etsystatic.com/010/0/6836338/il_570xN.447318083_g71c.jpg'
+        - url: 'http://img3.etsystatic.com/012/0/6836338/il_570xN.447318119_70ey.jpg'

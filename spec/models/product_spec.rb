@@ -66,11 +66,19 @@ describe Product do
     expect(subject.categories.count).to eq 2
   end
 
+  it 'deletes associated images upon destroy' do
+    subject.images.new(data: File.new(Rails.root + 'spec/support/test_image.png'), product: subject)
+    subject.save
+
+    expect { subject.destroy }.to change { Image.count }.by -1
+  end
+
   describe '#img' do
-    it 'returns a the first product image or creates a new one if none available' do
+    it 'returns an object that responds to #url with or without an associated image' do
+      subject.images.new(data: File.new(Rails.root + 'spec/support/test_image.png'), product: subject)
       subject.save
-      Image.create(data: File.new(Rails.root + 'spec/support/test_image.png'), product: subject)
-      expect(subject.img).to eq subject.images.first.data
+
+      expect { subject.images.destroy }.to_not change { subject.img.respond_to?(:url) }.to false
     end
   end
 

@@ -1,51 +1,28 @@
+SEED_DATA = YAML.load_file('db/seeds.yml')
+
 def seed_products(store, count)
   count.times do |i|
-    begin
-      puts "Seeding product #{i} for store #{store.id}"
-      if store.name == 'Bike'
-        title = "Bicycle Wine Rack #{i}"
-        desc = "If you like wine and you like biking, you're going to love this. The handmade leather bicycle wine rack is perfect for taking wine with you on the go."
-      elsif store.name == 'Bracelet'
-        title = "Paracord Bracelet #{i}"
-        desc = "This is a Customizable Paracord Bracelet in Cobra Weave with an Infinity Charm attached. It is made with a curved black buckle. The finished bracelet will contain at least 8 feet of total paracord."
-      end
+    puts "Seeding product #{i} for store #{store.id}"
 
-      image = File.new(Rails.root + "app/assets/images/#{store.name.downcase}/#{store.name.downcase}_#{i + 1}.jpg")
-      product = store.products.create!(title: title,
-                                       description: desc,
-                                       status: 'active',
-                                       price: rand(2000) + 1)
-      Image.create!(data: image, product: product)
-    rescue
-      puts "Product name taken! Retrying."
-      retry
+    params = SEED_DATA['products'][store.path][i]
+    image_params = params.delete('images')
+
+    product = store.products.new(params)
+
+    image_params.each do |image_param|
+      product.images.new(data: URI.parse(image_param['url']))
     end
+
+    product.save!
   end
 end
 
 def seed_categories(store, count)
   count.times do |i|
-    begin
-      title = Faker::Lorem.words(2).join(" ")
-      store.categories.create!(title: title,
-                               store_id: store.id)
-      puts "Category #{title} created for Store #{store.id}"
-    rescue
-      puts "Category name taken! Retrying."
-      retry
-    end
-  end
-end
-
-
-def seed_users(count)
-  count.times do |i|
-    puts "seeding user #{i}"
-    User.create!(full_name: "full_name#{i}",
-                 password: "password",
-                 password_confirmation: "password",
-                 email: "user#{i}@example.com",
-                 display_name: "display_name#{i}")
+    title = Faker::Lorem.words(2).join(" ")
+    store.categories.create!(title: title,
+                             store_id: store.id)
+    puts "Category #{title} created for Store #{store.id}"
   end
 end
 
@@ -56,37 +33,20 @@ user2 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartla
 user2.uber_up
 
 # CREATE STORES
-store1 = Store.create!(name: "Bike", path: "bike", description: "Handcrafted bicycles made in SF.")
-store2 = Store.create!(name: "Bracelet", path: "bracelet", description: "Family owned knickknackery. We build custom treasures.")
-
-stores = [store1, store2]
+stores = SEED_DATA['stores'].map do |store_params|
+           Store.create!(store_params)
+         end
 
 # SET STORE STATUS
-store1.update_attributes({status: 'online'}, as: :uber)
-store2.update_attributes({status: 'online'}, as: :uber)
+stores.each do |store|
+  store.update_attributes({status: 'online'}, as: :uber)
+end
 
 # CREATE CATEGORIES
 # stores.each { |store| seed_categories(store, 10) }
 
 # CREATE PRODUCTS
 stores.each { |store| seed_products(store, 20) }
-
-# CREATE USERS
-# seed_users(100)
-
-# CREATE ROLES
-# stores.each do |store|
-#   ['admin', 'admin'].each do |role|
-#     begin
-#       UserStoreRole.create({user_id: rand(10_000),
-#                             store_id: store.id,
-#                             role: role}, as: :uber)
-#     rescue
-#       puts "Oy Vey! UserStoreRole exists. Retrying."
-#       retry
-#     end
-#   end
-# end
 
 # CREATE ORDERS
 # STATUSES = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
