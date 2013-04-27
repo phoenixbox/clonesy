@@ -1,10 +1,16 @@
 <%= simple_form_for [current_store, :admin, @product],
                     :html => { :multipart => true }  do |f| %>
   <%= f.simple_fields_for :images do |i| %>
-    <%= i.file_field :data_1 %>
+    <%= i.label 'Images <small>(Must be < 2MB)</small>' %>
+    <%= i.file_field :data_1, inline_label: 'Image 1' %>
+    <br>
     <%= i.file_field :data_2 %>
+    <br>
     <%= i.file_field :data_3 %>
+    <br>
     <%= i.file_field :data_4 %>
+    <br>
+    <br>
   <% end %>
   <%= f.input :title, input_html: { placeholder: t('placeholder.product.title') } %>
   <%= f.input :description, input_html: { placeholder: t('placeholder.product.description') } %>
