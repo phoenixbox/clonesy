@@ -19,6 +19,7 @@ StoreEngine::Application.routes.draw do
 
   scope path: "account", as: "account" do
     get "/orders" => "orders#index", as: :orders
+    get "/collections" => "collections#index", as: :collections
   end
 
   get "/orders/:guid" => "orders#show", as: :order
@@ -43,7 +44,6 @@ StoreEngine::Application.routes.draw do
     post "/buy_now" => "checkouts#buy_now", as: :buy_now
 
     resources :products, only: [ :show ]
-    resources :collections
 
     resource :cart, only: [ :update, :show, :destroy ] do
       member do

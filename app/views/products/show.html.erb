@@ -24,7 +24,9 @@
     <% if @product.status == 'active' %>
     <%= render partial: 'add_to_cart_button', locals: {product: @product} %> 
     <%= render partial: 'buy_now_button', locals: {product: @product} %>
-    <%= render partial: 'add_to_collection_button', locals: {product: @product} %>
+      <% if logged_in? %>
+        <%= render partial: 'add_to_collection_button', locals: {product: @product} %>
+      <% end%>
     <% else %>
     <p> Product is retired! </p>
     <% end %>

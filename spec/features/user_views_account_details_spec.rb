@@ -63,6 +63,35 @@ describe 'user account detail view' do
       end
     end
 
+    context 'when they click the link to go to their collections index' do
+      it "takes them to their collections index page" do
+        visit 'profile'
+        click_link 'Collections'
+        expect(current_path).to eq account_collections_path
+      end
+
+      context "when they are viewing their collections index" do
+
+        it "they can create new collection with valid information" do
+          visit account_collections_path
+          fill_in 'collection_name', with: 'bicycles'
+          fill_in 'collection_them', with: 'outdoors'
+          click_button "Create Collection"
+          expect(page).to have_content("Collection Created!")
+        end
+
+        xit "cannot create a new store with invalid information" do
+          visit account_collection_path
+          fill_in 'collection_name', with: ''
+          fill_in 'collection_them', with: 'outdoors'
+          click_button "Create Collection"
+          expect(page).to have_content("can't be blank")
+        end
+
+      end
+
+    end
+
     context 'when they click on a specific order link' do
       it 'takes them to a view of their specific order' do
         order = FactoryGirl.create(:order, user: @user)

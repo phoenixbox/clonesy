@@ -1,0 +1,5 @@
+<%= simple_form_for @collection do |f| %>
+    <%= f.input :name %>
+    <%= f.input :theme %>
+    <%= f.button :submit, t('submit'), class:"btn btn-success span2" %>
+<% end %>
