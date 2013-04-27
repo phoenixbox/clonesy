@@ -1,13 +1,12 @@
 SEED_DATA = YAML.load_file('db/seeds.yml')
 
-def seed_products(store, count)
-  count.times do |i|
+def seed_products(store)
+  SEED_DATA['products'][store.path].each_with_index do |product_params, i|
     puts "Seeding product #{i} for store #{store.id}"
 
-    params = SEED_DATA['products'][store.path][i]
-    image_params = params.delete('images')
+    image_params = product_params.delete('images')
 
-    product = store.products.new(params)
+    product = store.products.new(product_params)
 
     image_params.each do |image_param|
       product.images.new(data: URI.parse(image_param['url']))
@@ -46,7 +45,7 @@ end
 # stores.each { |store| seed_categories(store, 10) }
 
 # CREATE PRODUCTS
-stores.each { |store| seed_products(store, 20) }
+stores.each { |store| seed_products(store) }
 
 # CREATE ORDERS
 # STATUSES = ['pending', 'shipped', 'cancelled', 'returned', 'paid']

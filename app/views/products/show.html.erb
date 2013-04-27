@@ -2,8 +2,20 @@
   <h3><%= link_to @product.store.name, store_home_path(current_store) %></h3>
 
   <div class="prod_detail_img span6">
-    <!-- TODO: Refactor to partial and show thumbs -->
-    <%= image_tag @product.img.url(:large) %>
+    <!-- TODO: Refactor to partial -->
+    <div class="row">
+      <div class='main_image'>
+        <%= image_tag @product.img.url(:large),
+                      :class => 'pull-left' %>
+      </div>
+      <div class="span1">
+        <% @product.images.each_with_index do |image, i| %>
+          <%= image_tag image.data.url(:thumb),
+                        :'data-url' => @product.images[i].data.url(:large),
+                        :class => 'thumb' %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="prod_detail_text span5">
