@@ -67,6 +67,7 @@ StoreEngine::Application.routes.draw do
       resources :products do
         member do
           put :toggle_status
+          delete :destroy_image
         end
       end
 

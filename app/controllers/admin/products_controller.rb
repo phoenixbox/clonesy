@@ -3,7 +3,8 @@ class Admin::ProductsController < ApplicationController
   before_filter :find_product, only: [ :edit,
                                        :update,
                                        :destroy,
-                                       :toggle_status ]
+                                       :toggle_status,
+                                       :destroy_image ]
 
   def index
     @products = current_store.products.order('created_at DESC')
@@ -15,12 +16,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
-    images = params[:product].delete(:images)
-    @product = current_store.products.new(params[:product])
+    @product = current_store.products.new_with_images(params[:product])
 
     if @product.save
-      Image.batch_create(images.values, @product) if images
-
       redirect_to store_admin_products_path(current_store),
                   :notice => "Successfully created product."
     else
@@ -32,7 +30,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
-    if @product.update_attributes(params[:product])
+    if @product.update_attributes_with_images(params[:product])
       redirect_to store_admin_products_path(current_store),
                   :notice  => "Successfully updated product."
     else
@@ -50,6 +48,15 @@ class Admin::ProductsController < ApplicationController
     @product.toggle_status
     redirect_to store_admin_products_path(current_store),
                 :notice  => "Product status successfully set to '#{@product.status}'."
+  end
+
+  def destroy_image
+    image = @product.images.find(params[:image_id])
+    if image.destroy
+      head 200
+    else
+      head 404
+    end
   end
 
   private

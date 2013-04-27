@@ -67,7 +67,7 @@ describe Product do
   end
 
   it 'deletes associated images upon destroy' do
-    subject.images.new(data: File.new(Rails.root + 'spec/support/test_image.png'), product: subject)
+    subject.images.build(data: File.new(Rails.root + 'spec/support/test_image.png'))
     subject.save
 
     expect { subject.destroy }.to change { Image.count }.by -1
@@ -75,10 +75,18 @@ describe Product do
 
   describe '#img' do
     it 'returns an object that responds to #url with or without an associated image' do
-      subject.images.new(data: File.new(Rails.root + 'spec/support/test_image.png'), product: subject)
+      subject.images.build(data: File.new(Rails.root + 'spec/support/test_image.png'))
       subject.save
 
       expect { subject.images.destroy }.to_not change { subject.img.respond_to?(:url) }.to false
+    end
+  end
+
+  describe '#update_attributes_with_images' do
+    it 'updates product attributes' do
+      image = mock('Fake Image', :images => true)
+      subject.update_attributes_with_images({title: 'Neutral Eagle'})
+      expect(subject.title).to eq 'Neutral Eagle'
     end
   end
 
@@ -129,6 +137,22 @@ describe Product do
         product2 = FactoryGirl.create(:product, store: @store)
         product3 = FactoryGirl.create(:product, store: @store)
         expect(Product.by_category(nicknacks.id)).to match_array [product1, product2, product3]
+      end
+    end
+  end
+
+  describe '.new_with_images' do
+    context 'with one image and product attrs are valid' do
+      it 'instantiates a new product with images' do
+        params = {title: 'Bitter Cod',
+                  description: 'Yummy',
+                  status: 'active',
+                  price: 2.00,
+                  store_id: @store.id,
+                  images: {key: 1} }
+        Image.stub(:new).and_return(Image.new)
+        product = Product.new_with_images(params)
+        expect(product.images.length).to eq 1
       end
     end
   end

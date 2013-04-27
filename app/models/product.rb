@@ -43,6 +43,13 @@ class Product < ActiveRecord::Base
     images.present? ? images.first.data : Image.new.data
   end
 
+  def update_attributes_with_images(params)
+    images = params.delete(:images)
+    self.update_attributes(params).tap do |result|
+      Image.batch_build(images.values, self) if images && result
+    end
+  end
+
   def self.featured
     if Store.count > 0
       store_id = rand(Store.count) + 1
@@ -58,6 +65,13 @@ class Product < ActiveRecord::Base
       Product.includes(:store).order("created_at DESC").limit(6)
     else
       []
+    end
+  end
+
+  def self.new_with_images(params)
+    images = params.delete(:images)
+    new(params).tap do |product|
+      Image.batch_build(images.values, product) if images
     end
   end
 end

@@ -1,17 +1,26 @@
 <%= simple_form_for [current_store, :admin, @product],
                     :html => { :multipart => true }  do |f| %>
-  <%= f.simple_fields_for :images do |i| %>
-    <%= i.label 'Images <small>(Must be < 2MB)</small>' %>
-    <%= i.file_field :data_1, inline_label: 'Image 1' %>
-    <br>
-    <%= i.file_field :data_2 %>
-    <br>
-    <%= i.file_field :data_3 %>
-    <br>
-    <%= i.file_field :data_4 %>
-    <br>
+  <div class="image_management">
+  <%= f.simple_fields_for :images do |s| %>
+    <%= s.label 'Images <small>(Must be < 2MB)</small>' %>
+      <% (0..3).each do |i| %>
+        <% if @product.images[i] %>
+          <span class='admin-thumb'>
+            <%= image_tag @product.images[i].data.url(:thumb),
+                          :'data-image-id' => "#{@product.images[i].id}" %>
+            <div class='text-thumb'>
+              Delete?
+            </div>
+          </span>
+        <% else %>
+          <br>
+          <%= s.file_field "data_#{i}" %>
+        <% end %>
+      <% end %>
     <br>
   <% end %>
+</div>
+
   <%= f.input :title, input_html: { placeholder: t('placeholder.product.title') } %>
   <%= f.input :description, input_html: { placeholder: t('placeholder.product.description') } %>
   <%= f.input :price, wrapper: :prepend do %>

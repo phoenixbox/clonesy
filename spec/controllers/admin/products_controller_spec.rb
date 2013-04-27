@@ -34,15 +34,21 @@ describe Admin::ProductsController do
 
     context "with valid attributes" do
       it "saves the new product to the database" do
-        expect {
-          post :create, product: {title: 'trousers', price: 1.11, store_id: 1, description: 'abc', status: 'active'}}.to change(Product, :count).by(1)
+        Image.stub(:batch_build).and_return(true)
+        params = {title: 'trousers',
+                  price: 1.11,
+                  store_id: 1,
+                  description: 'abc',
+                  status: 'active',
+                  images: {key: 1}}
+        expect { post :create, product: params}.to change(Product, :count).by(1)
       end
 
       it "redirects to products#index of the current store" do
         post :create, product: {title: 'trousers', price: 1.11, store_id: 1, description: 'abc', status: 'active'}
         expect(response).to redirect_to(store_admin_products_path(@store))
       end
-    end    
+    end
 
     context "with invalid attributes" do
       it "does not save the new product to the database" do
@@ -115,6 +121,18 @@ describe Admin::ProductsController do
       put :toggle_status, id: @product, product: {status: 'retired'}
       @product.reload
       expect(@product.status).to eq 'retired'
+    end
+  end
+
+  describe 'DELETE#destroy_image' do
+    before :each do
+      @product = Product.create(title: 'product', price: 1.11, store_id: @store.id, description: 'abc', status: 'active')
+      @image = @product.images.create(data: File.new(Rails.root + 'spec/support/test_image.png'))
+    end
+
+    it "deletes the correct image" do
+      delete :destroy_image, id: @product, image_id: @image.id
+      expect { @product.reload }.to change { @product.images.length }.to(0).from(1)
     end
   end
 end

@@ -13,3 +13,18 @@
 .admin-product-index {
   margin: 30px;
 }
+
+.admin-thumb {
+  position: relative;
+}
+.text-thumb {
+  display: none;
+  position: absolute;
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  bottom: 0;
+  margin-left: 4px;
+  z-index: -1;
+}
+
