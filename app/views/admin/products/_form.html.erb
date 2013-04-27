@@ -1,6 +1,10 @@
-<%= simple_form_for [current_store, :admin, @product], :html => { :multipart => true }  do |f| %>
-  <%= f.simple_fields_for :image do |i| %>
-    <%= i.file_field :photo %>
+<%= simple_form_for [current_store, :admin, @product],
+                    :html => { :multipart => true }  do |f| %>
+  <%= f.simple_fields_for :images do |i| %>
+    <%= i.file_field :data_1 %>
+    <%= i.file_field :data_2 %>
+    <%= i.file_field :data_3 %>
+    <%= i.file_field :data_4 %>
   <% end %>
   <%= f.input :title, input_html: { placeholder: t('placeholder.product.title') } %>
   <%= f.input :description, input_html: { placeholder: t('placeholder.product.description') } %>

@@ -1,17 +1,19 @@
 class Product < ActiveRecord::Base
   attr_accessible :title,
                   :description,
-                  :price, :status,
+                  :price,
+                  :status,
                   :category_ids,
                   :categories,
                   :store_id
 
   has_and_belongs_to_many :categories
   belongs_to :store
-  has_many :images, validate: true, autosave: true
+  has_many :images
+  # , validate: true, autosave: true
 
-  accepts_nested_attributes_for :images
-  attr_accessible :image_attributes
+  # accepts_nested_attributes_for :images
+  # attr_accessible :image
 
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }

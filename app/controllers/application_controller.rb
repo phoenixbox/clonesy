@@ -41,8 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def locale
-    # I18n.locale = session[:i18n] || I18n.default_locale || :en
-    I18n.locale = :en
+    I18n.locale = session[:i18n] || I18n.default_locale || :en
   end
 
   def flag
@@ -57,5 +56,4 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
-
 end

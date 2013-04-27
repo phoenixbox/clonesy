@@ -2,7 +2,10 @@
   <h3><%= link_to @product.store.name, store_home_path(current_store) %></h3>
 
   <div class="prod_detail_img span6">
-    <p><%= image_tag gen_image_url(@product.store.name.downcase, @product.id) %></p>
+    <!-- TODO: Refactor to partial and show thumbs -->
+    <% @product.images.each do |image| %>
+      <%= image_tag image.data.url(:large) %>
+    <% end %>
   </div>
 
   <div class="prod_detail_text span5">

@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # TODO: Completely remove this horrible hack. kkthx
   def gen_image_url(store, id)
     if store == 'bike'
       "https://s3.amazonaws.com/dose/#{store}_#{id}.jpg"

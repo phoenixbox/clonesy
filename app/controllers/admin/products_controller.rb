@@ -15,8 +15,12 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
+    images = params[:product].delete(:images)
     @product = current_store.products.new(params[:product])
+
     if @product.save
+      Image.process_blob(images.values, @product) if images
+
       redirect_to store_admin_products_path(current_store),
         :notice => "Successfully created product."
     else
