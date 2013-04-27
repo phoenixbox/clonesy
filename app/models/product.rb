@@ -9,6 +9,9 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :store
 
+  has_many :collection_products
+
+
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }
   validates :description, presence: :true

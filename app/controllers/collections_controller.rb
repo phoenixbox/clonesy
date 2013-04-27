@@ -1,7 +1,7 @@
 class CollectionsController < ApplicationController
 
   def index
-    @collections = Collection.all
+    @collections = Collection.find_all_by_user_id(params[:id])
   end
 
   def new
@@ -29,5 +29,9 @@ class CollectionsController < ApplicationController
     redirect_to account_collections_path
   end
 
-
+  def add_product
+    collection = Collection.find(params[:id])
+    collection.add_product(params[:product_id])
+    redirect_to :back
+  end
 end

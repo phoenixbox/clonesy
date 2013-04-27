@@ -63,6 +63,16 @@ describe CollectionsController do
   end 
 
   describe "GET #index" do 
+
+    before(:each) do 
+      FactoryGirl.create(:collection, user_id: user.id)
+      FactoryGirl.create(:collection, user_id: 100)
+    end
+
+    it "renders an index of all user's collections" do 
+      get :index, id: user.id
+      expect(assigns(:collections).count).to eq 2
+    end
   end
 
   describe "DELETE #destroy" do 
@@ -75,5 +85,17 @@ describe CollectionsController do
   end
 
   describe "POST #add_product" do 
+
+    let!(:store){ FactoryGirl.create(:store) }
+    let!(:product){ FactoryGirl.create(:product, store_id: store.id ) }
+
+    before(:each) do 
+      @request.env['HTTP_REFERER'] = 'http://localhost:3000/'
+    end
+
+    it "adds a product to the user's collection" do
+      post :add_product, id: collection, product_id: product.id
+      expect(collection.products).to include(product)
+    end
   end
 end 
