@@ -19,10 +19,10 @@ class Admin::ProductsController < ApplicationController
     @product = current_store.products.new(params[:product])
 
     if @product.save
-      Image.process_blob(images.values, @product) if images
+      Image.batch_create(images.values, @product) if images
 
       redirect_to store_admin_products_path(current_store),
-        :notice => "Successfully created product."
+                  :notice => "Successfully created product."
     else
       render :action => 'new', :notice  => "Product creation failed."
     end
@@ -34,7 +34,7 @@ class Admin::ProductsController < ApplicationController
   def update
     if @product.update_attributes(params[:product])
       redirect_to store_admin_products_path(current_store),
-        :notice  => "Successfully updated product."
+                  :notice  => "Successfully updated product."
     else
       render :action => 'edit', :notice  => "Update failed."
     end
@@ -43,7 +43,7 @@ class Admin::ProductsController < ApplicationController
   def destroy
     @product.destroy
     redirect_to store_admin_products_path(current_store),
-      :notice => "Successfully destroyed product."
+                :notice => "Successfully destroyed product."
   end
 
   def toggle_status

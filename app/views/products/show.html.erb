@@ -3,9 +3,7 @@
 
   <div class="prod_detail_img span6">
     <!-- TODO: Refactor to partial and show thumbs -->
-    <% @product.images.each do |image| %>
-      <%= image_tag image.data.url(:large) %>
-    <% end %>
+    <%= image_tag @product.img.url(:large) %>
   </div>
 
   <div class="prod_detail_text span5">

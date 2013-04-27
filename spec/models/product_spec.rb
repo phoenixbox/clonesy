@@ -66,6 +66,14 @@ describe Product do
     expect(subject.categories.count).to eq 2
   end
 
+  describe '#img' do
+    it 'returns a the first product image or creates a new one if none available' do
+      subject.save
+      Image.create(data: File.new(Rails.root + 'spec/support/test_image.png'), product: subject)
+      expect(subject.img).to eq subject.images.first.data
+    end
+  end
+
   describe '.featured_products' do
     it 'assigns four random products from a random store' do
       Store.stub(:find).and_return(@store)
@@ -95,7 +103,7 @@ describe Product do
     end
   end
 
-  describe 'self.category id' do
+  describe '.category id' do
     context "on a product with a category_id" do
       it "finds the products by the category_id" do
         nicknacks = FactoryGirl.create(:category, title: 'nicknacks')

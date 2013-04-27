@@ -10,10 +10,12 @@ def seed_products(store, count)
         desc = "This is a Customizable Paracord Bracelet in Cobra Weave with an Infinity Charm attached. It is made with a curved black buckle. The finished bracelet will contain at least 8 feet of total paracord."
       end
 
-      store.products.create!(title: title,
-                             description: desc,
-                             status: 'active',
-                             price: rand(2000) + 1)
+      image = File.new(Rails.root + "app/assets/images/#{store.name.downcase}/#{store.name.downcase}_#{i + 1}.jpg")
+      product = store.products.create!(title: title,
+                                       description: desc,
+                                       status: 'active',
+                                       price: rand(2000) + 1)
+      Image.create!(data: image, product: product)
     rescue
       puts "Product name taken! Retrying."
       retry

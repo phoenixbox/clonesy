@@ -1,5 +1,5 @@
 <a href="<%= store_product_path(product.store, product) %>">
-<%= image_tag gen_image_url(product.store.name.downcase, product.id) %>
+<%= image_tag product.img.url(:large) %>
 <div class="featured-text-section">
   <h4><%= link_to product.title, store_product_path(product.store, product) %></h4>
   <div class="prod-section row-fluid">

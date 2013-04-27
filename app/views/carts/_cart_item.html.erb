@@ -1,21 +1,23 @@
 <% current_cart.each do |cart_item| %>
 <tr>
-  <td><%= image_tag gen_image_url(cart_item.product.store.name.downcase, cart_item.product.id) %></td>
+  <td><%= image_tag cart_item.product.img.url(:medium) %></td>
   <td>
-    <h2><%= link_to cart_item.title, store_product_path(current_store, cart_item.product) %></h2>
+    <h2><%= link_to cart_item.title,gen_ store_product_path(current_store, cart_item.product) %></h2>
     <br>
     <%= cart_item.product.description %>
     <br>
     <br>
     <%= link_to t('action.remove'),
-                remove_item_store_cart_path(
-                  current_store,
+                remove_item_store_cart_path(current_store,
                   product_id: cart_item.product.id),
-                confirm: t('confirm'), method: :put %>
+                confirm: t('confirm'),
+                method: :put %>
   </td>
   <td><%= number_to_currency(cart_item.unit_price) %></td>
   <td class="span2">
-    <%= simple_form_for :carts, url: store_cart_path(current_store), method: :put do |f| %>
+    <%= simple_form_for :carts,
+                        url: store_cart_path(current_store),
+                        method: :put do |f| %>
       <%= f.hidden_field :product_id, value: cart_item.product.id %>
       <%= f.input_field :quantity, value: cart_item.quantity, class: 'span2' %>
       <%= f.button :submit, t('crud.update'), class:'btn btn-block' %>

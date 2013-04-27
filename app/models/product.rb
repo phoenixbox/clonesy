@@ -10,10 +10,6 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :store
   has_many :images
-  # , validate: true, autosave: true
-
-  # accepts_nested_attributes_for :images
-  # attr_accessible :image
 
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }
@@ -43,6 +39,10 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def img
+    images.present? ? images.first.data : Image.new.data
+  end
+
   def self.featured
     if Store.count > 0
       store_id = rand(Store.count) + 1
@@ -60,5 +60,4 @@ class Product < ActiveRecord::Base
       []
     end
   end
-
 end
