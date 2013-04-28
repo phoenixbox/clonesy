@@ -4,7 +4,7 @@ stores:
     description: 'Handcrafted bicycles. Stylized after Paris, constructed in SF.'
   - name: 'Tryna Style'
     path: 'trynastyle'
-    description: 'California fashion house. Hella jewelry for hella gents.'
+    description: 'California fashion house. Hella design for hella gents.'
   # - name: 'Brace Yourself'
   #   path: 'braceyourself'
   #   description: 'Family owned knickknackery. We build custom treasures.'
