@@ -311,7 +311,7 @@ products:
       price: 42.00
       images:
         - url: 'http://img2.etsystatic.com/005/0/6075230/il_570xN.400999122_amit.jpg'
-        - url: 'http://img0.etsystatic.com/003/0/6075230/il_570xN.400999516_mdmc.jpghttp://img1.etsystatic.com/003/0/6075230/il_570xN.400994189_l2fa.jpg'
+        - url: 'http://img0.etsystatic.com/003/0/6075230/il_570xN.400999516_mdmc.jpg'
         - url: 'http://img1.etsystatic.com/003/0/6075230/il_570xN.400994189_l2fa.jpg'
         - url: 'http://img0.etsystatic.com/007/0/6075230/il_570xN.400999532_l164.jpg'
     - title: 'Mens Hat - mustard brown Corduroy'
