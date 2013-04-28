@@ -2,26 +2,29 @@ require 'spec_helper'
 
 describe Highlights do
   describe '.from_database' do
-    it 'primes Product.featured' do
-      Product.stub(:featured).and_return('featured products')
+    before(:each) do
+      Product.stub(:popular).and_return('popular products')
+      Product.stub(:recent).and_return('recent products')
+      Store.stub(:popular).and_return('popular store')
+      Store.stub(:recent).and_return('recent store')
+    end
+
+    it 'primes Product.popular' do
       highlights = Highlights.from_database
-      expect(highlights.featured_products).to eq 'featured products'
+      expect(highlights.popular_products).to eq 'popular products'
     end
 
     it 'primes Product.recent' do
-      Product.stub(:recent).and_return('recent products')
       highlights = Highlights.from_database
       expect(highlights.recent_products).to eq 'recent products'
     end
 
-    it 'primes Store.featured' do
-      Store.stub(:featured).and_return('featured store')
+    it 'primes Store.popular' do
       highlights = Highlights.from_database
-      expect(highlights.featured_store).to eq 'featured store'
+      expect(highlights.popular_store).to eq 'popular store'
     end
 
     it 'primes Store.recent' do
-      Store.stub(:recent).and_return('recent store')
       highlights = Highlights.from_database
       expect(highlights.recent_store).to eq 'recent store'
     end

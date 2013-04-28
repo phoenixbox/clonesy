@@ -1,23 +1,23 @@
 class Highlights
   def self.from_database
     new.tap do |highlights|
-      highlights.featured_products
+      highlights.popular_products
       highlights.recent_products
-      highlights.featured_store
+      highlights.popular_store
       highlights.recent_store
     end
   end
 
-  def featured_products
-    @featured_products ||= Product.featured
+  def popular_products
+    @popular_products ||= Product.popular
   end
 
   def recent_products
     @recent_products ||= Product.recent
   end
 
-  def featured_store
-    @featured_store ||= Store.featured
+  def popular_store
+    @popular_store ||= Store.popular
   end
 
   def recent_store

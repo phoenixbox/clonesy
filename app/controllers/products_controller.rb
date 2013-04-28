@@ -6,12 +6,14 @@ class ProductsController < ApplicationController
                   .by_category(params[:category_id]).active
                   .page(params[:page]).per(20)
     @categories = current_store.categories
+    current_store.increase_popularity
     session[:return_to] = request.fullpath
   end
 
   def show
     @store = current_store
     @product = current_store.products.find(params[:id])
+    @product.increase_popularity
     session[:return_to] = request.fullpath
   end
 end

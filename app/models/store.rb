@@ -48,16 +48,20 @@ class Store < ActiveRecord::Base
     end
   end
 
-  def self.featured
-    self.count > 0 ? offset(rand(self.count)).first : nil
+  def increase_popularity
+    LocalStore.increase_popularity(self)
+  end
+
+  def self.popular
+    popular_store = LocalStore.popular(self)
+    find(popular_store) if popular_store
   end
 
   def self.recent
     self.count > 0 ? self.order("created_at DESC").first : nil
   end
 
-  private
-
+private
   def parameterize_path
     self.path = path.parameterize
   end

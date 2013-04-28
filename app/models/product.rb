@@ -12,12 +12,16 @@ class Product < ActiveRecord::Base
 
   validates :title, presence: :true,
                     uniqueness: { case_sensitive: false }
+
   validates :description, presence: :true
+
   validates :status, presence: :true,
                      inclusion: { in: %w(active retired) }
+
   validates :price, presence: :true,
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
+
   validates :store_id, presence: true
 
   scope :active, lambda { where(status: 'active') }
@@ -50,22 +54,17 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def self.featured
-    if Store.count > 0
-      store_id = rand(Store.count) + 1
-      store = Store.find(store_id)
-      store.products.includes(:store).limit(4)
-    else
-      []
-    end
+  def increase_popularity
+    LocalStore.increase_popularity(self)
+  end
+
+  def self.popular
+    popular_products = LocalStore.popular(self)
+    Product.includes(:store).find(popular_products.map(&:to_i))
   end
 
   def self.recent
-    if Product.count > 0
-      Product.includes(:store).order("created_at DESC").limit(6)
-    else
-      []
-    end
+    Product.includes(:store).order("created_at DESC").limit(6) || []
   end
 
   def self.new_with_images(params)

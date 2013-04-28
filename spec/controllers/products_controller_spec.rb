@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe ProductsController do
-  
   describe 'GET #index' do
     it "index action should render index template" do
-      controller.stub(:current_store => FactoryGirl.create(:store))
+      store = FactoryGirl.create(:store)
+
+      controller.stub(current_store: store)
+      store.should_receive(:increase_popularity).and_return(true)
+
       get :index
       response.should render_template(:index)
     end
@@ -12,9 +15,12 @@ describe ProductsController do
 
   describe 'GET #show'do
    it "show action should render the show template" do
-      current_store = FactoryGirl.create(:store)
-      controller.stub(:current_store) { current_store }
-      product = FactoryGirl.create(:product, store: current_store)
+      store = FactoryGirl.create(:store)
+      product = FactoryGirl.create(:product, store: store)
+
+      controller.stub(current_store: store)
+      LocalStore.should_receive(:increase_popularity).and_return(true)
+
       get :show, id: product
       response.should render_template(:show)
     end

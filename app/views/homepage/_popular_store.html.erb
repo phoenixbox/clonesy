@@ -1,8 +1,9 @@
-<% if store %>
+<% if store && store.products.present? %>
 <div class="row-fluid">
   <div class="span6">
     <a href="<%= store_home_path(store) %>">
-    <%= image_tag store.products.sample.img.url(:large), class: "img-polaroid" if store.products.present? %>
+    <%= image_tag store.products.sample.img.url(:large),
+                  class: "img-polaroid" %>
     </a>
   </div>
 
