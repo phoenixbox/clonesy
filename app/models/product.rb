@@ -6,10 +6,9 @@ class Product < ActiveRecord::Base
                   :categories,
                   :store_id
 
+  has_and_belongs_to_many :collections
   has_and_belongs_to_many :categories
   belongs_to :store
-
-  has_many :collection_products
 
 
   validates :title, presence: :true,

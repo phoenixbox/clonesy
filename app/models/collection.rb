@@ -1,8 +1,8 @@
 class Collection < ActiveRecord::Base
   belongs_to :user
 
-  has_many :collection_products
-  has_many :products, through: :collection_products
+ 
+  has_and_belongs_to_many :products
 
   attr_accessible :name, :theme, :user_id
 
