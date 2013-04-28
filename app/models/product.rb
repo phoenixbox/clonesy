@@ -4,7 +4,6 @@ class Product < ActiveRecord::Base
                   :price,
                   :status,
                   :category_ids,
-                  :categories,
                   :store_id
 
   has_and_belongs_to_many :categories
@@ -47,6 +46,7 @@ class Product < ActiveRecord::Base
     images = params.delete(:images)
     self.update_attributes(params).tap do |result|
       Image.batch_build(images.values, self) if images && result
+      self.save
     end
   end
 

@@ -16,7 +16,7 @@ $(function () {
         },
         click: function () {
             var image_id = $(this).data('image-id');
-            $(this).parent().parent().append('<input id=product_images_data_' + image_id + ' name="product[image][data_' + image_id + ']" type="file"><br>');
+            $(this).parent().parent().append('<input id=product_images_data_' + image_id + ' name="product[images][data_' + image_id + ']" type="file"><br>');
             $(this).parent().remove();
 
             $.ajax({
