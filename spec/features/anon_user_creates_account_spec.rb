@@ -37,18 +37,22 @@ describe 'new user creates and edits account' do
         expect(current_path).to eq '/users'
       end
     end
-
   end
 
   describe 'signing in and out of account' do
     before(:each) do
+      mock_highlights = mock('Mock Highlight', popular_products: [],
+                                               recent_products: [],
+                                               popular_store: Store.new,
+                                              recent_store: Store.new)
+      Highlights.stub(:from_database).and_return(mock_highlights)
       signup_user
     end
 
     it 'allows them to log out of their account' do
       visit login_path
-      fill_in "Email", with: 'poetry@poetry.com'
-      fill_in "Password", with: "poet"
+      fill_in "sessions_email", with: 'poetry@poetry.com'
+      fill_in "sessions_password", with: "poet"
       click_button "Login"
       expect(current_path).to eq root_path
       click_link_or_button "Logout"

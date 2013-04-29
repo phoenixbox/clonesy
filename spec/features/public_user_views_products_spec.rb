@@ -6,7 +6,8 @@ feature "Public User Views Products" do
     before(:each) do
       @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store: @store)
-      visit store_home_path(@store, @product)
+      LocalStore.stub(:increase_popularity).and_return(true)
+      visit store_home_path(@store)
     end
 
     it "displays products" do
@@ -18,6 +19,7 @@ feature "Public User Views Products" do
     before(:each) do
       @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store: @store)
+      LocalStore.stub(:increase_popularity).and_return(true)
       visit store_product_path(@store, @product)
     end
 

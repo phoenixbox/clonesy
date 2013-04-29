@@ -90,19 +90,17 @@ describe Product do
     end
   end
 
-  describe '.featured_products' do
-    it 'assigns four random products from a random store' do
-      Store.stub(:find).and_return(@store)
+  describe '.popular' do
+    it 'delegates to LocalStore and returns products' do
       p1 = FactoryGirl.create(:product, store: @store)
       p2 = FactoryGirl.create(:product, store: @store)
-      p3 = FactoryGirl.create(:product, store: @store)
-      p4 = FactoryGirl.create(:product, store: @store)
-      expect(Product.featured).to match_array [p1, p2, p3, p4]
+      LocalStore.stub(:popular).and_return([p1.id, p2.id])
+      expect(Product.popular).to match_array [p1, p2]
     end
   end
 
   describe '.recent' do
-    it 'assigns twelve most recent products from all stores' do
+    it 'assigns six most recent products from all stores' do
       Store.stub(:find).and_return(@store)
       stores = []
       (1..6).each do |i|

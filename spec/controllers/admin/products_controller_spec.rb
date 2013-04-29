@@ -31,7 +31,6 @@ describe Admin::ProductsController do
   end
 
   describe 'POST#create' do
-
     context "with valid attributes" do
       it "saves the new product to the database" do
         Image.stub(:batch_build).and_return(true)

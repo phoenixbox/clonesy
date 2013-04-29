@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe "user adds product to collection" do
-
-  let!(:user){ FactoryGirl.create(:user) }
-  let(:store){ FactoryGirl.create(:store) }
-  let(:product){ FactoryGirl.create(:product, store_id: store.id) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:store) { FactoryGirl.create(:store) }
+  let!(:product) { FactoryGirl.create(:product, store_id: store.id) }
 
   before do
+    LocalStore.stub(:increase_popularity).and_return(true)
     visit '/login'
     fill_in 'sessions_email', with: 'raphael@example.com'
     fill_in 'sessions_password', with: 'password'
@@ -14,9 +14,7 @@ describe "user adds product to collection" do
   end
 
   context "given a user is logged in" do
-
     context "given a user has not already made a collection" do
-
       it "has an option to create a new collection" do
         visit store_product_path(store, product)
         within(:css, 'ul#collection-list'){
@@ -32,7 +30,7 @@ describe "user adds product to collection" do
         expect(current_path).to eq new_account_collection_path
       end
 
-      it "allows the user to create a new collection" do 
+      it "allows the user to create a new collection" do
         visit new_account_collection_path
         fill_in "collection_name", with: "Hats"
         fill_in "collection_theme", with: "Awesome Ones"

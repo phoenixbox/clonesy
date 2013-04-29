@@ -90,12 +90,12 @@ describe Store do
     end
   end
 
-  describe '.featured' do
-    it 'selects a random store' do
-      s1 = FactoryGirl.create(:store)
-      s2 = FactoryGirl.create(:store)
-      featured = Store.featured
-      expect([s1, s2]).to include featured
+  describe '.popular' do
+    it 'delegates to LocalStore.popular' do
+      subject.save
+      LocalStore.stub(:popular).and_return(subject.id)
+      popular = Store.popular
+      expect(popular).to eq subject
     end
   end
 
