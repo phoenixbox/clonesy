@@ -10,6 +10,10 @@ class Collection < ActiveRecord::Base
   validates :theme, presence: true
   validates :user_id, presence: true
 
+  def self.for_user(user)
+    user ? where(user_id: user.id).all : []
+  end
+
   def add_product(product_id)
     product = Product.find(product_id)
     self.products << product

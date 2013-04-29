@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @store = current_store
+    @collections = Collection.for_user(current_user)
     @product = current_store.products.find(params[:id])
     @product.increase_popularity
     session[:return_to] = request.fullpath
