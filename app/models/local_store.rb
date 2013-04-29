@@ -15,6 +15,7 @@ class LocalStore
 
   def self.popular(thing)
     key = key(thing, :popular)
+
     case thing.to_s
     when 'Product' then REDIS.zrevrange(key, 0, 3)
     when 'Store' then set = REDIS.zrevrange(key, 0, 0); set.present? ? set.first : nil
