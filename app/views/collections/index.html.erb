@@ -4,7 +4,13 @@
   <div class="span8">
     <h1><%= current_user.full_name %>'s Collections</h1>
     <% @collections.each do |collection| %>
+    <div class="row-fluid">
+    <div class="span8">
       <li><%= link_to collection.name, account_collection_path(collection) %></li>
-    <%end%>
+      <%= image_tag collection.sample_collection_image.url(:large),
+                    class: "img-polaroid" %>
+    </div>
+    <% end %>
   </div>
 </div>
+
