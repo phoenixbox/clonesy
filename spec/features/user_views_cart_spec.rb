@@ -38,7 +38,7 @@ describe 'the user cart view' do
     context 'the user wants to remove an item from the cart' do
       it 'gets removed' do
         click_button 'Empty Cart'
-        expect(current_path).to eq store_home_path(@store)
+        expect(current_path).to eq root_path
       end
     end
 

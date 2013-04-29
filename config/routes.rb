@@ -22,6 +22,16 @@ StoreEngine::Application.routes.draw do
     resources :collections
   end
 
+  resource :cart, only: [ :update, :show, :destroy ] do
+    member do
+      put :remove_item
+    end
+  end
+
+  get "/checkout" => "checkouts#show", as: :checkout
+  post "/checkout" => "checkouts#create", as: :checkout
+  post "/buy_now" => "checkouts#buy_now", as: :buy_now
+
   get "/orders/:guid" => "orders#show", as: :order
 
   resources :stores, only: [ :new, :create ]
@@ -39,20 +49,7 @@ StoreEngine::Application.routes.draw do
   scope "/:store_path", as: :store do
     get "/" => "products#index", as: :home
 
-    get "/checkout" => "checkouts#show", as: :checkout
-    post "/checkout" => "checkouts#create", as: :checkout
-    post "/buy_now" => "checkouts#buy_now", as: :buy_now
-
     resources :products, only: [ :show ]
-
-    resource :cart, only: [ :update, :show, :destroy ] do
-      member do
-        put :remove_item
-      end
-    end
-
-    get '/stock/products' => "admin/products#index", as: :stock_products
-    get '/stock/products/:id/edit' => "admin/products#edit", as: :stock_edit_product
 
     namespace :admin do
       get '/' => "dashboards#manage", as: :manage

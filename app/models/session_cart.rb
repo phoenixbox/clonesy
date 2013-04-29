@@ -1,12 +1,8 @@
 class SessionCart
 
-  def initialize(cart_contents, current_store)
-    @current_store = current_store
-
+  def initialize(cart_contents)
     @cart_contents = cart_contents
-    @cart_contents[@current_store.id] ||= Hash.new(0)
-
-    @cart = Cart.new(@cart_contents[@current_store.id])
+    @cart = Cart.new(@cart_contents)
   end
 
   def total
@@ -40,7 +36,6 @@ class SessionCart
 private
 
   def update_cart(cart_data)
-    @cart_contents[@current_store.id] = cart_data
+    @cart_contents = cart_data
   end
-
 end

@@ -5,8 +5,8 @@ describe Order do
   let(:store) { FactoryGirl.create(:store) }
   let(:user) { FactoryGirl.create(:user) }
   let(:product) { FactoryGirl.create(:product, store: store) }
-  let(:cart_contents) { {product.store_id => {product.id => 1} } }
-  let(:cart) { SessionCart.new(cart_contents, product.store) }
+  let(:cart_contents) { {product.id => 1} }
+  let(:cart) { SessionCart.new(cart_contents) }
 
   it 'has a valid factory' do
     expect(FactoryGirl.build(:order, user: user)).to be_valid

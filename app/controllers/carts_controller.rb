@@ -14,6 +14,7 @@ class CartsController < ApplicationController
 
   def destroy
     current_cart.destroy
-    redirect_to store_home_path(current_store), :notice  => "Cart cleared."
+    raise current_cart.inspect
+    redirect_to root_path, :notice  => "Cart cleared."
   end
 end

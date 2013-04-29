@@ -6,6 +6,10 @@ class CartItem
     @quantity = quantity
   end
 
+  def store
+    product.store
+  end
+
   def title
     product.title
   end

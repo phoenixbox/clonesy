@@ -7,8 +7,8 @@ describe CheckoutsController do
   let!(:user_billing) { FactoryGirl.create(:billing_address) }
   let(:store) { FactoryGirl.create(:store) }
   let!(:product) { FactoryGirl.create(:product, store: store) }
-  let(:cart_contents) { { product.store_id => { product.id => 1 } } }
-  let!(:cart) { SessionCart.new(cart_contents, product.store) }
+  let(:cart_contents) { { product.id => 1 } }
+  let!(:cart) { SessionCart.new(cart_contents) }
 
   describe "an unauthenticated user checks out" do
     let(:valid_attributes) { { user: {

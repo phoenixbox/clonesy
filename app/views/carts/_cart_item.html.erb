@@ -2,21 +2,21 @@
 <tr>
   <td><%= image_tag cart_item.product.img.url(:medium) %></td>
   <td>
-    <h2><%= link_to cart_item.title, store_product_path(current_store, cart_item.product) %></h2>
+    <h2><%= link_to cart_item.title, store_product_path(cart_item.store, cart_item.product) %></h2>
     <br>
     <%= cart_item.product.description %>
     <br>
     <br>
     <%= link_to t('action.remove'),
-                remove_item_store_cart_path(current_store,
-                  product_id: cart_item.product.id),
+                remove_item_cart_path(
+                product_id: cart_item.product.id),
                 confirm: t('confirm'),
                 method: :put %>
   </td>
   <td><%= number_to_currency(cart_item.unit_price) %></td>
   <td class="span2">
     <%= simple_form_for :carts,
-                        url: store_cart_path(current_store),
+                        url: cart_path,
                         method: :put do |f| %>
       <%= f.hidden_field :product_id, value: cart_item.product.id %>
       <%= f.input_field :quantity, value: cart_item.quantity, class: 'span2' %>
