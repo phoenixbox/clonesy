@@ -5,7 +5,11 @@ class LocalStore
     REDIS.pipelined do
       ensure_ttl(key)
 
-      REDIS.zscore(key, thing.id) ? REDIS.zincrby(key, 1, thing.id) : REDIS.add(key, id)
+      if REDIS.zscore(key, thing.id)
+        REDIS.zincrby(key, 1, thing.id)
+      else
+        REDIS.add(key, thing.id)
+      end
     end
   end
 
@@ -23,6 +27,6 @@ private
   end
 
   def self.ensure_ttl(key)
-    REDIS.expire(86400) if REDIS.ttl(key) == -1
+    REDIS.expire(key, 86400) if REDIS.ttl(key) == -1
   end
 end
