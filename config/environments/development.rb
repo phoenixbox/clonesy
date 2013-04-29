@@ -41,6 +41,7 @@ StoreEngine::Application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
   end
+
 end
 
 ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
