@@ -92,33 +92,28 @@ describe Product do
 
   describe '.popular' do
     it 'delegates to LocalStore and returns products' do
-      p1 = FactoryGirl.create(:product, store: @store)
-      p2 = FactoryGirl.create(:product, store: @store)
-      LocalStore.stub(:popular).and_return([p1.id, p2.id])
-      expect(Product.popular).to match_array [p1, p2]
+      products = (1..2).map { FactoryGirl.create(:product, store: @store) }
+      LocalStore.stub(:popular).and_return(products.map(&:id))
+      expect(Product.popular).to match_array products
     end
   end
 
   describe '.recent' do
-    it 'assigns six most recent products from all stores' do
-      Store.stub(:find).and_return(@store)
-      stores = []
-      (1..6).each do |i|
-        stores << FactoryGirl.create(:product, store: @store)
-      end
-      expect(Product.recent).to match_array stores
+    it 'assigns the six most recent products from all stores' do
+      products = (1..7).map { FactoryGirl.create(:product, store: @store) }
+      expect((Product.recent & products).count).to eq 6
     end
   end
 
   describe '.toggle_status' do
-    it 'sets toggles the status from active to retired and back' do
+    it 'toggles status from active to retired and back' do
       expect { subject.toggle_status }.to change { subject.status }.to('retired')
       expect { subject.toggle_status }.to change { subject.status }.to('active')
     end
   end
 
   describe '.category id' do
-    context "on a product with a category_id" do
+    context "with a category_id" do
       it "finds the products by the category_id" do
         nicknacks = FactoryGirl.create(:category, title: 'nicknacks')
         product1 = FactoryGirl.create(:product, store: @store, categories: [nicknacks] )
@@ -128,19 +123,16 @@ describe Product do
       end
     end
 
-    context "on a product without a category_id" do
+    context "without a category_id" do
       it "doesn't apply a category filter" do
-        nicknacks = FactoryGirl.build(:category, title: 'nicknacks')
-        product1 = FactoryGirl.create(:product, store: @store)
-        product2 = FactoryGirl.create(:product, store: @store)
-        product3 = FactoryGirl.create(:product, store: @store)
-        expect(Product.by_category(nicknacks.id)).to match_array [product1, product2, product3]
+        products = (1..3).map { FactoryGirl.create(:product, store: @store) }
+        expect(Product.by_category(nil)).to match_array products
       end
     end
   end
 
   describe '.new_with_images' do
-    context 'with one image and product attrs are valid' do
+    context 'with one image and valid product attributes' do
       it 'instantiates a new product with images' do
         params = {title: 'Bitter Cod',
                   description: 'Yummy',
