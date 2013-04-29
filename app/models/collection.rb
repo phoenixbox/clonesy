@@ -1,7 +1,7 @@
 class Collection < ActiveRecord::Base
   belongs_to :user
 
- 
+
   has_and_belongs_to_many :products
 
   attr_accessible :name, :theme, :user_id
@@ -18,4 +18,7 @@ class Collection < ActiveRecord::Base
     self.products.destroy(product)
   end
 
+  def self.for_user(user)
+    user ? where(user_id: user.id).all : []
+  end
 end
