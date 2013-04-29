@@ -8,6 +8,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    if current_user
+    @collections = current_user.collections.all
+    end
     @store = current_store
     @product = current_store.products.find(params[:id])
     session[:return_to] = request.fullpath

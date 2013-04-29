@@ -1,9 +1,14 @@
 <div class="btn-group">
-  <button class="btn">Add to Collection</button>
-  <button class="btn dropdown-toggle" data-toggle="dropdown">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    Add to Collection
     <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" id="collection-list">
+  </a>
+  <ul class="dropdown-menu">
+    <% @collections.each do |collection|%>
+    <li>
+      <%= link_to collection.name, add_product_account_collection_path(collection.id, product.id), method: :put %>
+    </li>
+    <% end %>
     <li>
       <%= link_to "Create New Collection", new_account_collection_path, id: "create-new" %>
     </li>

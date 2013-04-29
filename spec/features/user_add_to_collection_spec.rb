@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "user adds product to collection" do
 
   let!(:user){ FactoryGirl.create(:user) }
-  let(:store){ FactoryGirl.create(:store) }
+  let!(:store){ FactoryGirl.create(:store) }
   let(:product){ FactoryGirl.create(:product, store_id: store.id) }
 
   before do
@@ -19,14 +19,14 @@ describe "user adds product to collection" do
 
       it "has an option to create a new collection" do
         visit store_product_path(store, product)
-        within(:css, 'ul#collection-list'){
+        within(:css, 'ul.dropdown-menu'){
           expect(page).to have_css('a#create-new')
         }
       end
 
       it "when clicked 'create collection' redirects to collection#INDEX page" do
         visit store_product_path(store, product)
-        within(:css, 'ul#collection-list'){
+        within(:css, 'ul.dropdown-menu'){
           click_link 'Create New Collection'
         }
         expect(current_path).to eq new_account_collection_path
@@ -51,20 +51,22 @@ describe "user adds product to collection" do
         fill_in 'sessions_email', with: 'raphael@example.com'
         fill_in 'sessions_password', with: 'password'
         click_button 'Login'
-        collection.products << product
       end
 
-      xit "adds the product to the users chosen collection" do
+      it "adds the product to the users chosen collection" do
         visit store_product_path(store, product)
-        click_on "account/collections/#{collection.id}"
-        collections.reload
-        expect(collection.products).to include(product)
+        click_link collection.name
+        expect(page).to have_content "Product added to the #{collection.name} collection"
       end
 
-      it "re-renders the product#show page"
+      it "re-renders the product#show page" do
+        visit store_product_path(store, product)
+        click_link collection.name
+        expect(current_path).to eq store_product_path(store, product)
       end
+
     end
-
+  end
 
 
   context "given a user is not logged in" do
@@ -72,4 +74,5 @@ describe "user adds product to collection" do
     it "when clicked 'create collection' redirects to session#new"
 
   end
+
 end

@@ -33,6 +33,7 @@ class CollectionsController < ApplicationController
   def add_product
     collection = Collection.find(params[:id])
     collection.add_product(params[:product_id])
+    flash[:notice] = "Product added to the #{collection.name} collection!"
     redirect_to :back
   end
 
