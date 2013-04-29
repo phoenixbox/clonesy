@@ -6,7 +6,7 @@ describe "user adds product to collection" do
   let(:store){ FactoryGirl.create(:store) }
   let(:product){ FactoryGirl.create(:product, store_id: store.id) }
 
-  before(:each) do
+  before do
     visit '/login'
     fill_in 'sessions_email', with: 'raphael@example.com'
     fill_in 'sessions_password', with: 'password'
@@ -24,28 +24,41 @@ describe "user adds product to collection" do
         }
       end
 
-      it "when clicked 'create collection' redirects to collection#new page" do
+      it "when clicked 'create collection' redirects to collection#INDEX page" do
         visit store_product_path(store, product)
         within(:css, 'ul#collection-list'){
           click_link 'Create New Collection'
         }
-        expect(current_path).to eq new_store_collection_path(store)
+        expect(current_path).to eq new_account_collection_path
       end
 
-
+      it "allows the user to create a new collection" do 
+        visit new_account_collection_path
+        fill_in "collection_name", with: "Hats"
+        fill_in "collection_theme", with: "Awesome Ones"
+        click_button 'Submit'
+        expect(current_path).to eq account_collections_path
+        expect(page).to have_content("Hats")
+      end
     end
 
     context "given a user has already made a collection" do
 
+      let!(:collection) { FactoryGirl.create(:collection, user_id: user.id) }
+
       before do
+        visit '/login'
+        fill_in 'sessions_email', with: 'raphael@example.com'
+        fill_in 'sessions_password', with: 'password'
+        click_button 'Login'
+        collection.products << product
       end
 
-      it "adds the product to the users chosen collection" do
-        pending
-        collection = Collection.new(name: "first_collection", user_id: user.id) 
-        visit product_path(product)
-        collection_link = find_field('Add to Collection').find('option[collection.name]') 
-        expect(collection_link).to be
+      xit "adds the product to the users chosen collection" do
+        visit store_product_path(store, product)
+        click_on "account/collections/#{collection.id}"
+        collections.reload
+        expect(collection.products).to include(product)
       end
 
       it "re-renders the product#show page"

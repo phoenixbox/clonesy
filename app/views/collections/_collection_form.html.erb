@@ -1,5 +1,6 @@
-<%= simple_form_for @collection do |f| %>
+<%= simple_form_for @collection, url: account_collections_path do |f| %>
     <%= f.input :name %>
     <%= f.input :theme %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.button :submit, t('submit'), class:"btn btn-success span2" %>
 <% end %>

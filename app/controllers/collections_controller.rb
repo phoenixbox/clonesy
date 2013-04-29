@@ -1,10 +1,11 @@
 class CollectionsController < ApplicationController
 
   def index
-    @collections = Collection.find_all_by_user_id(params[:id])
+    @collections = current_user.collections.all
   end
 
   def new
+    @collection = Collection.new
   end
 
   def update
@@ -15,7 +16,7 @@ class CollectionsController < ApplicationController
 
   def create
     @collection = Collection.create(params[:collection])
-    render 'index'
+    redirect_to account_collections_path
   end
 
   def show
@@ -33,5 +34,11 @@ class CollectionsController < ApplicationController
     collection = Collection.find(params[:id])
     collection.add_product(params[:product_id])
     redirect_to :back
+  end
+
+  def remove_product
+    collection = Collection.find(params[:id])
+    collection.remove_product(params[:product_id])
+    redirect_to :back 
   end
 end

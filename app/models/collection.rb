@@ -12,4 +12,10 @@ class Collection < ActiveRecord::Base
     product = Product.find(product_id)
     self.products << product
   end
+
+  def remove_product(product_id)
+    product = Product.find(product_id)
+    self.products.destroy(product)
+  end
+
 end

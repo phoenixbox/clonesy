@@ -3,7 +3,8 @@
 
   <div class="span8">
     <h1><%= current_user.full_name %>'s Collections</h1>
-
-  <%= render 'collection_form'%>
+    <% @collections.each do |collection| %>
+      <li><%= link_to collection.name, account_collection_path(collection) %></li>
+    <%end%>
   </div>
 </div>

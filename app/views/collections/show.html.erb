@@ -1,0 +1,10 @@
+<div class="user-index">
+  <%= render partial: '/users/user_navigation', locals: { active: :account_details } %>
+
+  <div class="span8">
+    <h1><%= @collection.name %></h1>
+    <% @collection.products.each do |product|%>
+    <%= product.title %>
+    <% end %>
+  </div>
+</div>
