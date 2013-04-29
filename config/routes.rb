@@ -19,6 +19,7 @@ StoreEngine::Application.routes.draw do
 
   scope path: "account", as: "account" do
     get "/orders" => "orders#index", as: :orders
+    resources :collections
   end
 
   get "/orders/:guid" => "orders#show", as: :order

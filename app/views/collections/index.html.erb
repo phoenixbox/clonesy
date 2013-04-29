@@ -1,0 +1,10 @@
+<div class="user-index">
+  <%= render partial: '/users/user_navigation', locals: { active: :account_details } %>
+
+  <div class="span8">
+    <h1><%= current_user.full_name %>'s Collections</h1>
+    <% @collections.each do |collection| %>
+      <li><%= link_to collection.name, account_collection_path(collection) %></li>
+    <%end%>
+  </div>
+</div>

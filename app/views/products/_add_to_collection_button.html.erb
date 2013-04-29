@@ -1,0 +1,11 @@
+<div class="btn-group">
+  <button class="btn">Add to Collection</button>
+  <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" id="collection-list">
+    <li>
+      <%= link_to "Create New Collection", new_account_collection_path, id: "create-new" %>
+    </li>
+  </ul>
+</div>

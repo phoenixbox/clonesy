@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   has_many :user_store_roles
   has_many :stores, through: :user_store_roles
 
+  has_many :collections
+
   def self.new_guest(params=nil)
     params ||= {}
     params[:full_name] = "Guest"

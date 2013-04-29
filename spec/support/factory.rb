@@ -1,7 +1,7 @@
 FactoryGirl.define do
 
   sequence :name do |n|
-    "unique_store_#{n}"
+    "unique_#{n}"
   end
 
   sequence :title do |n|
@@ -31,6 +31,11 @@ FactoryGirl.define do
     description 'Hurts so good'
     price 12.99
     status 'active'
+  end
+
+  factory :collection do
+    name
+    theme "outdoors"
   end
 
   factory :user do
