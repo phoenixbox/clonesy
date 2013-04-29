@@ -92,20 +92,15 @@ describe Product do
 
   describe '.popular' do
     it 'delegates to LocalStore and returns products' do
-      p1 = FactoryGirl.create(:product, store: @store)
-      p2 = FactoryGirl.create(:product, store: @store)
-      LocalStore.stub(:popular).and_return([p1.id, p2.id])
-      expect(Product.popular).to match_array [p1, p2]
+      products = (1..2).map { FactoryGirl.create(:product, store: @store) }
+      LocalStore.stub(:popular).and_return(products.map(&:id))
+      expect(Product.popular).to match_array products
     end
   end
 
   describe '.recent' do
     it 'assigns six most recent products from all stores' do
-      Store.stub(:find).and_return(@store)
-      stores = []
-      (1..6).each do |i|
-        stores << FactoryGirl.create(:product, store: @store)
-      end
+      stores = (1..6).map { FactoryGirl.create(:product, store: @store) }
       expect(Product.recent).to match_array stores
     end
   end
