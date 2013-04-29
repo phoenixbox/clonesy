@@ -108,7 +108,7 @@ describe CollectionsController do
     before(:each) do
       collection.add_product(product)
       @request.env['HTTP_REFERER'] = 'http://localhost:3000/'
-    endgit ad
+    end
 
     it "removes the product from the collection" do
       delete :remove_product, id: collection, product_id: product.id
