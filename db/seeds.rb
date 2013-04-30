@@ -28,8 +28,10 @@ end
 # THE USUAL SUSPECS / UBERS
 user1 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
 user1.uber_up
+Collection.create(name: "favorites", user: user1)
 user2 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
 user2.uber_up
+Collection.create(name: "favorites", user: user2)
 
 # CREATE STORES
 stores = SEED_DATA['stores'].map do |store_params|

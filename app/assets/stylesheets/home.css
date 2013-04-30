@@ -21,7 +21,7 @@ input.search-query {
 #etsy-logo {
   background-color: #EE3A8C;
   font-family: Georgia;
-  font-size: 200%;
+  font-size: 150%;
   color: white;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -44,6 +44,11 @@ div.featured-text-section {
 
 div.product-display {
   background-color: white;
+  display: relative;
+}
+div.product-favorite {
+  display: none;
+  color: pink;
 }
 .prod-section {
   padding-bottom: 10px;
