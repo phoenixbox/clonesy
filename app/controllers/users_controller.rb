@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   private
 
   def create_favorites_collection(user)
-    Collection.create(name: "favorites", theme: "favorites", user_id: user.id)
+    Collection.create(name: "favorites", user: user)
   end
 
   def enqueue_welcome_email(email,full_name)

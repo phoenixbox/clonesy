@@ -14,7 +14,7 @@ describe User do
 
     it "can find the user's 'favorites' collection" do 
       subject.save!
-      collection = Collection.create(name: "favorites", theme: "favorites", user_id: subject.id)
+      collection = Collection.create(name: "favorites", user: subject)
       expect(subject.favorites).to be
     end
   end
