@@ -1,5 +1,6 @@
 <div class="user-index">
-  <%= render partial: '/users/user_navigation', locals: { active: nil } %>
+  <% @collection.id == current_user.favorites.id ? local = :favorites : nil %>
+  <%= render partial: '/users/user_navigation', locals: { active: local } %>
 
   <div class="span8">
     <h1><%= @collection.name %></h1>

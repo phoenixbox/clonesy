@@ -35,5 +35,10 @@
     </form>
   </div>
 
-  <a class="btn span2 etsy-nav" href="<%= cart_path %>"><i class="icon-shopping-cart"></i>Cart</a>        
+  <a class="btn span2 etsy-nav" href="<%= cart_path %>"><i class="icon-shopping-cart"></i>
+     Cart
+    <% unless current_cart.empty? %>
+      <%= current_cart.count %>
+    <% end %>
+  </a>        
 </div>
