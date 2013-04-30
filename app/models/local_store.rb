@@ -26,21 +26,27 @@ class LocalStore
     else nil; end
   end
 
-private
-
-#key of the store/product, value is the ip address. 
-
-  def unique_user?(thing, user)  
-    if REDIS.sismember("store_#{thing.id}", user) == 1 || REDIS.sismember("product_#{thing.id}", user) == 1
+  def self.unique_user?(thing, user)  
+    if visited?(thing, user)
       false
     else
-      REDIS.sadd store_visitors(user)
+      add_visitor(thing, user)
       true
     end
   end
 
-  def store_visitors(thing)
-    REDIS.key thing || REDIS.add thing
+private
+
+  def self.visited?(thing, user)
+    REDIS.sismember("store:#{thing.id}", user) == 1 || REDIS.sismember("product:#{thing.id}", user) == 1
+  end
+
+  def self.add_visitor(thing, user)
+    if thing.class == Product
+      REDIS.sadd("store:#{thing.id}", user)
+    else
+      REDIS.sadd("product:#{thing.id}", user) 
+    end
   end
 
   def self.key(thing, qualifier)
