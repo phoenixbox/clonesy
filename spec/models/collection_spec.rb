@@ -1,22 +1,17 @@
 require 'spec_helper'
 
 describe Collection do
-
   let!(:user){ FactoryGirl.create(:user) }
-  
-  it "validates presence of collection name" do
-    Collection.create(theme: "a_theme", user_id: user.id)
-    expect(Collection.count).to eq 0
+
+  subject do
+    user.collections.create(name: 'Hotness')
   end
 
-  it "validates presence of collection theme" do 
-    Collection.create(name: 'collection', user_id: user.id)
-    expect(Collection.count).to eq 0
+  it "requires a name" do
+    expect { subject.name = '' }.to change { subject.valid? }.to(false)
   end
 
-  it "validates presence of collection's user" do
-    Collection.create(name: "a_name", theme: "a_theme")
-    expect(Collection.count).to eq 0 
+  it "requires a user" do
+    expect { subject.user = nil }.to change { subject.valid? }.to(false)
   end
-
 end

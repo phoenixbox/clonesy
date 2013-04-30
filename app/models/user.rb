@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :user_store_roles
   has_many :stores, through: :user_store_roles
-
   has_many :collections
 
   def self.new_guest(params=nil)

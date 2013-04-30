@@ -12,7 +12,7 @@ class CheckoutsController < ApplicationController
         current_cart.destroy
         redirect_to order_path(order), notice: "Order submitted!"
       else
-        redirect_to store_cart_path(current_store), notice: "Checkout failed."
+        redirect_to cart_path, notice: "Checkout failed."
       end
     else
       render action: :show
