@@ -25,6 +25,6 @@ class Collection < ActiveRecord::Base
   end
 
   def sample_collection_image
-    self.products.sample.img
+    self.products.sample.img if (!self.products.empty?)
   end
 end

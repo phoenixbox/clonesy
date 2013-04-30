@@ -7,8 +7,10 @@
     <div class="row-fluid">
     <div class="span8">
       <li><%= link_to collection.name, account_collection_path(collection) %></li>
-      <%= image_tag collection.sample_collection_image.url(:large),
-                    class: "img-polaroid" %>
+      <% if collection.sample_collection_image %>
+        <%= image_tag collection.sample_collection_image.url(:large),
+                      class: "img-polaroid" %>
+      <% end %>
     </div>
     <% end %>
   </div>
