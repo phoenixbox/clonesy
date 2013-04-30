@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
                   .by_category(params[:category_id]).active
                   .page(params[:page]).per(20)
     @categories = current_store.categories
-    current_store.increase_popularity
+    current_store.increase_popularity(request.remote_ip)
     session[:return_to] = request.fullpath
   end
 
