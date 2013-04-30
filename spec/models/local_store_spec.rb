@@ -33,36 +33,7 @@ describe LocalStore do
       end
     end
   end
-
-  describe "increasing a store's popularity" do 
-
-    let(:store) { FactoryGirl.create(:store) }
-
-    context "given the user has already visited the store's page" do 
-      it "does not increase that store's popularity" do 
-      end
-    end
-
-    context "given the user has not already visited the store's page" do 
-      it "increases that store's popularity" do 
-      end
-    end
-  end
-
-  describe "increasing a product's popularity" do 
-
-    let(:product) { FactoryGirl.create(:product) }
-
-    context "given the user has already visited the product's page" do 
-      it "does not increase that product's popularity" do 
-      end
-    end
-
-    context "given the user has not already visited the product's page" do 
-      it "increases that product's popularity" do 
-      end
-    end
-  end
+  
 
   xit '.increase_popularity' do
   end

@@ -56,8 +56,8 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def increase_popularity
-    LocalStore.increase_popularity(self)
+  def increase_popularity(user)
+    LocalStore.increase_popularity(self, user)
   end
 
   def self.popular

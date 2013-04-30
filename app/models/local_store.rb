@@ -31,7 +31,6 @@ class LocalStore
       false
     else
       add_visitor(thing, user)
-      true
     end
   end
 
@@ -43,9 +42,9 @@ private
 
   def self.add_visitor(thing, user)
     if thing.class == Product
-      REDIS.sadd("store:#{thing.id}", user)
+      REDIS.sadd("product:#{thing.id}", user)
     else
-      REDIS.sadd("product:#{thing.id}", user) 
+      REDIS.sadd("store:#{thing.id}", user) 
     end
   end
 

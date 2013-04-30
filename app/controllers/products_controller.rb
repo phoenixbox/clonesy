@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   def show
     @collections = Collection.for_user(current_user)
     @product = current_store.products.find(params[:id])
-    @product.increase_popularity
+    @product.increase_popularity(request.remote_ip)
     session[:return_to] = request.fullpath
   end
 end
