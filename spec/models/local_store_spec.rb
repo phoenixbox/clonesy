@@ -24,6 +24,7 @@ describe LocalStore do
 
       before do 
         LocalStore.stub(:visited?).and_return(false)
+        LocalStore.stub(:set_expiration).and_return(true)
         REDIS.stub(:sadd).and_return(true)
       end
 

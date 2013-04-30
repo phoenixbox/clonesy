@@ -6,7 +6,7 @@ class LocalStore
       key = key(thing.class, :popular)
 
       REDIS.pipelined do
-        check_expiration(key)
+        set_expiration(key)
 
         if REDIS.zscore(key, thing.id)
           REDIS.zincrby(key, 1, thing.id)
@@ -41,18 +41,26 @@ private
   end
 
   def self.add_visitor(thing, user)
+
+    key = set_item_key(thing)
+
     if thing.class == Product
-      REDIS.sadd("product:#{thing.id}", user)
+      REDIS.sadd(key, user)
     else
-      REDIS.sadd("store:#{thing.id}", user) 
+      REDIS.sadd(key, user)
+      set_expiration(key)
     end
+  end
+
+  def self.set_item_key(item)
+    "#{item.class}:#{item.id}"
   end
 
   def self.key(thing, qualifier)
     "#{qualifier}_#{thing.to_s.downcase.pluralize}"
   end
 
-  def self.check_expiration(key)
+  def self.set_expiration(key)
     REDIS.expire(key, 86400) if REDIS.ttl(key) == -1
   end
 end
