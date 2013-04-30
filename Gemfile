@@ -15,6 +15,7 @@ gem 'faker', '~>1.1.2'
 gem 'kaminari'
 gem 'paperclip', "~> 3.0"
 gem 'redis', "~> 3.0.3"
+gem 'aws-sdk'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -37,7 +38,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "bullet"
-  gem 'aws-sdk'
 end
 
 group :test do
