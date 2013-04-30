@@ -38,6 +38,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem "bullet"
   gem 'aws-sdk'
+  gem 'mock_redis'
 end
 
 group :test do
