@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(:version => 20130428010716) do
   create_table "collections", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "theme"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -51,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20130428010716) do
     t.integer "product_id"
   end
 
-  add_index "collections_products", ["collection_id"], :name => "index_collections_products_on_collection_id"
+  add_index "collections_products", ["collection_id", "product_id"], :name => "index_collections_products_on_collection_id_and_product_id", :unique => true
   add_index "collections_products", ["product_id"], :name => "index_collections_products_on_product_id"
 
   create_table "images", :force => true do |t|

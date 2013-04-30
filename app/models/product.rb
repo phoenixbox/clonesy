@@ -62,7 +62,7 @@ class Product < ActiveRecord::Base
 
   def self.popular
     popular_products = LocalStore.popular(self)
-    Product.includes(:store).find(popular_products.map(&:to_i))
+    Product.includes(:store).includes(:images).find(popular_products.map(&:to_i))
   end
 
   def self.recent

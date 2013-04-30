@@ -1,8 +1,10 @@
 <div class="user-index">
-  <%= render partial: '/users/user_navigation', locals: { active: :account_details } %>
+  <%= render partial: '/users/user_navigation', locals: { active: nil } %>
 
   <div class="span8">
-    <h1>Create a New Collection!</h1>
-    <%= render 'collection_form' %>
+    <h1>Create Collection</h1>
+    <hr>
+
+    <%= render 'form' %>
   </div>
 </div>

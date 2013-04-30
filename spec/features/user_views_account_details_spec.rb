@@ -71,11 +71,9 @@ describe 'user account detail view' do
       end
 
       context "when they are viewing their collections index" do
-
         it "they can create new collection with valid information" do
           visit new_account_collection_path
           fill_in 'collection_name', with: 'Bicycles'
-          fill_in 'collection_theme', with: 'outdoors'
           click_button "Submit"
           expect(page).to have_content("Bicycles")
         end
@@ -83,7 +81,6 @@ describe 'user account detail view' do
         xit "cannot create a new store with invalid information" do
           visit account_collection_path
           fill_in 'collection_name', with: ''
-          fill_in 'collection_them', with: 'outdoors'
           click_button "Create Collection"
           expect(page).to have_content("can't be blank")
         end
