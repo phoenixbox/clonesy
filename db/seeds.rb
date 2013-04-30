@@ -2,7 +2,7 @@ SEED_DATA = YAML.load_file('db/seeds.yml')
 
 def seed_products(store)
   SEED_DATA['products'][store.path].each_with_index do |product_params, i|
-    puts "Seeding product #{i} for store #{store.id}"
+    puts "Seeding product #{i+1} for store #{store.id}"
 
     image_params = product_params.delete('images')
 
