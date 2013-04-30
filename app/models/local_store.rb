@@ -41,15 +41,9 @@ private
   end
 
   def self.add_visitor(thing, user)
-
     key = set_item_key(thing)
-
-    if thing.class == Product
-      REDIS.sadd(key, user)
-    else
-      REDIS.sadd(key, user)
-      set_expiration(key)
-    end
+    REDIS.sadd(key, user)
+    set_expiration(key)
   end
 
   def self.set_item_key(item)
