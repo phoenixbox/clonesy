@@ -203,7 +203,7 @@ products:
         We will sent your package to you in 1-3 days when you complete the order , we are in China, it is a long delivery, so take a long time, usually need 15-35 days, so please wait patiently, our things are worth waiting for
         When you finish your order,pls give me your correct address and telephone No,that 's very important,so after you finish the order,pls confirm your information,if you can't receive your package on account of information,we aren't responsible for your package.Pls understand.
       status: 'active'
-      price: 8.95
+      price: 10.95
       images:
         - url: 'http://img0.etsystatic.com/005/0/6861452/il_570xN.395359400_o4vs.jpg'
         - url: 'http://img1.etsystatic.com/007/0/6861452/il_570xN.395355085_im2r.jpg'
