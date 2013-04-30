@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     if @user.valid?
       enqueue_welcome_email(@user.email,@user.full_name)
       auto_login(@user)
+      create_favorites_collection(@user)
       redirect_to @next_page || session[:return_to] || root_path,
                   notice: "Welcome, #{@user.full_name}"
     else
@@ -45,6 +46,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def create_favorites_collection(user)
+    Collection.create(name: "favorites", theme: "favorites", user_id: user.id)
+  end
 
   def enqueue_welcome_email(email,full_name)
     Resque.enqueue(WelcomeEmailJob, @user.email, @user.full_name)

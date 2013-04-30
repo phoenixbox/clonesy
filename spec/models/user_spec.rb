@@ -10,6 +10,15 @@ describe User do
       )
   end
 
+  context "given a user has registered for the application" do 
+
+    it "can find the user's 'favorites' collection" do 
+      subject.save!
+      collection = Collection.create(name: "favorites", theme: "favorites", user_id: subject.id)
+      expect(subject.favorites).to be
+    end
+  end
+
   it 'has a valid subject' do
     expect( subject ).to be_valid
   end

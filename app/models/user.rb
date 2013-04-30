@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     self.orphan
   end
 
+  def favorites
+    Collection.where(name: "favorites").find_by_user_id(self.id)
+  end
+
   private
 
   def self.generate_password
