@@ -4,6 +4,7 @@ describe 'user account detail view' do
   context 'when the user is logged in' do
     before(:each) do
       @user = FactoryGirl.create(:user)
+      FactoryGirl.create(:collection, name: 'favorites', user: @user)
       visit '/login'
       fill_in 'sessions_email', with: 'raphael@example.com'
       fill_in 'sessions_password', with: 'password'
