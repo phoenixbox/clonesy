@@ -44,11 +44,22 @@ div.featured-text-section {
 
 div.product-display {
   background-color: white;
-  display: relative;
+  position: relative;
 }
 div.product-favorite {
   display: none;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 10;
+  font-size: 200%;
   color: pink;
+  text-shadow: 0 0 0.4em white, 0 0 0.4em white;
+}
+div.product-favorite a:hover {
+  text-decoration: none;
+  color: white;
+  text-shadow: 0 0 0.4em pink, 0 0 0.4em pink;
 }
 .prod-section {
   padding-bottom: 10px;
