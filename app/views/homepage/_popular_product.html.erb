@@ -1,9 +1,12 @@
 <div class="product-favorite">
-  <% if logged_in? %>
-    <%= link_to '♥', add_product_account_collection_path(current_user.favorites, product), method: :put %>
-  <% else %>
-    <%= link_to '♥', login_path %>
-  <% end %>
+    <% if logged_in? %>
+      <%= link_to '♥', add_product_account_collection_path(current_user.favorites, product), method: :put %>
+    <% else %>
+      <%= link_to '♥', login_path %>
+    <% end %>
+</div>
+
+<div class="circle">
 </div>
 
 <a href="<%= store_product_path(product.store, product) %>">
