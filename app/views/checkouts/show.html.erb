@@ -1,5 +1,5 @@
 <div class="login-form">
-  <%= simple_form_for @user, url: store_checkout_path(current_store), method: :post do |f| %>
+  <%= simple_form_for @user, url: checkout_path, method: :post do |f| %>
   <% if @user.new_record? %>
   <h4>Email</h4>
   <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>

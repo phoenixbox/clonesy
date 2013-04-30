@@ -1,5 +1,5 @@
 <% if current_user %>
-  <%= link_to 'Checkout', store_checkout_path(current_store), class: 'btn btn-success span3' %>
+  <%= link_to 'Checkout', checkout_path, class: 'btn btn-success span3' %>
 <% else %>
   <a href="#checkout_modal" role="button" class="btn btn-success span3" data-toggle="modal">Checkout</a>
   <%= render 'checkout_modal' %>

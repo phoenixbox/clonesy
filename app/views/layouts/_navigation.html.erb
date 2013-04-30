@@ -29,7 +29,7 @@
 
     <% if current_store != nil && current_store.id != nil %>
     <li>
-      <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path, class: 'btn btn-custom-lighten', method: :get %>
+      <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", cart_path, class: 'btn btn-custom-lighten', method: :get %>
     </li>
     <% end %>
   <li class="dropdown">
