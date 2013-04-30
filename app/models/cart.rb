@@ -1,14 +1,19 @@
 class Cart
-  def initialize(cart_data)
-    @cart_data = cart_data
+  attr_accessor :cart_hash
+
+  def initialize(cart_hash)
+    @cart_hash = cart_hash
+  end
+
+  def each(&block)
+    items.each(&block)
   end
 
   def items
-    products = Product.find(@cart_data.keys).index_by(&:id)
+    products = Product.find(cart_hash.keys).index_by(&:id)
 
-    @cart_data.map do |id, quantity|
-      product = products[id.to_i]
-      CartItem.new(product, quantity)
+    cart_hash.map do |id, quantity|
+      CartItem.new(products[id.to_i], quantity)
     end
   end
 
@@ -18,27 +23,27 @@ class Cart
 
   def remove_item(product_id)
     if product_id.present?
-      @cart_data.delete(product_id)
+      cart_hash.delete(product_id)
     end
-    @cart_data
+    cart_hash
   end
 
   def update(carts_param)
     if id = carts_param[:product_id]
       quantity = carts_param[:quantity]
       unless quantity.to_i < 0
-        @cart_data[id] = quantity || (@cart_data[id].to_i + 1).to_s
+        cart_hash[id] = quantity || (cart_hash[id].to_i + 1).to_s
       end
     end
-    @cart_data
+    cart_hash
   end
 
   def destroy
-    @cart_data = {}
+    cart_hash.clear
   end
 
   def count
-    @cart_data.present? ? "(#{calculate_count})" : nil
+    cart_hash.present? ? "(#{calculate_count})" : nil
   end
 
   def empty?
@@ -47,6 +52,6 @@ class Cart
 
 private
   def calculate_count
-    @cart_data.values.map(&:to_i).reduce(&:+)
+    cart_hash.values.map(&:to_i).reduce(&:+)
   end
 end
