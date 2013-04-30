@@ -37,7 +37,7 @@ class LocalStore
 private
 
   def self.visited?(thing, user)
-    REDIS.sismember("store:#{thing.id}", user) == 1 || REDIS.sismember("product:#{thing.id}", user) == 1
+    REDIS.sismember("#{thing.class}:#{thing.id}", user) == 1 
   end
 
   def self.add_visitor(thing, user)
