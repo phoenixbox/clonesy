@@ -103,11 +103,6 @@ describe UsersController do
       login_user @user
     end
 
-    it "locates the requested @user" do
-      put :update, id: @user, user: FactoryGirl.attributes_for(:user)
-      expect(assigns(:user)).to eq(@user)
-    end
-
     context "with valid attributes" do
       it "updates the user in the database" do
         put :update, id: @user, user: FactoryGirl.attributes_for(:user, full_name: "S.Rogers")

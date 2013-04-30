@@ -1,9 +1,9 @@
 class Mailer < ActionMailer::Base
-  default from: "white@mrwhite-sose.herokuapp.com"
+  default from: "steve@dose-jobs.herokuapp.com"
 
   def welcome_email(email, full_name)
     @full_name = full_name
-    mail(to: email, subject: "Welcome to White's Monsterporium!")
+    mail(to: email, subject: "Welcome to Job's DOSE!")
   end
 
   def order_confirmation(user, order_id, order_total)

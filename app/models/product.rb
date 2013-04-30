@@ -36,6 +36,22 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def self.popular
+    popular_products = LocalStore.popular(self)
+    Product.includes(:store).includes(:images).find(popular_products.map(&:to_i))
+  end
+
+  def self.recent
+    Product.includes(:store).order("created_at DESC").limit(6) || []
+  end
+
+  def self.new_with_images(params)
+    images = params.delete(:images)
+    new(params).tap do |product|
+      Image.batch_build(images.values, product) if images
+    end
+  end
+
   def toggle_status
     if status == 'active'
       update_attributes(status: 'retired')
@@ -58,21 +74,5 @@ class Product < ActiveRecord::Base
 
   def increase_popularity
     LocalStore.increase_popularity(self)
-  end
-
-  def self.popular
-    popular_products = LocalStore.popular(self)
-    Product.includes(:store).includes(:images).find(popular_products.map(&:to_i))
-  end
-
-  def self.recent
-    Product.includes(:store).order("created_at DESC").limit(6) || []
-  end
-
-  def self.new_with_images(params)
-    images = params.delete(:images)
-    new(params).tap do |product|
-      Image.batch_build(images.values, product) if images
-    end
   end
 end

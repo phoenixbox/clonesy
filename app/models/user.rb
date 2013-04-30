@@ -55,8 +55,7 @@ class User < ActiveRecord::Base
     self.orphan
   end
 
-  private
-
+private
   def self.generate_password
     o = [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten
     (0...50).map{ o[rand(o.length)] }.join
