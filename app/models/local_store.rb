@@ -36,7 +36,6 @@ private
  
     REDIS.pipelined do
       ensure_ttl(key)
-      raise REDIS.ttl(key)
       REDIS.zincrby(key, 1, model_id)
     end
   end
