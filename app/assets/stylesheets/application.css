@@ -23,6 +23,11 @@
   font-style: italic;
 }
 
+ul
+{
+    list-style-type: none;
+}
+
 .collection_list {
   border: 2px solid black;
   padding: 20px;
