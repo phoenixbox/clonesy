@@ -5,7 +5,7 @@ StoreEngine::Application.routes.draw do
 
   root to: 'homepage#show'
 
-  match '/search_results' => 'search_terms#results'
+  post '/search_results' => 'search_terms#results'
 
   get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
   put "/i18n" => "i18n#update"

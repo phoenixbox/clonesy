@@ -1,4 +1,4 @@
-class SearchTermsController < ApplicationController
+class SearchTermsgit Controller < ApplicationController
   def results
     product = Product.find_by_title(params[:query])
     if product
