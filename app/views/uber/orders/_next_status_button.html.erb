@@ -1,0 +1,5 @@
+<% if next_status(order.status) %>
+  <%= button_to next_status(order.status),
+                uber_order_path(order.id, update_status: true),
+                method: :put, class: 'btn btn-small' %>
+<% end %>

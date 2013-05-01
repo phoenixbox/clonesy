@@ -4,5 +4,8 @@
     <li class="<%= active == :dashboard ? 'active' : '' %>">
       <%= link_to 'Dashboard', uber_stores_path %>
     </li>
+    <li class="<%= active == :orders ? 'active' : '' %>">
+      <%= link_to 'Orders', uber_orders_path %>
+    </li>
   </ul>
 </div>

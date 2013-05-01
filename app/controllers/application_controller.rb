@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart,
                 :current_store,
                 :flag
-
+  before_filter :search_terms
   before_filter :locale
 
   def require_admin
@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
     else
       @store ||= Store.online.where(path: params[:store_path]).first
     end
+  end
+
+  def search_terms
+    @search_terms ||= SearchTerms.list
   end
 
   def locale

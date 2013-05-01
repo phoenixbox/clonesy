@@ -7,7 +7,7 @@ module Admin::OrdersHelper
   end
 
   def status_count(status)
-    count = @statuses[status] || 0
+    count = @admin_order_view.status_count[status] || 0
     "#{count} #{t('order.status.' + status)}"
   end
 end

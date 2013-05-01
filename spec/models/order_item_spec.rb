@@ -4,7 +4,7 @@ describe OrderItem do
   let!(:user){FactoryGirl.create(:user)}
   let!(:store){FactoryGirl.create(:store)}
   let!(:product){FactoryGirl.create(:product, store: store)}
-  let!(:order){FactoryGirl.create(:order, store: store, user: user)}
+  let!(:order){FactoryGirl.create(:order, user: user)}
 
   it 'has a valid factory' do
     expect(FactoryGirl.build(:order_item, order: order, product: product)).to be_valid

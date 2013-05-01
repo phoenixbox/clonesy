@@ -5,6 +5,8 @@ StoreEngine::Application.routes.draw do
 
   root to: 'homepage#show'
 
+  post '/search_results' => 'search_terms#results'
+
   get "/code" => redirect("http://github.com/raphweiner/son_of_store_engine")
   put "/i18n" => "i18n#update"
 
@@ -42,6 +44,7 @@ StoreEngine::Application.routes.draw do
   resources :stores, only: [ :new, :create ]
 
   namespace :uber do
+    resources :orders, only: [ :index, :show, :update ]
     resources :stores, only: [ :index ] do
       member do
         put :approve
@@ -74,7 +77,7 @@ StoreEngine::Application.routes.draw do
         end
       end
 
-      resources :orders, only: [ :show, :update ]
+      resources :orders, only: [ :show ]
       resources :order_items, only: [ :update, :destroy]
       resources :categories, except: [ :show ]
     end
