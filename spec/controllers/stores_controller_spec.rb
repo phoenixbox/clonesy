@@ -4,26 +4,19 @@ describe StoresController do
 
   let!(:store) {FactoryGirl.build(:store)}
 
-  before (:each) do 
+  before (:each) do
     store.status = "online"
     store.save!
   end
-  
+
   def valid_attributes
-    { name: "store_name", 
+    { name: "store_name",
       description: "store_description",
       path: "store_path" }
   end
 
   def valid_session
     {}
-  end
-
-  describe "GET index" do
-    it "assigns all stores as @stores" do
-      get :index, {}, valid_session
-      assigns(:stores).should eq([store])
-    end
   end
 
   describe "GET new" do

@@ -19,4 +19,8 @@ class Collection < ActiveRecord::Base
     product = Product.find(product_id)
     self.products.destroy(product)
   end
+
+  def sample_collection_image
+    self.products.sample.img if (!self.products.empty?)
+  end
 end

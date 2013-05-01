@@ -28,7 +28,7 @@ class Admin::RolesController < ApplicationController
                 notice: "Successfully revoked role."
   end
 
-  private
+private
   def enqueue_role_revoke(user_id, current_store)
     Resque.enqueue(RoleRevokeEmailJob, User.find(user_id), current_store)
   end
@@ -38,10 +38,6 @@ class Admin::RolesController < ApplicationController
   end
 
   def enqueue_role_invite(email,current_user,current_store,role)
-    Resque.enqueue(RoleInviteEmailJob,
-                     email,
-                     current_user,
-                     current_store,
-                     role)
+    Resque.enqueue(RoleInviteEmailJob, email, current_user, current_store, role)
   end
 end

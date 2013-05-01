@@ -6,6 +6,7 @@ class CollectionsController < ApplicationController
                                        :add_product,
                                        :remove_product ]
 
+
   def index
     @collections = current_user.collections.includes(:products).all
   end

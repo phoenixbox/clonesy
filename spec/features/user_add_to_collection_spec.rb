@@ -7,6 +7,7 @@ describe "user adds product to collection" do
 
   before do
     LocalStore.stub(:increase_popularity).and_return(true)
+    FactoryGirl.create(:collection, name: "favorites", user: user)
     visit '/login'
     fill_in 'sessions_email', with: 'raphael@example.com'
     fill_in 'sessions_password', with: 'password'

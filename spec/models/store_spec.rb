@@ -93,9 +93,26 @@ describe Store do
   describe '.popular' do
     it 'delegates to LocalStore.popular' do
       subject.save
-      LocalStore.stub(:popular).and_return(subject.id)
+      LocalStore.stub(:popular_store).and_return(subject.id)
       popular = Store.popular
       expect(popular).to eq subject
+    end
+
+    context "a user visits a store page for the first time in a session" do 
+
+      before do 
+        subject.save
+        # user_ip = "127.0.0.1"
+      end
+
+      it "increases that store's popularity" do 
+      end
+    end
+
+    context "a user visits a store page for a second (or more) time in a session" do 
+
+      it "does not increase that store's  popularity" do 
+      end
     end
   end
 
