@@ -23,7 +23,7 @@ describe 'Uber views orders' do
       before(:each) do
         @store = FactoryGirl.create(:store)
         @user = FactoryGirl.create(:user, email: 'abc@123.com')
-        @order = FactoryGirl.create(:order, user: @user, store: @store)
+        @order = FactoryGirl.create(:order, user: @user)
         @product = FactoryGirl.create(:product, store: @store)
         @order_item = FactoryGirl.create(:order_item, order: @order, product: @product)
         visit uber_order_path(@order.id)
@@ -52,6 +52,24 @@ describe 'Uber views orders' do
 
       it "displays order status" do
         expect(page).to have_content(@order.status)
+      end
+
+      it "can progress status based on rules" do
+        expect(page).to have_button('cancel')
+
+        order = FactoryGirl.create(:order, user: @user, status: 'paid')
+        visit uber_order_path(order.id)
+        expect(page).to have_button('mark as shipped')
+
+        order = FactoryGirl.create(:order, user: @user, status: 'shipped')
+        visit uber_order_path(order.id)
+        expect(page).to have_button('mark as returned')
+
+        order = FactoryGirl.create(:order, user: @user, status: 'cancelled')
+        visit uber_order_path(order.id)
+        expect(page).to_not have_button('mark as returned')
+        expect(page).to_not have_button('mark as shipped')
+        expect(page).to_not have_button('cancel')
       end
     end
   end

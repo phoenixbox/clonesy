@@ -75,7 +75,7 @@ StoreEngine::Application.routes.draw do
         end
       end
 
-      resources :orders, only: [ :show, :update ]
+      resources :orders, only: [ :show ]
       resources :order_items, only: [ :update, :destroy]
       resources :categories, except: [ :show ]
     end

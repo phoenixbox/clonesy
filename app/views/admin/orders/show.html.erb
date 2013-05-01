@@ -4,7 +4,6 @@
   <div class="span8">
     <h1><%= t 'order.self' %> #<%= @order.id %></h1>
     <span class="label default"><%= @order.status %></span>
-    <%= render partial: 'next_status_button', locals: { order: @order } %>
     <hr>
     <p><%= t 'model.createdat' %>: <%= @order.created_at.to_s(:short) %></p>
     <p><%= t 'model.updatedat' %>: <%= @order.updated_at.to_s(:short) %></p>
@@ -14,6 +13,7 @@
     <table class="table">
       <thead>
       <th><%= t 'product.title' %></th>
+      <th>Store</th>
       <th><%= t 'product.quantity' %></th>
       <th><%= t 'product.unitprice' %></th>
       <th><%= t 'product.subtotal' %></th>
@@ -25,8 +25,16 @@
       <tr>
         <td></td>
         <td></td>
-        <td style="text-align: right;"><%= t 'total' %></td>
+        <td></td>
+        <td style="text-align: right;">Total</td>
         <td><%= number_to_currency(@order.total) %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align: right;">Your cut</td>
+        <td><%= number_to_currency(@order.total(current_store)) %></td>
       </tr>
       </tfoot>
     </table>
