@@ -18,20 +18,20 @@ class UsersController < ApplicationController
     if @user.valid?
       enqueue_welcome_email(@user.email,@user.full_name)
       auto_login(@user)
+      create_favorites_collection(@user)
       redirect_to @next_page || session[:return_to] || root_path,
                   notice: "Welcome, #{@user.full_name}"
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to profile_path,
-                  :notice => "Successfully updated account"
+      redirect_to profile_path, notice: "Successfully updated account"
     else
-      render :action => 'show'
+      render action: 'show'
     end
   end
 
@@ -44,13 +44,16 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-  def enqueue_welcome_email(email,full_name)
+private
+  def enqueue_welcome_email(email, full_name)
     Resque.enqueue(WelcomeEmailJob, @user.email, @user.full_name)
   end
 
   def next_page
     @next_page ||= params[:user].delete(:next_page) if params[:user]
+  end
+
+  def create_favorites_collection(user)
+    Collection.create(name: "favorites", user: user)
   end
 end

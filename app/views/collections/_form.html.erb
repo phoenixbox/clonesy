@@ -1,0 +1,5 @@
+<%= simple_form_for @collection, url: account_collections_path do |f| %>
+    <%= f.input :name %>
+    <%= f.hidden_field :product_id, value: @product_to_add %>
+    <%= f.button :submit, t('submit'), class: "btn btn-success span2" %>
+<% end %>

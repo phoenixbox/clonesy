@@ -1,10 +1,20 @@
 <div class="user-index">
-  <%= render partial: '/users/user_navigation', locals: { active: :account_details } %>
+  <%= render partial: '/users/user_navigation', locals: { active: :collections } %>
 
   <div class="span8">
-    <h1><%= current_user.full_name %>'s Collections</h1>
+    <h1>Collections</h1>
+    <hr>
+
     <% @collections.each do |collection| %>
-      <li><%= link_to collection.name, account_collection_path(collection) %></li>
-    <%end%>
+    <div class="row-fluid">
+      <div class="span12">
+        <%= link_to collection.name, account_collection_path(collection) %>
+        <% if collection.sample_collection_image %>
+          <%= image_tag collection.sample_collection_image.url(:large), class: "img-polaroid" %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
   </div>
 </div>

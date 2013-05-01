@@ -7,6 +7,9 @@
     <li class="<%= active == :orders ? 'active' : '' %>">
       <%= link_to t('order.history'), account_orders_path %>
     </li>
+    <li class="<%= active == :favorites ? 'active' : '' %>">
+      <%= link_to 'Favorites', account_collection_path(current_user.favorites) %>
+    </li>
     <li class="<%= active == :collections ? 'active' : '' %>">
       <%= link_to 'Collections', account_collections_path %>
     </li>

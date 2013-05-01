@@ -1,0 +1,14 @@
+<div class="user-index">
+  <%= render partial: '/users/user_navigation', locals: { active: nil } %>
+
+  <div class="span8">
+    <h1>Edit Collection</h1>
+    <hr>
+
+    <%= simple_form_for @collection,
+                        url: account_collection_path(@collection) do |f| %>
+        <%= f.input :name %>
+        <%= f.button :submit, 'Update', class: "btn btn-success span2" %>
+    <% end %>
+  </div>
+</div>

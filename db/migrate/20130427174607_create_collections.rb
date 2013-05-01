@@ -3,7 +3,7 @@ class CreateCollections < ActiveRecord::Migration
     create_table :collections do |t|
       t.references :user
       t.string :name
-      t.string :theme
+
       t.timestamps
     end
   end

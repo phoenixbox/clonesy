@@ -1,10 +1,28 @@
 <div class="user-index">
-  <%= render partial: '/users/user_navigation', locals: { active: :account_details } %>
+  <% @collection.id == current_user.favorites.id ? local = :favorites : nil %>
+  <%= render partial: '/users/user_navigation', locals: { active: local } %>
 
   <div class="span8">
     <h1><%= @collection.name %></h1>
+    <%= link_to 'Edit',
+                 edit_account_collection_path(@collection),
+                 id: 'edit-collection' %>
+    |
+    <%= link_to 'Delete',
+                 account_collection_path(@collection),
+                 method: :delete,
+                 id: 'delete-collection' %>
+    <hr>
+
     <% @collection.products.each do |product|%>
-    <%= product.title %>
+      <%= image_tag product.img.url(:thumb) %>
+      <%= link_to product.title,
+                  store_product_path(product.store, product) %>
+      <small>(<%= link_to 'Remove',
+                          remove_product_account_collection_path(@collection, product),
+                          method: :put,
+                          class: 'remove-item' %>)</small>
+      <br />
     <% end %>
   </div>
 </div>

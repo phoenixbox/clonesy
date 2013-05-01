@@ -6,11 +6,16 @@
   <ul class="dropdown-menu">
     <% @collections.each do |collection|%>
     <li>
-      <%= link_to collection.name, add_product_account_collection_path(collection.id, product.id), method: :put %>
+      <%= link_to collection.name,
+                  add_product_account_collection_path(collection.id, product.id),
+                  method: :put %>
     </li>
     <% end %>
+    <li class="divider">
     <li>
-      <%= link_to "Create New Collection", new_account_collection_path, id: "create-new" %>
+      <%= link_to "Create New Collection",
+                  new_account_collection_path(product_id: product.id),
+                  id: "create-new" %>
     </li>
   </ul>
 </div>
