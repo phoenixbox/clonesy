@@ -42,6 +42,7 @@ StoreEngine::Application.routes.draw do
   resources :stores, only: [ :new, :create ]
 
   namespace :uber do
+    resources :orders, only: [ :index, :show, :update ]
     resources :stores, only: [ :index ] do
       member do
         put :approve
