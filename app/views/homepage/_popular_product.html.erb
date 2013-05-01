@@ -1,15 +1,26 @@
-<a href="<%= store_product_path(product.store, product) %>">
-<%= image_tag product.img.url(:large) %>
-<div class="featured-text-section">
-  <h4><%= link_to product.title, store_product_path(product.store, product) %></h4>
-  <div class="prod-section row-fluid">
-    <div class="prod-store-section span6">
-      <span class="prod-store-text"><%= product.store.name %></span>
-    </div>
+<div class="product-favorite">
+    <% if logged_in? %>
+      <%= link_to '♥', add_product_account_collection_path(current_user.favorites, product), method: :put %>
+    <% else %>
+      <%= link_to '♥', login_path %>
+    <% end %>
+</div>
 
-    <div class="prod-price-section span6">
-      <span class="prod-price-text"><%= number_to_currency(product.price) %></span>
+<div class="circle">
+</div>
+
+<a href="<%= store_product_path(product.store, product) %>">
+  <%= image_tag product.img.url(:large) %>
+  <div class="featured-text-section">
+    <h4><%= link_to product.title, store_product_path(product.store, product) %></h4>
+    <div class="prod-section row-fluid">
+      <div class="prod-store-section span6">
+        <span class="prod-store-text"><%= product.store.name %></span>
+      </div>
+
+      <div class="prod-price-section span6">
+        <span class="prod-price-text"><%= number_to_currency(product.price) %></span>
+      </div>
     </div>
   </div>
-</div>
 </a>
