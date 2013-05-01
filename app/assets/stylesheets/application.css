@@ -18,7 +18,9 @@
 }
 
 .collection_products {
-  
+  padding: 20px;
+  font-size: 70%;
+  font-style: italic;
 }
 
 .collection_list {

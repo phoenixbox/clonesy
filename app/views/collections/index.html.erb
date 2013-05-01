@@ -17,6 +17,16 @@
             
             <div class="span6 collection_title">
                 <%= link_to collection.name.titleize , account_collection_path(collection) %>
+                <div class="collection_products">
+                  <% products = collection.products.limit(4).collect { |product| product.title } %>
+                  <% products.each do |product| %>
+                  <ul>
+                    <li> 
+                      <%= product %>
+                    </li>
+                  </ul>
+                  <% end %>
+                </div>
             </div>
         </div>
       </div>
