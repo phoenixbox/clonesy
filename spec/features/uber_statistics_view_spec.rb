@@ -6,11 +6,16 @@ describe 'the uber statistics view', type: :feature do
     @admin = FactoryGirl.create(:user)
     @store = FactoryGirl.create(:store)
     Role.promote(@admin, @store, 'admin')
+    @admin.uber_up
     visit login_path
     fill_in 'sessions_email', with: 'raphael@example.com'
     fill_in 'sessions_password', with: 'password'
     click_button 'Login'
     visit uber_statistics_path
+  end
+
+  it "should be on the uber stats index page" do
+    expect(current_path).to eq uber_statistics_path
   end
 
   it 'should have a title' do

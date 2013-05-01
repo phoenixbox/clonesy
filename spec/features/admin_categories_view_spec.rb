@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'the admin categories view', type: :feature do
   before(:each) do
     admin = FactoryGirl.create(:user)
-    @store = FactoryGirlx .create(:store)
+    @store = FactoryGirl.create(:store)
     Role.promote(admin, @store, 'admin')
     visit login_path
     fill_in 'sessions_email', with: 'raphael@example.com'
