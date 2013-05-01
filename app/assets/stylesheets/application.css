@@ -12,10 +12,6 @@
  *= require_tree .
  */
 
-/* For the Shopping Cart Show Page*/
-#shopping_cart_summary {
-  float: right;
-}
 
 /* This is the sidebar nav used for user account and admin stuff*/
 .nav-list li.nav-header{

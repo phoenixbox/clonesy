@@ -1,19 +1,15 @@
 <% current_cart.each do |cart_item| %>
+
 <tr>
-  <td><%= image_tag cart_item.product.img.url(:medium) %></td>
-  <td>
-    <h2><%= link_to cart_item.title, store_product_path(cart_item.store, cart_item.product) %></h2>
-    <br>
-    <%= cart_item.product.description %>
-    <br>
-    <br>
-    <%= link_to t('action.remove'),
-                remove_item_cart_path(
-                product_id: cart_item.product.id),
-                confirm: t('confirm'),
-                method: :put %>
+  <td class="span3">
+    <%= image_tag cart_item.product.img.url(:medium) %>
   </td>
-  <td><%= number_to_currency(cart_item.unit_price) %></td>
+  <td>
+    <%= render partial: "carts/cart_item_tools", locals: {cart_item: cart_item} %>
+  </td>
+  <td>
+    <span class="prod-price-section"><%= number_to_currency(cart_item.unit_price) %>
+  </td>
   <td class="span2">
     <%= simple_form_for :carts,
                         url: cart_path,
@@ -24,4 +20,5 @@
     <% end %>
   </td>
 </tr>
+
 <% end %>
