@@ -12,6 +12,29 @@
  *= require_tree .
  */
 
+/* For the Collections Index Page*/
+.collection_title {
+  padding: 40px;
+}
+
+.collection_products {
+  padding: 10px;
+  font-size: 70%;
+  text-align: left;
+}
+
+.collection_image {
+  padding: 5px;
+  margin: 10px;
+}
+
+.collection_list {
+  border: 2px solid black;
+  padding: 20px;
+  background-color: #F2F2F2;
+  margin: 20px;
+}
+
 /* For the Shopping Cart Show Page*/
 #shopping_cart_summary {
   float: right;

@@ -4,6 +4,9 @@
 
   <div class="span8">
     <h1><%= @collection.name %></h1>
+
+    <% unless @collection.name == "favorites" %>
+    
     <%= link_to 'Edit',
                  edit_account_collection_path(@collection),
                  id: 'edit-collection' %>
@@ -12,6 +15,7 @@
                  account_collection_path(@collection),
                  method: :delete,
                  id: 'delete-collection' %>
+    <% end %>
     <hr>
 
     <% @collection.products.each do |product|%>
