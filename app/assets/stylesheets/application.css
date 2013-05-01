@@ -35,13 +35,8 @@
   margin: 20px;
 }
 
-/* For the Shopping Cart Show Page*/
-#shopping_cart_summary {
-  float: right;
-}
-
 /* This is the sidebar nav used for user account and admin stuff*/
-.nav-list li.nav-header{
+.nav-list li.nav-header {
   color: rgb(51, 51, 51);
 }
 
@@ -61,6 +56,7 @@
   background-color: #8B2252;
   color: #fff;
 }
+
 /* Color Tabs in Admin Dashboard*/
 .nav-pills li{
   margin: 0 3px 0 3px;

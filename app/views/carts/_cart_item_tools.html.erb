@@ -1,0 +1,13 @@
+<span><%= link_to cart_item.title, store_product_path(cart_item.store, cart_item.product) %></span>
+<br><br>
+<p>
+  Shipping from: <%= link_to cart_item.store.name, store_home_path(cart_item.store) %><br><br>
+  <%= link_to t('action.remove'),
+            remove_item_cart_path(
+            product_id: cart_item.product.id),
+            confirm: t('confirm'),
+            method: :put %> 
+  <% if logged_in? %>
+     | <%= link_to 'Add to Favorites', add_product_account_collection_path(current_user.favorites, cart_item.product), method: :put %>
+  <% end %>
+</p>

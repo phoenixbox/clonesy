@@ -1,37 +1,35 @@
-<div class="cart-overview">
-  <% if current_cart.empty? %>
+<% if current_cart.empty? %>
 
-    <h5><%= t('cart.isempty') %></h5>
-    <%= link_to t('back.home'), root_path %>
+<h3><%= t('cart.isempty') %></h3>
+<%= link_to t('back.home'), root_path %>
 
-  <% else %>
+<% else %>
 
-    <table class="table table-striped">
-      <thead>
-        <th></th>
-        <th><%= t('product.self') %></th>
-        <th><%= t('product.price') %></th>
-        <th><%= t('product.quantity') %></th>
-      </thead>
-      <tbody>
-        <%= render partial: 'cart_item' %>
-      </tbody>
-    </table>
+<table class="table table-striped" id="tbl-no-margin">
+  <thead>
+    <th><h3>My Cart</h3></th>
+    <th></th>
+    <th><%= t('product.price') %></th>
+    <th><%= t('product.quantity') %></th>
+  </thead>
+  <tbody>
+    <%= render partial: 'cart_item' %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><h4 class="prod-price-section">Total: <%= number_to_currency(current_cart.total) %></h4></td>
+    </tr>
+  </tbody>
+</table>
 
-    <div id="shopping_cart_summary">
-      <div class="pull-right"><h5>Total: <%= number_to_currency(current_cart.total) %></h5></div>
-
-      <div class ="btn-toolbar">
-        <span class="btn-group pull-right">
-
-          <%= render partial: 'checkout_button' %><br /><br />
-
-          <%= button_to t('cart.empty'), cart_path, class: 'btn btn-block', method: :delete %>
-
-        </span>
-      </div>
-
-    </div>
-
-  <% end %>
+<div class="pull-right">
+  <div class ="btn-toolbar">
+    <span class="btn-group">
+      <%= render partial: 'checkout_button' %><br /><br />
+      <%= button_to t('cart.empty'), cart_path, class: 'btn btn-block', method: :delete %>
+    </span>
+  </div>
 </div>
+
+<% end %>
