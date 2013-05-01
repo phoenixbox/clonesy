@@ -6,8 +6,8 @@ class LoadTestingStore
     load_store.update_attributes({status: 'offline'}, as: :uber)
 
     seed_categories(10)
-    seed_products(100)
-    seed_orders(100)
+    seed_products(10_000)
+    seed_orders(10_000)
   end
 
   def seed_categories(num)
@@ -28,8 +28,9 @@ class LoadTestingStore
     num.times do |i|
       puts "Seeding order ##{i}"
       order = Order.create!(status: ::ORDER_STATUSES.sample,
-                            user_id: 2)
-      order.order_items.create!(product_id: rand(100) + 1,
+                            user_id: 2,
+                            store_id: load_store.id)
+      order.order_items.create!(product_id: rand(10_000) + 1,
                                 unit_price: 2,
                                 quantity: rand(5) + 1)
     end
