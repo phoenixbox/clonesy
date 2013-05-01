@@ -7,6 +7,7 @@ class LocalStore
     add_visitor(model_class_name, model_id, user)
 
     update_popularity(model_class_name, model_id)
+
   end 
 
   def self.popular_products
@@ -22,7 +23,7 @@ class LocalStore
 private
 
   def self.user_has_already_visited?(model_class_name, model_id, user)  
-    REDIS.sismember("#{model_class_name}:#{model_id}", user) == 1 
+    REDIS.sismember("#{model_class_name}:#{model_id}", user)
   end
 
   def self.add_visitor(model_class_name, model_id, user)
@@ -35,6 +36,7 @@ private
  
     REDIS.pipelined do
       ensure_ttl(key)
+      raise REDIS.ttl(key)
       REDIS.zincrby(key, 1, model_id)
     end
   end
