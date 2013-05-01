@@ -7,5 +7,8 @@
     <li class="<%= active == :orders ? 'active' : '' %>">
       <%= link_to 'Orders', uber_orders_path %>
     </li>
+     <li class="<%= active == :statistics ? 'active' : '' %>">
+      <%= link_to 'Statistics', uber_statistics_path(current_store) %>
+    </li>
   </ul>
 </div>

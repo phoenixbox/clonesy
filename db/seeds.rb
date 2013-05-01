@@ -36,7 +36,6 @@ class LoadTestingStore
   end
 end
 
-
 class RealishStore
   attr_reader :store
 

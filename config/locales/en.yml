@@ -126,3 +126,5 @@ en:
         pending: 'cancel'
         paid: 'mark as shipped'
         shipped: 'mark as returned'
+  statistics:
+    self: 'Statistics'

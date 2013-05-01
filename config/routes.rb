@@ -52,6 +52,7 @@ StoreEngine::Application.routes.draw do
         put :toggle_online_status
       end
     end
+    resources :statistics, only: [ :index ]
   end
 
   scope "/:store_path", as: :store do
