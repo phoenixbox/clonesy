@@ -93,7 +93,7 @@ describe Product do
   describe '.popular' do
     it 'delegates to LocalStore and returns products' do
       products = (1..2).map { FactoryGirl.create(:product, store: @store) }
-      LocalStore.stub(:popular).and_return(products.map(&:id))
+      LocalStore.stub(:popular_products).and_return(products.map(&:id))
       expect(Product.popular).to match_array products
     end
   end

@@ -1,26 +1,22 @@
 class Highlights
+  attr_reader :popular_products,
+              :recent_products,
+              :popular_store,
+              :recent_store
+
+  def initialize(pp, rp, ps, rs)
+    @popular_products = pp
+    @recent_products  = rp
+    @popular_store    = ps
+    @recent_store     = rs
+  end
+
   def self.from_database
-    new.tap do |highlights|
-      highlights.popular_products
-      highlights.recent_products
-      highlights.popular_store
-      highlights.recent_store
-    end
-  end
+    pp = Product.popular
+    rp = Product.recent
+    ps = Store.popular
+    rs = Store.recent
 
-  def popular_products
-    @popular_products ||= Product.popular
-  end
-
-  def recent_products
-    @recent_products ||= Product.recent
-  end
-
-  def popular_store
-    @popular_store ||= Store.popular
-  end
-
-  def recent_store
-    @recent_store ||= Store.recent
+    new(pp, rp, ps, rs)
   end
 end
