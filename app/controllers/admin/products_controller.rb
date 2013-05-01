@@ -20,9 +20,9 @@ class Admin::ProductsController < ApplicationController
 
     if @product.save
       redirect_to store_admin_products_path(current_store),
-                  :notice => "Successfully created product."
+                  notice: "Successfully created product."
     else
-      render :action => 'new', :notice  => "Product creation failed."
+      render action: 'new', notice: "Product creation failed."
     end
   end
 
@@ -32,22 +32,22 @@ class Admin::ProductsController < ApplicationController
   def update
     if @product.update_attributes_with_images(params[:product])
       redirect_to store_admin_products_path(current_store),
-                  :notice  => "Successfully updated product."
+                  notice: "Successfully updated product."
     else
-      render :action => 'edit', :notice  => "Update failed."
+      render action: 'edit', notice: "Update failed."
     end
   end
 
   def destroy
     @product.destroy
     redirect_to store_admin_products_path(current_store),
-                :notice => "Successfully destroyed product."
+                notice: "Successfully destroyed product."
   end
 
   def toggle_status
     @product.toggle_status
     redirect_to store_admin_products_path(current_store),
-                :notice  => "Product status successfully set to '#{@product.status}'."
+                notice: "Product status set to '#{@product.status}'."
   end
 
   def destroy_image
@@ -59,7 +59,7 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  private
+private
   def find_product
     @product = current_store.products.find(params[:id])
   end

@@ -7,6 +7,7 @@ describe "user adds product to collection" do
 
   before do
     LocalStore.stub(:increase_popularity).and_return(true)
+    FactoryGirl.create(:collection, name: "favorites", user: user)
     visit '/login'
     fill_in 'sessions_email', with: 'raphael@example.com'
     fill_in 'sessions_password', with: 'password'
@@ -22,7 +23,7 @@ describe "user adds product to collection" do
         }
       end
 
-      it "when clicked 'create collection' redirects to collection#INDEX page" do
+      it "when clicked 'create collection' redirects to collections#NEW page" do
         visit store_product_path(store, product)
         within(:css, 'ul.dropdown-menu'){
           click_link 'Create New Collection'
@@ -33,10 +34,9 @@ describe "user adds product to collection" do
       it "allows the user to create a new collection" do
         visit new_account_collection_path
         fill_in "collection_name", with: "Hats"
-        fill_in "collection_theme", with: "Awesome Ones"
         click_button 'Submit'
-        expect(current_path).to eq account_collections_path
         expect(page).to have_content("Hats")
+        expect(current_path).to eq account_collection_path(Collection.last)
       end
     end
 
@@ -56,18 +56,19 @@ describe "user adds product to collection" do
         expect(page).to have_content "Product added to the #{collection.name} collection"
       end
 
+      it "can only add a product once to a collection" do
+        2.times do
+          visit store_product_path(store, product)
+          click_link collection.name
+        end
+        expect(collection.products.count).to eq 1
+      end
+
       it "re-renders the product#show page" do
         visit store_product_path(store, product)
         click_link collection.name
         expect(current_path).to eq store_product_path(store, product)
       end
-
     end
-  end
-
-
-  context "given a user is not logged in" do
-    it "when clicked 'create collection' redirects to session#new"
-
   end
 end

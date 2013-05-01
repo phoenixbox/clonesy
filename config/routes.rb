@@ -22,6 +22,7 @@ StoreEngine::Application.routes.draw do
     resources :collections do
       member do
         put "add_product/:product_id" => "collections#add_product", as: :add_product
+        put "remove_product/:product_id" => "collections#remove_product", as: :remove_product
       end
     end
   end

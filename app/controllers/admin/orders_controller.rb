@@ -14,6 +14,7 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = current_store.orders.find(params[:id])
+
     if params[:update_status]
       @order.update_status
     end

@@ -22,6 +22,15 @@ class Store < ActiveRecord::Base
 
   scope :online, lambda { where(status: 'online') }
 
+  def self.popular
+    popular_store = LocalStore.popular(self)
+    find(popular_store) if popular_store
+  end
+
+  def self.recent
+    self.count > 0 ? self.last : nil
+  end
+
   def is_admin?(user)
     user.uber? || UserStoreRole.exists?(store_id: self,
                                         user_id: user,
@@ -41,24 +50,12 @@ class Store < ActiveRecord::Base
   end
 
   def toggle_online_status(role)
-    if status == 'online'
-      update_attributes({status: 'offline'}, as: role)
-    elsif status == 'offline'
-      update_attributes({status: 'online'}, as: role)
-    end
+    next_status = {'online' => 'offline', 'offline' => 'online'}[status]
+    update_attributes({status: next_status}, as: role) if next_status
   end
 
   def increase_popularity(user)
     LocalStore.increase_popularity('store', id, user)
-  end
-
-  def self.popular
-    popular_store = LocalStore.popular(self)
-    find(popular_store) if popular_store
-  end
-
-  def self.recent
-    self.count > 0 ? self.order("created_at DESC").first : nil
   end
 
 private

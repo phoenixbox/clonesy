@@ -19,7 +19,6 @@ class LocalStore
     REDIS.zrevrange(key, 0, 0).first
   end
 
- 
 private
 
   def self.user_has_already_visited?(model_class_name, model_id, user)  
