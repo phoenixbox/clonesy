@@ -4,7 +4,6 @@ class Store < ActiveRecord::Base
 
   has_many :categories
   has_many :products
-  has_many :orders
   has_many :user_store_roles
 
   before_validation :parameterize_path
@@ -56,6 +55,18 @@ class Store < ActiveRecord::Base
 
   def increase_popularity(user)
     LocalStore.increase_popularity('store', id, user)
+  end
+
+  def orders
+    Order.find_by_sql("SELECT orders.* from orders INNER JOIN order_items on order_items.order_id = orders.id INNER JOIN products on products.id = order_items.product_id where products.store_id = #{id}")
+  end
+
+  def orders_by_status(order_status=nil)
+    if order_status && order_status != 'all'
+      orders.select { |order| order.status == order_status}
+    else
+      orders
+    end
   end
 
 private

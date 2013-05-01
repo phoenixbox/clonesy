@@ -6,21 +6,21 @@
     <hr>
     <%# TODO: Fix order links to correctly use new guid schema %>
 
-    <% if @count > 0 %>
-      <%= render partial: 'admin_dashboard_nav',
-                 locals: { active_tab: @active_tab,
-                           count: @count,
-                           statuses: @statuses} %>
+    <%= render partial: 'admin_dashboard_nav',
+               locals: { active_tab: @admin_order_view.active_tab,
+                         status_count: @admin_order_view.status_count } %>
+    <% if @admin_order_view.orders.present? %>
         <br>
         <table class="table">
           <thead>
           <th>#</th>
-          <th><%= t 'model.createdat' %></th>
-          <th><%= t 'model.status' %></th>
-          <th><%= t 'model.modify' %></th>
+          <th>Created at</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>Your Cut</th>
           </thead>
           <tbody>
-          <%= render @orders %>
+          <%= render @admin_order_view.orders %>
           </tbody>
         </table>
     <% else %>

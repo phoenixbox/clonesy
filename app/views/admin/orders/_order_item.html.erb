@@ -1,13 +1,18 @@
 <tr>
-  <td><%= link_to order_item.product.title, store_product_path(@order.store, order_item.product) %></td>
-  <% if @order.status == 'pending' || @order.status == 'paid' %>
+  <td><%= link_to order_item.product.title, store_product_path(order_item.store, order_item.product) %></td>
+  <td><%= link_to order_item.store.name, store_home_path(order_item.store) %></td>
+  <% if (@order.status == 'pending' || @order.status == 'paid') && order_item.store == current_store %>
   <td>
     <%= simple_form_for :admin_order_item, url: store_admin_order_item_path(order_item.store, order_item), method: :put do |f| %>
       <%= f.hidden_field :order_item_id, value: order_item.id %>
       <%= f.input_field :quantity, value: order_item.quantity, class: 'span1' %>
-      <%= f.button :submit, t('crud.update'), class: 'btn-mini' %>
+      <br>
+      <%= f.button :submit, 'Update', class: 'btn-mini' %>
+      <%= button_to 'Delete',
+                    store_admin_order_item_path(order_item.store, order_item),
+                    method: :delete,
+                    class: 'btn btn-mini btn-danger' %>
     <% end %>
-    <%= button_to t('crud.delete'), store_admin_order_item_path(order_item.store, order_item), method: :delete, class: 'btn btn-mini btn-danger' %>
   </td>
   <% else %>
   <td><%= order_item.quantity %></td>

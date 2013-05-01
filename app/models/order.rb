@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
-  attr_accessible :status, :user_id, :store_id
+  attr_accessible :status, :user_id
+
   belongs_to :user
-  belongs_to :store
   has_many :order_items, validate: true, dependent: :destroy
   has_many :products, through: :order_items
   has_one :billing_address, as: :addressable
@@ -17,14 +17,6 @@ class Order < ActiveRecord::Base
 
   def to_param
     guid
-  end
-
-  def self.by_status(status)
-    if status.present? && status != 'all'
-      order.where(status: status)
-    else
-      scoped
-    end
   end
 
   def self.create_pending_order(user, cart_items)
@@ -48,16 +40,26 @@ class Order < ActiveRecord::Base
     self.save
   end
 
-  def total
+  # TODO: write a test for this
+  def total(store=nil)
     if order_items.present?
-      order_items.map {|order_item| order_item.subtotal }.inject(&:+)
+      filtered_items = filtered_items(store)
+      filtered_items.map {|order_item| order_item.subtotal }.inject(&:+)
     else
       0
     end
   end
 
+  def stores
+    products.map { |product| product.store }
+  end
+
 private
   def generate_guid
     self.guid = SecureRandom.uuid
+  end
+
+  def filtered_items(store)
+    store ? order_items.select {|oi| oi.store == store } : order_items
   end
 end

@@ -12,7 +12,7 @@ describe Admin::OrderItemsController do
   describe "admin is logged in" do
     before(:each) do
       @product = FactoryGirl.create(:product, store: @store)
-      @order = FactoryGirl.create(:order, store: @store, user: @admin)
+      @order = FactoryGirl.create(:order, user: @admin)
       @order_item = FactoryGirl.create(:order_item, order: @order, product: @product)
     end
 

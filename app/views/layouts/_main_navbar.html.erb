@@ -19,9 +19,11 @@
   <div class='span3'>
     <div class='row-fluid'>
       <% if logged_in? %>
-        <a class="btn span4 etsy-nav" href="<%= account_collection_path(current_user.favorites)%>"><i class="icon-heart"></i></a>        
-        <a class="btn span4 etsy-nav" href="<%= profile_path %>"><i class="icon-user"></i></a>        
-        <a class="btn span4 etsy-nav" href="#"><i class="icon-gift"></i></a>        
+        <% if current_user.favorites %>
+        <a class="btn span4 etsy-nav" href="<%= account_collection_path(current_user.favorites)%>"><i class="icon-heart"></i></a>
+        <% end %>
+        <a class="btn span4 etsy-nav" href="<%= profile_path %>"><i class="icon-user"></i></a>
+        <a class="btn span4 etsy-nav" href="#"><i class="icon-gift"></i></a>
       <% else %>
         <%= link_to 'Signup', signup_path, class: "btn span6 etsy-nav" %>
         <%= link_to 'Login', login_path, class: "btn span6 etsy-nav" %>
@@ -40,5 +42,5 @@
     <% unless current_cart.empty? %>
       <%= current_cart.count %>
     <% end %>
-  </a>        
+  </a>
 </div>
