@@ -1,8 +1,4 @@
 class StoresController < ApplicationController
-  def index
-    @stores = Store.online
-  end
-
   def new
     @new_store = Store.new
   end

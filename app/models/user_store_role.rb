@@ -9,4 +9,8 @@ class UserStoreRole < ActiveRecord::Base
 
   validates :store_id, presence: true
   validates :user_id, presence: true
+
+  def self.admins(store)
+    self.where(store_id: store.id, role: 'admin').map(&:user)
+  end
 end

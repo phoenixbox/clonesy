@@ -56,8 +56,7 @@ class Order < ActiveRecord::Base
     end
   end
 
-  private
-
+private
   def generate_guid
     self.guid = SecureRandom.uuid
   end

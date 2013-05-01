@@ -13,9 +13,9 @@ class Admin::CategoriesController < ApplicationController
     @category = current_store.categories.build(params[:category])
     if @category.save
       redirect_to store_admin_categories_path,
-      :notice => "Successfully created category."
+                  notice: "Successfully created category."
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -27,9 +27,9 @@ class Admin::CategoriesController < ApplicationController
     @category = current_store.categories.find(params[:id])
     if @category.update_attributes(params[:category])
       redirect_to store_admin_categories_path,
-      :notice  => "Successfully updated category."
+                  notice: "Successfully updated category."
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 end

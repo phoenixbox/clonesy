@@ -8,6 +8,7 @@ class CheckoutsController < ApplicationController
   def create
     if @user.save
       order = create_order(@user, current_cart)
+
       if order.valid?
         current_cart.destroy
         redirect_to order_path(order), notice: "Order submitted!"
@@ -21,8 +22,8 @@ class CheckoutsController < ApplicationController
 
   def buy_now
     cart = Cart.new(params[:product_id] => '1')
-
     order = create_order(current_user, cart.items)
+
     if order.valid?
       redirect_to order_path(order), notice: "Order submitted!"
     else
@@ -31,7 +32,6 @@ class CheckoutsController < ApplicationController
   end
 
 private
-
   def build_user
     @user = if logged_in?
               current_user.attributes = params[:user]
@@ -49,8 +49,6 @@ private
       send_order_email(user, order.id, order.total)
     end
   end
-
-  private
 
   def send_order_email(user, order_id, order_total)
     Resque.enqueue(OrderConfirmEmailJob, user, order_id, order_total)
