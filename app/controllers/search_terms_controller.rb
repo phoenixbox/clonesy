@@ -1,6 +1,6 @@
-class SearchTermsgit Controller < ApplicationController
+class SearchTermsController < ApplicationController
   def results
-    product = Product.find_by_title(params[:query])
+    product = SearchTerms.match_by_title(params[:query])
     if product
       redirect_to store_product_path(product.store, product)
     else
