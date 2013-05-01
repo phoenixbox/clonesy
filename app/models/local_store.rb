@@ -1,60 +1,60 @@
 class LocalStore
-  def self.increase_popularity(thing, user)
 
-    if unique_user?(thing, user)
+  def self.increase_popularity(model_class_name, model_id, user)
 
-      key = key(thing.class, :popular)
+    return if user_has_already_visited?(model_class_name, model_id, user)
 
-      REDIS.pipelined do
-        set_expiration(key)
+    add_visitor(model_class_name, model_id, user)
 
-        if REDIS.zscore(key, thing.id)
-          REDIS.zincrby(key, 1, thing.id)
-        else
-          REDIS.add(key, thing.id)
-        end
-      end
+    update_popularity(model_class_name, model_id)
+  end 
+
+  def self.popular_products
+    key = key('product')
+    REDIS.zrevrange(key, 0, 3)
+  end
+ 
+  def self.popular_store
+    key = key('store')
+    REDIS.zrevrange(key, 0, 0).first
+  end
+
+  def self.update_popularity(model_class_name, model_id)
+    key = key(model_class_name)
+ 
+    REDIS.pipelined do
+      ensure_ttl(key)
+      REDIS.zincrby(key, 1, model_id)
     end
   end
-
-  def self.popular(thing)
-    key = key(thing, :popular)
-
-    case thing.to_s
-    when 'Product' then REDIS.zrevrange(key, 0, 3)
-    when 'Store' then set = REDIS.zrevrange(key, 0, 0); set.present? ? set.first : nil
-    else nil; end
-  end
-
-  def self.unique_user?(thing, user)  
-    if visited?(thing, user)
-      false
-    else
-      add_visitor(thing, user)
-    end
-  end
-
+ 
 private
 
-  def self.visited?(thing, user)
-    REDIS.sismember("#{thing.class}:#{thing.id}", user) == 1 
+  def self.user_has_already_visited?(model_class_name, model_id, user)  
+    REDIS.sismember("#{model_class_name}:#{model_id}", user) == 1 
   end
 
-  def self.add_visitor(thing, user)
-    key = set_item_key(thing)
+  def self.add_visitor(model_class_name, model_id, user)
+    key = key_for_model(model_class_name, model_id)
+    set(key,user)
+  end
+
+  def self.set(key,user)
     REDIS.sadd(key, user)
-    set_expiration(key)
+    ensure_ttl(key)
   end
 
-  def self.set_item_key(item)
-    "#{item.class}:#{item.id}"
+  def self.key(model_class_name)
+    "popular_#{model_class_name.pluralize}"
   end
-
-  def self.key(thing, qualifier)
-    "#{qualifier}_#{thing.to_s.downcase.pluralize}"
-  end
-
-  def self.set_expiration(key)
+ 
+  def self.ensure_ttl(key)
     REDIS.expire(key, 86400) if REDIS.ttl(key) == -1
   end
+
+  def self.key_for_model(model_class_name, model_id)
+    "#{model_class_name}:#{model_id}"
+  end
 end
+
+

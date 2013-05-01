@@ -48,8 +48,8 @@ class Store < ActiveRecord::Base
     end
   end
 
-  def increase_popularity(user_ip)
-    LocalStore.increase_popularity(self, user_ip)
+  def increase_popularity(user)
+    LocalStore.increase_popularity('store', id, user)
   end
 
   def self.popular
