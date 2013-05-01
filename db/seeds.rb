@@ -66,6 +66,5 @@ stores.each do |store|
       retry
     end
     OrderItem.all.each { |i| i.created_at += (rand(20) * -1).days; i.save }
-    # order.order_items.update_attribute :created_at, (rand(60)*-1).days.ago
   end
 end
