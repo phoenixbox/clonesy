@@ -6,7 +6,7 @@ module Uber::StatisticsHelper
   end
 
   def top_five_products
-    OrderItem.select("product_id as label, sum(quantity) as value").group("product_id").order("value DESC").limit(5)
+    OrderItem.select("products.title as label, sum(quantity) as value").joins(:product).group("products.title, product_id").order("value DESC").limit(5)
   end
 
   def aspu
