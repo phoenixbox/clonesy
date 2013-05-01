@@ -20,11 +20,14 @@
                 <div class="collection_products">
                   <% products = collection.sample_products %>
                   <% products.each do |product| %>
-                  <ul>
-                    <li> 
-                      <%= product %>
-                    </li>
-                  </ul>
+                  <div class='row-fluid collection_image'>
+                    <div class='span6'>
+                      <%= product.title %>
+                    </div>
+                    <div class='span6'>
+                      <%= image_tag product.img.url(:thumb) %>
+                    </div>
+                  </div>
                   <% end %>
                 </div>
             </div>

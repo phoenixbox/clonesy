@@ -25,6 +25,6 @@ class Collection < ActiveRecord::Base
   end
 
   def sample_products
-    self.products.limit(4).collect { |product| product.title }
+    self.products.limit(2)
   end
 end
