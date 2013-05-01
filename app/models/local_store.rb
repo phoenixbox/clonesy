@@ -19,14 +19,6 @@ class LocalStore
     REDIS.zrevrange(key, 0, 0).first
   end
 
-  def self.update_popularity(model_class_name, model_id)
-    key = key(model_class_name)
- 
-    REDIS.pipelined do
-      ensure_ttl(key)
-      REDIS.zincrby(key, 1, model_id)
-    end
-  end
  
 private
 
@@ -37,6 +29,15 @@ private
   def self.add_visitor(model_class_name, model_id, user)
     key = key_for_model(model_class_name, model_id)
     set(key,user)
+  end
+
+  def self.update_popularity(model_class_name, model_id)
+    key = key(model_class_name)
+ 
+    REDIS.pipelined do
+      ensure_ttl(key)
+      REDIS.zincrby(key, 1, model_id)
+    end
   end
 
   def self.set(key,user)
