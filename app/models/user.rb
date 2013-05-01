@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     self.uber
   end
 
+  def make_admin
+    Role.promote(current_user)
+  end
+
   def orphan?
     self.orphan
   end

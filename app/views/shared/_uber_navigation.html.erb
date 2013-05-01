@@ -4,5 +4,8 @@
     <li class="<%= active == :dashboard ? 'active' : '' %>">
       <%= link_to 'Dashboard', uber_stores_path %>
     </li>
+     <li class="<%= active == :statistics ? 'active' : '' %>">
+      <%= link_to t('statistics.self'), uber_statistics_path(current_store) %>
+    </li>
   </ul>
 </div>
