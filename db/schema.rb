@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130430132056) do
+ActiveRecord::Schema.define(:version => 20130501183830) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20130430132056) do
     t.integer "product_id"
   end
 
-  add_index "collections_products", ["collection_id"], :name => "index_collections_products_on_collection_id"
+  add_index "collections_products", ["collection_id", "product_id"], :name => "index_collections_products_on_collection_id_and_product_id", :unique => true
   add_index "collections_products", ["product_id"], :name => "index_collections_products_on_product_id"
 
   create_table "images", :force => true do |t|
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20130430132056) do
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "store_id"
     t.string   "status"
     t.string   "guid"
     t.datetime "created_at", :null => false
@@ -86,6 +85,11 @@ ActiveRecord::Schema.define(:version => 20130430132056) do
 
   add_index "orders", ["guid"], :name => "index_orders_on_guid", :unique => true
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+
+  create_table "orders_stores", :force => true do |t|
+    t.integer "order_id"
+    t.integer "store_id"
+  end
 
   create_table "products", :force => true do |t|
     t.integer  "store_id"
