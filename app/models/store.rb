@@ -23,7 +23,7 @@ class Store < ActiveRecord::Base
   scope :online, lambda { where(status: 'online') }
 
   def self.popular
-    popular_store = LocalStore.popular(self)
+    popular_store = LocalStore.popular_store
     find(popular_store) if popular_store
   end
 
@@ -55,7 +55,7 @@ class Store < ActiveRecord::Base
   end
 
   def increase_popularity
-    LocalStore.increase_popularity(self)
+    LocalStore.increase_popularity('store', id)
   end
 
 private

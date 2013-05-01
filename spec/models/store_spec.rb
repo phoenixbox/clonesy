@@ -93,7 +93,7 @@ describe Store do
   describe '.popular' do
     it 'delegates to LocalStore.popular' do
       subject.save
-      LocalStore.stub(:popular).and_return(subject.id)
+      LocalStore.stub(:popular_store).and_return(subject.id)
       popular = Store.popular
       expect(popular).to eq subject
     end

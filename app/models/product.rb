@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.popular
-    popular_products = LocalStore.popular(self)
+    popular_products = LocalStore.popular_products
     Product.includes(:store).includes(:images).find(popular_products.map(&:to_i))
   end
 
@@ -53,11 +53,8 @@ class Product < ActiveRecord::Base
   end
 
   def toggle_status
-    if status == 'active'
-      update_attributes(status: 'retired')
-    elsif status == 'retired'
-      update_attributes(status: 'active')
-    end
+    next_status = {'active' => 'retired', 'retired' => 'active'}[status]
+    update_attributes(status: next_status) if next_status
   end
 
   def img
@@ -73,6 +70,6 @@ class Product < ActiveRecord::Base
   end
 
   def increase_popularity
-    LocalStore.increase_popularity(self)
+    LocalStore.increase_popularity('product', id)
   end
 end
