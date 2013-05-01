@@ -18,7 +18,7 @@
             <div class="span6 collection_title">
                 <%= link_to collection.name.titleize , account_collection_path(collection) %>
                 <div class="collection_products">
-                  <% products = collection.products.limit(4).collect { |product| product.title } %>
+                  <% products = collection.sample_products %>
                   <% products.each do |product| %>
                   <ul>
                     <li> 
@@ -32,6 +32,5 @@
       </div>
     </div>
     <% end %>
-
   </div>
 </div>

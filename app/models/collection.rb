@@ -23,4 +23,8 @@ class Collection < ActiveRecord::Base
   def sample_collection_image
     self.products.sample.img if (!self.products.empty?)
   end
+
+  def sample_products
+    self.products.limit(4).collect { |product| product.title }
+  end
 end
