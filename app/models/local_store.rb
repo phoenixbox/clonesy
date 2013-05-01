@@ -41,7 +41,7 @@ private
   end
 
   def store_visitors(thing)
-    REDIS.key thing || REDIS.add thing
+    # REDIS.key thing || REDIS.add thing
   end
 
   def self.key(thing, qualifier)
