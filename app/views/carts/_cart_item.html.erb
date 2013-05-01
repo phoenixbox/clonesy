@@ -2,7 +2,7 @@
 
 <tr>
   <td class="span3">
-    <%= image_tag cart_item.product.img.url(:medium) %>
+    <%= image_tag cart_item.product.img.url(:medium), class: 'img-polaroid' %>
   </td>
   <td>
     <%= render partial: "carts/cart_item_tools", locals: {cart_item: cart_item} %>
