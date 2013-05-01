@@ -31,7 +31,7 @@
 
   <div class='span5 etsy-nav etsy-search-bar'>
     <form>
-      <input type="text" class="search-query" placeholder="Search">
+      <input type="text" class="search-query" data-provide="typeahead" data-source="<%= @search_terms %>" autocomplete="off" placeholder="Search">
     </form>
   </div>
 
