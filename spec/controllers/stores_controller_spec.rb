@@ -5,6 +5,7 @@ describe StoresController do
   let!(:store) {FactoryGirl.build(:store)}
 
   before (:each) do
+    controller.stub(:current_user).and_return(FactoryGirl.create(:user))
     store.status = "online"
     store.save!
   end
