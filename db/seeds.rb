@@ -47,6 +47,7 @@ class RealishStore
   def initialize(store_params)
     @store = Store.create!(store_params)
     store.update_attributes({status: 'online'}, as: :uber)
+    REDIS.zincrby('popular_stores', 1, @store.id)
 
     seed_categories(10)
     seed_products
@@ -64,6 +65,7 @@ class RealishStore
       end
 
       product.save!
+      REDIS.zincrby('popular_products', 1, product.id)
     end
   end
 
@@ -89,6 +91,9 @@ class RealishStore
     end
   end
 end
+
+# FLUSH REDIS
+REDIS.flushall
 
 # LOAD SEED DATA, SETUP CONSTANTS
 SEED_DATA = YAML.load_file('db/seeds.yml')

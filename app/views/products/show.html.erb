@@ -48,3 +48,10 @@
 
   </div>
 </div>
+
+<script>
+    $('.thumb').on('mouseover', function () {
+        var url = $(this).data('url');
+        $('.main_image').html('<img src=' + url + '/ class="pull-left">');
+    });
+</script>

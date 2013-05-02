@@ -13,27 +13,22 @@
   <div class="span8">
     <h1><%= t 'statistics.self' %></h1>
     <hr>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Order Value Over Time</h3>
+        <hr>
+        <%= content_tag :div, "", id: "orders_chart", data: {orders: orders_value_chart_data } %>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Top 5 Bestsellers</h3>
+        <hr>
+         <%= content_tag :div, "", id: "donut_chart", data: {products: top_five_products } %>
+      </div>
+    </div>
+
   </div>
 </div>
-
-<div class="row-fluid">
-  <div class="span12">
-    <h3>Order Value Over Time</h3>
-    <hr>
-    <%= content_tag :div, "", id: "orders_chart", data: {orders: orders_value_chart_data } %>
-  </div>
-</div>
-
-<div class="row-fluid">
-  <div class="span6">
-    <h3>Average Spend per Customer</h3>
-    <hr>
-  </div>
-
-  <div class="span6 pull-right">
-    <h3>Top 5 Bestsellers</h3>
-    <hr>
-     <%= content_tag :div, "", id: "donut_chart", data: {products: top_five_products } %>
-  </div>
-</div>
-
