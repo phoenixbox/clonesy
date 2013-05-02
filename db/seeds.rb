@@ -110,3 +110,9 @@ LoadTestingStore.new
 SEED_DATA['stores'].each do |store_params|
   RealishStore.new(store_params)
 end
+
+OrderItem.all.each do |i|
+  puts "Updating date for order item #{i.id}"
+  i.created_at += (rand(20) * -1).days
+  i.save
+end
