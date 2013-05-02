@@ -20,7 +20,12 @@ class LoadTestingStore
   def seed_products(num)
     num.times do |i|
       puts "Load product ##{i}"
-      load_store.products.create!(title: i.to_s, description: i.to_s, price: 1, status: 'active', category_ids: [rand(10) + 1])
+      begin
+        title = Faker::Lorem.words(2).join(" ") + " " + i.to_s
+        load_store.products.create!(title: title, description: 'None..', price: 1, status: 'active', category_ids: [rand(10) + 1])
+      rescue
+        retry
+      end
     end
   end
 
