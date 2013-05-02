@@ -2,26 +2,37 @@
   <p id="notice"><%= "Not Found: This store is pending approval." %></p>
   <%= render partial: 'store_details' %>
 <% else %>
+
   <div class="product-index">
-
-    <section id="product_listing" class="row-fluid">
-      <div class="pull-left">
-        <h1>Welcome to <%= current_store.name %></h1>
-        <p><%= current_store.description %></p>
-      </div>
-      <div class="pull-right">
-        <%= render partial: 'category_dropdown',
-                   locals: { categories: @categories } %>
-      </div>
-    </section>
-
-    <br/>
-
-    <div id="product_listing" class="row-fluid">
-      <%= render @products %>
+  <section id="product_listing" class="row-fluid">
+    <div class="pull-left">
+      <h1>Welcome to <%= current_store.name %></h1>
+      <p><%= current_store.description %></p>
     </div>
-
-    <div class="pagination"> <%= paginate @products %></div>
-
+    <div class="pull-right">
+      <%= render partial: 'category_dropdown',
+                 locals: { categories: @categories } %>
+    </div>
+  </section>
   </div>
+  <br/>
+
+  <div id="product_listing" class="row-fluid">
+    <% n = 0 %>
+    <% @products.each do |product| %>
+      <% if n % 4 == 0 %>
+      <div class="span3 default-bit-height" id="multi-row">
+      <% else %>
+      <div class="span3 default-bit-height">
+      <% end %>
+      <% n += 1 %>
+        <div class="product-display">
+          <%= render partial: 'homepage/popular_product',
+                     locals: {product: product} %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="pagination"> <%= paginate @products %></div>
 <% end %>

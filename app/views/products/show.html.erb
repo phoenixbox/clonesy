@@ -26,7 +26,7 @@
     <div id="product-categories">
       <b><%= t('categories.self') %>:</b>
       <% @product.categories.each do |category| %>
-      <a href='/products/?category_id=<%= category.id %>'><span class="label"><%= category.title %></span></a>
+      <span class="label"><%= category.title %></span>
       <% end %>
     </div>
 
