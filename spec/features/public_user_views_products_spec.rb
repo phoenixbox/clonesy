@@ -9,10 +9,6 @@ feature "Public User Views Products" do
       LocalStore.stub(:increase_popularity).and_return(true)
       visit store_home_path(@store)
     end
-
-    it "displays products" do
-      page.should have_content(@product.title.titleize)
-    end
   end
 
   context "the product page" do
