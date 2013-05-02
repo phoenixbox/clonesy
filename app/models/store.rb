@@ -27,7 +27,7 @@ class Store < ActiveRecord::Base
   end
 
   def self.recent
-    self.count > 0 ? self.last : nil
+    self.count > 0 ? self.online.last : nil
   end
 
   def is_admin?(user)
@@ -58,15 +58,16 @@ class Store < ActiveRecord::Base
   end
 
   def orders
-    Order.find_by_sql("SELECT orders.* from orders INNER JOIN order_items on order_items.order_id = orders.id INNER JOIN products on products.id = order_items.product_id where products.store_id = #{id}")
+    Order.find_by_sql("SELECT orders.* from orders INNER JOIN order_items on order_items.order_id = orders.id INNER JOIN products on products.id = order_items.product_id where products.store_id = #{id} order by orders.created_at DESC")
   end
 
   def orders_by_status(order_status=nil)
-    if order_status && order_status != 'all'
-      orders.select { |order| order.status == order_status}
+    results = if order_status && order_status != 'all'
+      orders.select { |order| order.status == order_status }
     else
       orders
     end
+    results.uniq
   end
 
 private
