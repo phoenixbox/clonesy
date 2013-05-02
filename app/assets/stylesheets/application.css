@@ -75,6 +75,17 @@
   border: 1px solid rgb(57, 89, 116);
 }
 
+.faint{
+  background-color: #5e5e5e;
+  border: 0 none;
+  color: #5e5e5e;
+  height: 1px;
+}
+
+.inline{
+  display: inline;
+  float: left;
+}
 .morris-hover.morris-default-style {
   position:absolute;
   z-index:1000;
