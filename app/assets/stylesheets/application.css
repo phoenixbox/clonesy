@@ -98,3 +98,10 @@
   font-size: 16px;
   text-align: center;
 }
+
+#multi-row {
+  margin-left: 0px;
+}
+.default-bit-height {
+  height: 500px;
+}
