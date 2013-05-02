@@ -33,7 +33,7 @@
         <a class="btn span4 etsy-nav" href="<%= account_collection_path(current_user.favorites)%>"><i class="icon-heart"></i></a>
         <% end %>
         <a class="btn span4 etsy-nav" href="<%= profile_path %>"><i class="icon-user"></i></a>
-        <a class="btn span4 etsy-nav" href="#"><i class="icon-gift"></i></a>
+        <a class="btn span4 etsy-nav" href="<%= account_collections_path %>"><i class="icon-gift"></i></a>
       <% else %>
         <%= link_to 'Signup', signup_path, class: "btn span6 etsy-nav" %>
         <%= link_to 'Login', login_path, class: "btn span6 etsy-nav" %>
