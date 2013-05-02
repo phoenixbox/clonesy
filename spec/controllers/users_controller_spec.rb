@@ -29,6 +29,12 @@ describe UsersController do
         post :create, valid_attributes
         response.should redirect_to(root_path)
       end
+
+      it "creates a favorites collection for that user" do 
+        controller.stub(:enqueue_welcome_email)
+        post :create, valid_attributes
+        expect(User.first.favorites).to be
+      end
     end
 
     context "with invalid attributes" do
@@ -101,11 +107,6 @@ describe UsersController do
       @user = FactoryGirl.create(:user)
       @user.uber_up
       login_user @user
-    end
-
-    it "locates the requested @user" do
-      put :update, id: @user, user: FactoryGirl.attributes_for(:user)
-      expect(assigns(:user)).to eq(@user)
     end
 
     context "with valid attributes" do

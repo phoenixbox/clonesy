@@ -1,0 +1,26 @@
+<div>
+  <%= render partial: 'shared/uber_navigation', :locals => { active: :orders }  %>
+
+  <div class="span8">
+    <h1>Orders</h1>
+    <hr>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Order #</th>
+        <th>Created at</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+        <%= render @orders %>
+      </tbody>
+    </table>
+
+    <div> <%= paginate @orders %> </div>
+
+  </div>
+</div>

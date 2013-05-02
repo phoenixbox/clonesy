@@ -1,67 +1,107 @@
-SEED_DATA = YAML.load_file('db/seeds.yml')
+class LoadTestingStore
+  attr_reader :load_store
 
-def seed_products(store)
-  SEED_DATA['products'][store.path].each_with_index do |product_params, i|
-    puts "Seeding product #{i} for store #{store.id}"
+  def initialize
+    @load_store = Store.create!(name: 'Load', path: 'load', description: 'Load testing')
+    load_store.update_attributes({status: 'offline'}, as: :uber)
 
-    image_params = product_params.delete('images')
+    seed_categories(10)
+    seed_products(10_000)
+    seed_orders(10_000)
+  end
 
-    product = store.products.new(product_params)
-
-    image_params.each do |image_param|
-      product.images.new(data: URI.parse(image_param['url']))
+  def seed_categories(num)
+    num.times do |i|
+      load_store.categories.create!(title: "Category ##{i.to_s}")
+      puts "Category #{i} created"
     end
+  end
 
-    product.save!
+  def seed_products(num)
+    num.times do |i|
+      puts "Load product ##{i}"
+      load_store.products.create!(title: i.to_s, description: i.to_s, price: 1, status: 'active', category_ids: [rand(10) + 1])
+    end
+  end
+
+  def seed_orders(num)
+    num.times do |i|
+      puts "Seeding order ##{i}"
+      order = Order.create!(status: ::ORDER_STATUSES.sample,
+                            user_id: 2)
+      order.order_items.create!(product_id: rand(10_000) + 1,
+                                unit_price: (75..150).to_a.sample,
+                                quantity: rand(3) + 1)
+    end
   end
 end
 
-def seed_categories(store, count)
-  count.times do |i|
-    title = Faker::Lorem.words(2).join(" ")
-    store.categories.create!(title: title,
-                             store_id: store.id)
-    puts "Category #{title} created for Store #{store.id}"
+class RealishStore
+  attr_reader :store
+
+  def initialize(store_params)
+    @store = Store.create!(store_params)
+    store.update_attributes({status: 'online'}, as: :uber)
+
+    seed_categories(10)
+    seed_products
+    seed_orders(30)
+  end
+
+  def seed_products
+    SEED_DATA['products'][store.path].each_with_index do |product_params, i|
+      puts "Seeding product #{i+1} for store #{store.id}"
+      image_params = product_params.delete('images')
+      product = store.products.new(product_params)
+
+      image_params.each do |image_param|
+        product.images.new(data: URI.parse(image_param['url']))
+      end
+
+      product.save!
+    end
+  end
+
+  def seed_categories(num)
+    num.times do |i|
+      title = Faker::Lorem.words(2).join(" ")
+      store.categories.create!(title: title,
+                               store_id: store.id)
+      puts "Category #{title} created for Store #{store.id}"
+    end
+  end
+
+  def seed_orders(num)
+    num.times do |i|
+      puts "Seeding order ##{i}"
+      order = Order.create!(status: ::ORDER_STATUSES.sample,
+                            user_id: 2)
+      oi = order.order_items.create!(product_id: store.products.sample.id,
+                                     unit_price: (75..150).to_a.sample,
+                                     quantity: rand(3) + 1)
+      oi.created_at += (rand(20) * -1).days
+      oi.save!
+    endrai
   end
 end
 
-# THE USUAL SUSPECS / UBERS
+# LOAD SEED DATA, SETUP CONSTANTS
+SEED_DATA = YAML.load_file('db/seeds.yml')
+ORDER_STATUSES = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
+
+# THE USUAL SUSPECTS / UBERS
 user1 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
 user1.uber_up
+Collection.create(name: "favorites", user: user1)
+
 user2 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
 user2.uber_up
+Collection.create(name: "favorites", user: user2)
 
-# CREATE STORES
-stores = SEED_DATA['stores'].map do |store_params|
-           Store.create!(store_params)
-         end
+# CREATE LOAD TESTING STORE
+LoadTestingStore.new
 
-# SET STORE STATUS
-stores.each do |store|
-  store.update_attributes({status: 'online'}, as: :uber)
+# CREATE REAL-ISH STORES
+SEED_DATA['stores'].each do |store_params|
+  RealishStore.new(store_params)
 end
-
-# CREATE CATEGORIES
-# stores.each { |store| seed_categories(store, 10) }
-
-# CREATE PRODUCTS
-stores.each { |store| seed_products(store) }
-
-# CREATE ORDERS
-# STATUSES = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
-# stores.each do |store|
-#   20.times do |i|
-#     begin
-#       puts "Seeding order #{i} for store #{store.id}"
-#       order = Order.create(status: STATUSES.sample,
-#                            user_id: rand(10_000),
-#                            store_id: store.id)
-#       product = store.products.sample
-#       order.order_items.create(product_id: product.id,
-#                                unit_price: product.price,
-#                                quantity: rand(5))
-#     rescue
-#       retry
-#     end
-#   end
-# end

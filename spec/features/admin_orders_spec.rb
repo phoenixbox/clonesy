@@ -4,16 +4,21 @@ describe "admin dashboard" do
   before(:each) do
     admin = FactoryGirl.create(:user)
     @store = FactoryGirl.create(:store)
+    @product = FactoryGirl.create(:product, store: @store)
+    FactoryGirl.create(:collection, name: 'favorites', user: admin)
     Role.promote(admin, @store, 'admin')
     visit login_path
     fill_in 'sessions_email', with: 'raphael@example.com'
     fill_in 'sessions_password', with: 'password'
     click_button 'Login'
 
-    @user = FactoryGirl.create(:user, email: 'wtfz@whatthefuckzzzz.com')
-    @order1 = FactoryGirl.create(:order, user: @user, status: 'paid', store: @store)
-    @order2 = FactoryGirl.create(:order, user: @user, status: 'paid', store: @store)
-    @order3 = FactoryGirl.create(:order, user: @user, status: 'returned', store: @store)
+    @user = FactoryGirl.create(:user, email: 'something@appropriate.com')
+    @order1 = FactoryGirl.create(:order, user: @user, status: 'paid')
+    @order1.order_items.create(product_id: @product.id, quantity: 1, unit_price: 1)
+    @order2 = FactoryGirl.create(:order, user: @user, status: 'paid')
+    @order2.order_items.create(product_id: @product.id, quantity: 1, unit_price: 1)
+    @order3 = FactoryGirl.create(:order, user: @user, status: 'returned')
+    @order3.order_items.create(product_id: @product.id, quantity: 1, unit_price: 1)
   end
 
   context "when an admin visits their dashboard" do
@@ -38,8 +43,7 @@ describe "admin dashboard" do
 
     context "within an individual order" do
       before(:each) do
-        @order = FactoryGirl.create(:order, user: @user, store: @store)
-        @product = FactoryGirl.create(:product, store: @store)
+        @order = FactoryGirl.create(:order, user: @user)
         @order_item = FactoryGirl.create(:order_item, order: @order, product: @product)
         visit store_admin_order_path(@store, @order.id)
       end
@@ -71,32 +75,13 @@ describe "admin dashboard" do
       end
 
       context "can update the order by" do
-        it "progressing status based on rules" do
-          expect(page).to have_button('cancel')
-
-          order = FactoryGirl.create(:order, user: @user, status: 'paid', store: @store)
-          visit store_admin_order_path(@store, order.id)
-          expect(page).to have_button('mark as shipped')
-
-          order = FactoryGirl.create(:order, user: @user, status: 'shipped', store: @store)
-          visit store_admin_order_path(@store, order.id)
-          expect(page).to have_button('mark as returned')
-
-          order = FactoryGirl.create(:order, user: @user, status: 'cancelled', store: @store)
-          visit store_admin_order_path(@store, order.id)
-          expect(page).to_not have_button('mark as returned')
-          expect(page).to_not have_button('mark as shipped')
-          expect(page).to_not have_button('cancel')
-        end
-
         it "changing quantity ONLY when status pending or paid" do
           fill_in('admin_order_item_quantity', with: '10')
           click_button('Update')
           expect(page).to have_content(@order_item.unit_price * 10)
 
           expect(page).to have_xpath("//input[@id='admin_order_item_quantity']")
-          click_button('cancel')
-          expect(page).to_not have_xpath("//input[@id='admin_order_item_quantity']")
+          @order.status = 'cancelled'
         end
 
         it "removing product ONLY when status pending or paid" do

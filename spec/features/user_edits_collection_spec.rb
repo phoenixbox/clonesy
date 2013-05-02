@@ -5,6 +5,7 @@ describe "user edits collection" do
   let!(:collection) { user.collections.create(name: 'Shoes Shoes') }
 
   before do
+    FactoryGirl.create(:collection, name: 'favorites', user: user)
     LocalStore.stub(:increase_popularity).and_return(true)
     visit '/login'
     fill_in 'sessions_email', with: 'raphael@example.com'

@@ -11,7 +11,7 @@ describe Mailer do
   end
 
   it 'sends an order confirmation email' do
-    order = FactoryGirl.create(:order, store: store, user: user)
+    order = FactoryGirl.create(:order, user: user)
     order.guid = "randomstring-here-I-am"
     order.save!
     email = Mailer.order_confirmation(user, order, order.total).deliver

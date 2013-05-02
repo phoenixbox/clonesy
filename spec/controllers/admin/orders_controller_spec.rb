@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Admin::OrdersController do
+  let(:product) { FactoryGirl.create(:product, store: @store) }
+
   before(:each) do
     @user = FactoryGirl.create(:user)
     @store = FactoryGirl.create(:store)
@@ -10,32 +12,22 @@ describe Admin::OrdersController do
   end
 
   it "index action should render index template" do
-
     get :index
     response.should render_template(:index)
   end
 
   it "index action should return a collection of orders" do
-    orders = [ FactoryGirl.create(:order, user: @user, store: @store) ]
+    order = FactoryGirl.create(:order, user: @user)
+    order.order_items.create(product_id: product.id, quantity: 1, unit_price: 1)
 
     get :index
-    expect(assigns(:orders)).to match_array orders
+    expect(assigns(:admin_order_view).orders).to match_array [order]
   end
 
   it "show action should return an individual order" do
-    order = FactoryGirl.create(:order, user: @user, store: @store)
+    order = FactoryGirl.create(:order, user: @user)
 
     get :show, id: order.id
     expect(assigns(:order)).to eq order
-  end
-
-  describe 'update' do
-    it 'works correctly' do
-      order = FactoryGirl.create(:order, user: @user, store: @store)
-      request.env["HTTP_REFERER"] = '/'
-      put :update, id: order.id, update_status: true
-      order.reload
-      expect(order.status).to eq 'cancelled'
-    end
   end
 end

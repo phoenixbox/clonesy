@@ -22,16 +22,18 @@
 <div class='row-fluid'>
   <%= link_to root_path do %>
   <div class="span2 etsy-nav" id="etsy-logo">
-    Jeffsy
+    Agraphum
   </div>
   <% end %>
 
   <div class='span3'>
     <div class='row-fluid'>
       <% if logged_in? %>
-        <a class="btn span4 etsy-nav" href="#"><i class="icon-heart"></i></a>        
-        <a class="btn span4 etsy-nav" href="#"><i class="icon-user"></i></a>        
-        <a class="btn span4 etsy-nav" href="#"><i class="icon-gift"></i></a>        
+        <% if current_user.favorites %>
+        <a class="btn span4 etsy-nav" href="<%= account_collection_path(current_user.favorites)%>"><i class="icon-heart"></i></a>
+        <% end %>
+        <a class="btn span4 etsy-nav" href="<%= profile_path %>"><i class="icon-user"></i></a>
+        <a class="btn span4 etsy-nav" href="#"><i class="icon-gift"></i></a>
       <% else %>
         <%= link_to 'Signup', signup_path, class: "btn span6 etsy-nav" %>
         <%= link_to 'Login', login_path, class: "btn span6 etsy-nav" %>
@@ -40,10 +42,15 @@
   </div>
 
   <div class='span5 etsy-nav etsy-search-bar'>
-    <form>
-      <input type="text" class="search-query" placeholder="Search">
+    <form method="post" action="/search_results">
+      <input type="text" class="search-query" data-provide="typeahead" data-source="<%= @search_terms %>" autocomplete="off" name="query" placeholder="Search">
     </form>
   </div>
 
-  <a class="btn span2 etsy-nav" href="<%= cart_path %>"><i class="icon-shopping-cart"></i>Cart</a>        
+  <a class="btn span2 etsy-nav" href="<%= cart_path %>"><i class="icon-shopping-cart"></i>
+     Cart
+    <% unless current_cart.empty? %>
+      <%= current_cart.count %>
+    <% end %>
+  </a>
 </div>

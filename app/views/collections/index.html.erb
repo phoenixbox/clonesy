@@ -5,13 +5,35 @@
     <h1>Collections</h1>
     <hr>
 
-    <ul>
     <% @collections.each do |collection| %>
-      <li>
-        <%= link_to collection.name, account_collection_path(collection) %>
-        <small>(<%= collection.products.count %> items)</small>
-      </li>
+    <div class="row-fluid">
+      <div class="span12 collection_list">
+        <div class='row-fluid'>
+            <div class="span6">
+              <% if collection.sample_collection_image %>
+                <%= image_tag collection.sample_collection_image.url(:large), class: "img-polaroid" %>
+              <% end %>
+            </div>
+            
+            <div class="span6 collection_title">
+                <%= link_to collection.name.titleize , account_collection_path(collection) %>
+                <div class="collection_products">
+                  <% products = collection.sample_products %>
+                  <% products.each do |product| %>
+                  <div class='row-fluid collection_image'>
+                    <div class='span6'>
+                      <%= product.title %>
+                    </div>
+                    <div class='span6'>
+                      <%= image_tag product.img.url(:thumb) %>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
     <% end %>
-    </ul>
   </div>
 </div>

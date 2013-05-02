@@ -25,14 +25,6 @@ describe Order do
     expect(FactoryGirl.build(:order, user: user, status: 'abracadabra')).to_not be_valid
   end
 
-  context "when orders exist" do
-    before(:each) { FactoryGirl.create(:order, user: user) }
-
-    it "returns orders by status" do
-      expect((Order.by_status("pending")).count).to eq 1
-    end
-  end
-
   context "when an order has been placed" do
     it "creates a pending order" do
       expect{
@@ -61,6 +53,14 @@ describe Order do
     it "returns its total with items" do
       order = Order.create_pending_order(user, cart)
       expect(order.total).to eq 12.99
+    end
+  end
+
+  describe '#stores' do
+    it 'returns an array of all associated stores through order items' do
+      order = FactoryGirl.create(:order, user: user)
+      order.order_items.create(product_id: product.id, quantity: 1, unit_price: 1)
+      expect(order.stores).to eq [store]
     end
   end
 end

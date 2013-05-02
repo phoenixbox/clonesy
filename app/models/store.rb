@@ -4,7 +4,6 @@ class Store < ActiveRecord::Base
 
   has_many :categories
   has_many :products
-  has_many :orders
   has_many :user_store_roles
 
   before_validation :parameterize_path
@@ -21,6 +20,15 @@ class Store < ActiveRecord::Base
   scope :approved, lambda { where("status <> 'declined'") }
 
   scope :online, lambda { where(status: 'online') }
+
+  def self.popular
+    popular_store = LocalStore.popular_store
+    find(popular_store) if popular_store
+  end
+
+  def self.recent
+    self.count > 0 ? self.last : nil
+  end
 
   def is_admin?(user)
     user.uber? || UserStoreRole.exists?(store_id: self,
@@ -41,24 +49,24 @@ class Store < ActiveRecord::Base
   end
 
   def toggle_online_status(role)
-    if status == 'online'
-      update_attributes({status: 'offline'}, as: role)
-    elsif status == 'offline'
-      update_attributes({status: 'online'}, as: role)
+    next_status = {'online' => 'offline', 'offline' => 'online'}[status]
+    update_attributes({status: next_status}, as: role) if next_status
+  end
+
+  def increase_popularity(user)
+    LocalStore.increase_popularity('store', id, user)
+  end
+
+  def orders
+    Order.find_by_sql("SELECT orders.* from orders INNER JOIN order_items on order_items.order_id = orders.id INNER JOIN products on products.id = order_items.product_id where products.store_id = #{id}")
+  end
+
+  def orders_by_status(order_status=nil)
+    if order_status && order_status != 'all'
+      orders.select { |order| order.status == order_status}
+    else
+      orders
     end
-  end
-
-  def increase_popularity
-    LocalStore.increase_popularity(self)
-  end
-
-  def self.popular
-    popular_store = LocalStore.popular(self)
-    find(popular_store) if popular_store
-  end
-
-  def self.recent
-    self.count > 0 ? self.order("created_at DESC").first : nil
   end
 
 private

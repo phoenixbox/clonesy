@@ -6,8 +6,11 @@ class CollectionsController < ApplicationController
                                        :add_product,
                                        :remove_product ]
 
+
   def index
-    @collections = current_user.collections.includes(:products).all
+    @collections = current_user.collections
+                      .includes(:products)
+                      .select { |collection| collection.name != "favorites" }
   end
 
   def show

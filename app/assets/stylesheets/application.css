@@ -1,4 +1,5 @@
 /*
+/*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -12,13 +13,31 @@
  *= require_tree .
  */
 
-/* For the Shopping Cart Show Page*/
-#shopping_cart_summary {
-  float: right;
+/* For the Collections Index Page*/
+.collection_title {
+  padding: 40px;
+}
+
+.collection_products {
+  padding: 10px;
+  font-size: 70%;
+  text-align: left;
+}
+
+.collection_image {
+  padding: 5px;
+  margin: 10px;
+}
+
+.collection_list {
+  border: 2px solid black;
+  padding: 20px;
+  background-color: #F2F2F2;
+  margin: 20px;
 }
 
 /* This is the sidebar nav used for user account and admin stuff*/
-.nav-list li.nav-header{
+.nav-list li.nav-header {
   color: rgb(51, 51, 51);
 }
 
@@ -38,6 +57,7 @@
   background-color: #8B2252;
   color: #fff;
 }
+
 /* Color Tabs in Admin Dashboard*/
 .nav-pills li{
   margin: 0 3px 0 3px;
@@ -65,4 +85,16 @@
 .inline{
   display: inline;
   float: left;
+}
+.morris-hover.morris-default-style {
+  position:absolute;
+  z-index:1000;
+  border-radius: 10px;
+  padding: 6px;
+  color: #666;
+  background: rgba(255, 255, 255, 0.8);
+  border: solid 2px rgba(230, 230, 230, 0.8);
+  font-family: sans-serif;
+  font-size: 16px;
+  text-align: center;
 }

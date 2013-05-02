@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to order_item.product.title, store_product_path(order_item.product.store, order_item.product) %></td>
+  <td><%= link_to order_item.product.store.name, store_home_path(order_item.product.store) %></td>
+  <td><%= order_item.quantity %></td>
+  <td><%= number_to_currency(order_item.unit_price) %></td>
+  <td><%= number_to_currency(order_item.subtotal) %></td>
+</tr>

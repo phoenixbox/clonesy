@@ -5,12 +5,11 @@ class SessionsController < ApplicationController
   def create
     user = login(params[:sessions][:email],
                  params[:sessions][:password],
-                 params[:sessions][:remember_me]
-                 )
+                 params[:sessions][:remember_me])
     if user
       next_page = params[:sessions][:next_page]
       redirect_to next_page || session[:return_to] || root_path,
-        notice: 'Logged in!'
+                  notice: 'Logged in!'
     else
       flash.alert = 'Username or password was invalid'
       redirect_to login_path
