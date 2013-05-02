@@ -1,9 +1,19 @@
 <% if logged_in? %>
 <div class='row-fluid' id='account-text-section'>
   <div class='span12'>
-    <span>Welcome, <%= link_to current_user.first_name, profile_path %> | <%= link_to "Logout",
+    <span>Welcome,
+      <!-- If uber then go to the uber dashboard -->
+      <% if current_user.uber? %>
+      <%= link_to current_user.first_name, uber_account_path %> | <%= link_to "Logout",
                                     logout_path,
                                     method: :delete %>
+      <!-- if admin then go to the admin dashboard -->
+      <% else %>
+      <!-- if regular user then go to the user dashboard -->
+      <%= link_to current_user.first_name, profile_path %> | <%= link_to "Logout",
+                                    logout_path,
+                                    method: :delete %>
+      <% end %>    
     </span>
   </div>
 </div>

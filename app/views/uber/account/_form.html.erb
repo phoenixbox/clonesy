@@ -1,0 +1,8 @@
+<%= simple_form_for @user, :url => uber_account_update_path(@user.id), :method => :put  do |f| %>
+    <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+    <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+    <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.button :submit, t('submit'), class:"btn btn-success span2" %>
+<% end %>

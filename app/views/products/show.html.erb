@@ -34,6 +34,7 @@
     <h4><%= t('product.price') %>: <%= number_to_currency(@product.price) %></h4>
     <br>
 
+    <div>
     <% if @product.status == 'active' %>
       <%= render partial: 'add_to_cart_button', locals: {product: @product} %>
       <%= render partial: 'buy_now_button', locals: {product: @product} %>
@@ -43,6 +44,7 @@
     <% else %>
       <p> Product is retired! </p>
     <% end %>
+    </div>
 
   </div>
 </div>

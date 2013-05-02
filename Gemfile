@@ -16,6 +16,7 @@ gem 'kaminari'
 gem 'paperclip', "~> 3.0"
 gem 'redis', "~> 3.0.3"
 gem 'aws-sdk'
+gem 'pry'
 gem 'cache_digests'
 gem 'newrelic_rpm'
 

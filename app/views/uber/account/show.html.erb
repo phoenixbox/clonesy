@@ -1,0 +1,9 @@
+<div class="user-index">
+  <%= render partial: 'shared/uber_navigation', :locals => { active: :account_details }  %>
+  <div class="span8">
+    <h1>Edit Account Details</h1>
+    <hr>
+
+    <%= render partial: 'form', :locals => { active: :account_details } %>
+  </div>
+</div>

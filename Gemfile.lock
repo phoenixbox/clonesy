@@ -290,6 +290,7 @@ DEPENDENCIES
   newrelic_rpm
   paperclip (~> 3.0)
   pg
+  pry
   rails (= 3.2.13)
   rake
   redis (~> 3.0.3)

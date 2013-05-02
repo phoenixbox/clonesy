@@ -1,17 +1,21 @@
-<div class="admin-dashboard-manage">
-  <%= render partial: 'shared/admin_navigation', locals: { active: :manage }  %>
+<div class="user-index">
+  <%= render partial: 'shared/admin_navigation',
+              locals: { active: :manage }  %>
   <div class="span8">
     <h1>Manage</h1>
     <hr>
 
-    <h4>Name</h4>
-    <p><%= current_store.name %></p>
+    <h3>Store Name</h3>
+    <p><%= link_to current_store.name, store_home_path(current_store.path) %></p>
+    <hr class="faint" />
 
-    <h4>Path</h4>
+    <h3>Store Path</h3>
     <p><%= current_store.path %></p>
+    <hr class="faint" />
 
-    <h4>Description</h4>
+    <h3>Store Description</h3>
     <p><%= current_store.description %></p>
+    <hr class="faint" />
 
     <%= link_to 'Edit', store_admin_edit_store_path(current_store) %>
     <hr>
