@@ -7,7 +7,7 @@ class LoadTestingStore
 
     seed_categories(10)
     seed_products(10_000)
-    seed_orders(10_000)
+    seed_orders(20)
   end
 
   def seed_categories(num)
