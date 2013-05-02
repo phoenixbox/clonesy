@@ -27,7 +27,7 @@ class Store < ActiveRecord::Base
   end
 
   def self.recent
-    self.count > 0 ? self.last : nil
+    self.count > 0 ? self.online.last : nil
   end
 
   def is_admin?(user)
