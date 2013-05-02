@@ -81,7 +81,7 @@ class RealishStore
                                      quantity: rand(3) + 1)
       oi.created_at += (rand(20) * -1).days
       oi.save!
-    endrai
+    end
   end
 end
 
