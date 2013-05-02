@@ -16,6 +16,7 @@ gem 'kaminari'
 gem 'paperclip', "~> 3.0"
 gem 'redis', "~> 3.0.3"
 gem 'aws-sdk'
+gem 'pry'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

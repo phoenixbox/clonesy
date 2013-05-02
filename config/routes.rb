@@ -42,6 +42,8 @@ StoreEngine::Application.routes.draw do
   resources :stores, only: [ :new, :create ]
 
   namespace :uber do
+    get "/account" => "account#show", as: :account
+    put "/account/:id" => "account#update", as: :account_update
     resources :stores, only: [ :index ] do
       member do
         put :approve

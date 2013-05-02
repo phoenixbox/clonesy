@@ -1,20 +1,27 @@
 <% if current_store.pending? %>
-<p id="notice"><%= "Not Found: This store is pending approval." %></p>
-<%= render partial: 'store_details' %>
+  <p id="notice"><%= "Not Found: This store is pending approval." %></p>
+  <%= render partial: 'store_details' %>
 <% else %>
-<div class="product-index">
-  <section class="row">
-    <%= render partial: 'category_dropdown',
-               locals: { categories: @categories } %>
-  </section>
+  <div class="product-index">
 
-  <br/>
+    <section id="product_listing" class="row-fluid">
+      <div class="pull-left">
+        <h1>Welcome to <%= current_store.name %></h1>
+        <p><%= current_store.description %></p>
+      </div>
+      <div class="pull-right">
+        <%= render partial: 'category_dropdown',
+                   locals: { categories: @categories } %>
+      </div>
+    </section>
 
-  <div id="product_listing" class="row-fluid">
-    <%= render @products %>
+    <br/>
+
+    <div id="product_listing" class="row-fluid">
+      <%= render @products %>
+    </div>
+
+    <div class="pagination"> <%= paginate @products %></div>
+
   </div>
-
-  <div class="pagination"> <%= paginate @products %></div>
-
-</div>
 <% end %>

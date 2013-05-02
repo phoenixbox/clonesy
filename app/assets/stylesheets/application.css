@@ -54,3 +54,15 @@
   background-color: rgb(57, 89, 116);
   border: 1px solid rgb(57, 89, 116);
 }
+
+.faint{
+  background-color: #5e5e5e;
+  border: 0 none;
+  color: #5e5e5e;
+  height: 1px;
+}
+
+.inline{
+  display: inline;
+  float: left;
+}
