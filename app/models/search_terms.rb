@@ -1,9 +1,10 @@
 class SearchTerms
   def self.list
-    Product.all.collect {|product| product.title}
+    Store.online.map { |store| store.products }.flatten.map { |product| product.title }
   end
 
   def self.match_by_title(title)
-    Product.where('title iLIKE ?', "%#{title}%").first
+    products = Store.online.map { |store| store.products }.flatten
+    products.select { |product| product.title.downcase.include? title.downcase }.first
   end
 end
