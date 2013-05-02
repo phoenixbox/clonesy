@@ -28,11 +28,10 @@ class LoadTestingStore
     num.times do |i|
       puts "Seeding order ##{i}"
       order = Order.create!(status: ::ORDER_STATUSES.sample,
-                            user_id: 2,
-                            store_id: load_store.id)
+                            user_id: 2)
       order.order_items.create!(product_id: rand(10_000) + 1,
-                                unit_price: 2,
-                                quantity: rand(5) + 1)
+                                unit_price: (75..150).to_a.sample,
+                                quantity: rand(3) + 1)
     end
   end
 end
@@ -46,6 +45,7 @@ class RealishStore
 
     seed_categories(10)
     seed_products
+    seed_orders(30)
   end
 
   def seed_products
@@ -69,6 +69,19 @@ class RealishStore
                                store_id: store.id)
       puts "Category #{title} created for Store #{store.id}"
     end
+  end
+
+  def seed_orders(num)
+    num.times do |i|
+      puts "Seeding order ##{i}"
+      order = Order.create!(status: ::ORDER_STATUSES.sample,
+                            user_id: 2)
+      oi = order.order_items.create!(product_id: store.products.sample.id,
+                                     unit_price: (75..150).to_a.sample,
+                                     quantity: rand(3) + 1)
+      oi.created_at += (rand(20) * -1).days
+      oi.save!
+    endrai
   end
 end
 
