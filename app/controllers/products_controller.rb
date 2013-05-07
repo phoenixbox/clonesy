@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  respond_to :html, :json
+
   before_filter :require_current_store
 
   def index
@@ -8,6 +10,7 @@ class ProductsController < ApplicationController
     @categories = current_store.categories
     current_store.increase_popularity(request.remote_ip)
     session[:return_to] = request.fullpath
+    respond_with(@products)
   end
 
   def show
