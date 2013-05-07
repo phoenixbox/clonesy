@@ -105,3 +105,12 @@
 .default-bit-height {
   height: 500px;
 }
+
+/************* d3 *************/
+div.bar {
+  display: inline-block;
+  width: 20px;
+  /*height: 200px;*/
+  background-color: teal;
+  margin-right: 5px;
+}

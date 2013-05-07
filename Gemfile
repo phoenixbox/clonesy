@@ -20,6 +20,7 @@ gem 'pry'
 gem 'cache_digests'
 gem 'newrelic_rpm'
 gem 'jbuilder'
+gem 'd3-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
