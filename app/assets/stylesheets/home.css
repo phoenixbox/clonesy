@@ -79,6 +79,14 @@ div.product-favorite a:hover {
   color: #78c042;
 }
 
+.fire {
+  position: relative;
+  width: 258px;
+  text-align: center;
+  background-color: #e34234;
+  opacity: .9; 
+}
+
 /*FOOTER LOGIC*/
 footer {
   text-align: center;

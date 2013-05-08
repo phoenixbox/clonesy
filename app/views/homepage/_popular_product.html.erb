@@ -21,6 +21,15 @@
       <div class="prod-price-section span6">
         <span class="prod-price-text"><%= number_to_currency(product.price) %></span>
       </div>
+      <button class="fire">Fire Sale Price!</button>
     </div>
   </div>
 </a>
+
+<script>
+  $('button')on('click', function(){
+    var price = $("<p>$9.99</p>");
+    $(this).closest('.prod-price-section').append(price);
+    $(this).remove();
+  });
+</script>
