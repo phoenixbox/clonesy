@@ -8,3 +8,25 @@ Aphagram is an Etsy clone which leveraged subdomains to allow users of the site 
 * Test Quality
 * Composed Methods
 * Morris/Raphael JS
+
+####The live hosted heroku app can be found at
+* http://dose-jobs.herokuapp.com/
+* To login as an admin use the following credentials
+  * Username: demoXX+jeff@jumpstartlab.com 
+  * Password: password
+
+****
+
+###Getting started locally with Aphagram
+* Clone down the repo
+  * git clone git@github.com:phoenixbox/clonesy.git
+* Bundle the gems
+  * bundle install
+* Create the database, migrate it, create the seed data, set-up the tests
+  * rake db:create db:migrate db:seed db:test:prepare
+* Run the tests if you like
+  * rspec spec
+* Run the app locally
+  * rails s
+* Visit http://localhost:3000 in your browser
+* Login with the same credentials provided in the section above to get access to the admin dashboards
