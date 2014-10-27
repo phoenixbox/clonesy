@@ -8,6 +8,10 @@ Aphagram is an Etsy clone which leveraged subdomains to allow users of the site 
 * Test Quality
 * Morris/Raphael JS
 
+-* To login as an admin use the following credentials		
+-  * Username: demoXX+jeff@jumpstartlab.com 		
+-  * Password: password
+
 ****
 
 ###Getting started locally with Aphagram
