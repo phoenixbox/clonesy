@@ -6,14 +6,7 @@ Aphagram is an Etsy clone which leveraged subdomains to allow users of the site 
 
 ###What to look for
 * Test Quality
-* Composed Methods
 * Morris/Raphael JS
-
-####The live hosted heroku app can be found at
-* http://dose-jobs.herokuapp.com/
-* To login as an admin use the following credentials
-  * Username: demoXX+jeff@jumpstartlab.com 
-  * Password: password
 
 ****
 
